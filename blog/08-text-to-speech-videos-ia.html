@@ -1,0 +1,261 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3377827647746361" crossorigin="anonymous"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Text-to-Speech en videos de IA: añade locución automática — Blog Velo AI Studio</title>
+  <meta name="description" content="Aprende a usar la función de Text-to-Speech de Velo AI Studio para añadir una voz narrativa automática a tus videos sin grabar ni un segundo de audio.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://veloaistudio.online/blog/08-text-to-speech-videos-ia.html">
+  <link rel="alternate" hreflang="es" href="https://veloaistudio.online/blog/08-text-to-speech-videos-ia.html" />
+  <link rel="alternate" hreflang="en" href="https://veloaistudio.online/blog/08-text-to-speech-videos-ia.html" />
+  <link rel="alternate" hreflang="x-default" href="https://veloaistudio.online/blog/08-text-to-speech-videos-ia.html" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Text-to-Speech in AI videos: add automatic voiceover",
+    "description": "How to use Velo AI Studio's Text-to-Speech feature to add automatic narration to your videos without recording any audio.",
+    "datePublished": "2026-03-23",
+    "dateModified": "2026-03-23",
+    "inLanguage": ["es", "en"],
+    "author": { "@type": "Organization", "name": "Velo AI Studio" },
+    "publisher": { "@type": "Organization", "name": "Velo AI Studio", "url": "https://veloaistudio.online" }
+  }
+  </script>
+  <link rel="stylesheet" href="/theme.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;800&display=swap');
+    *{margin:0;padding:0;box-sizing:border-box;}
+    body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;min-height:100vh;line-height:1.7;}
+    body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;background:radial-gradient(ellipse 80% 50% at 20% 10%,rgba(124,58,237,0.1) 0%,transparent 60%);}
+    .container{max-width:760px;margin:0 auto;padding:40px 24px;position:relative;z-index:1;}
+    .nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:48px;}
+    .nav a{color:var(--accent2);text-decoration:none;font-family:'Space Mono',monospace;font-size:0.78rem;}
+    .nav a:hover{text-decoration:underline;}
+    .tag{display:inline-block;background:rgba(6,182,212,0.12);border:1px solid rgba(6,182,212,0.25);color:var(--accent2);font-family:'Space Mono',monospace;font-size:0.62rem;text-transform:uppercase;letter-spacing:1.5px;padding:3px 10px;border-radius:20px;margin-bottom:16px;}
+    h1{font-size:clamp(1.6rem,4vw,2.4rem);font-weight:800;line-height:1.2;margin-bottom:16px;}
+    .meta{font-family:'Space Mono',monospace;font-size:0.7rem;color:var(--muted);margin-bottom:40px;}
+    h2{font-size:1.2rem;font-weight:700;margin:36px 0 12px;color:var(--text);}
+    h3{font-size:1rem;font-weight:700;margin:22px 0 8px;color:var(--accent2);}
+    p{color:var(--prose);margin-bottom:18px;font-size:0.95rem;}
+    ul,ol{color:var(--prose);font-size:0.95rem;padding-left:24px;margin-bottom:18px;}
+    li{margin-bottom:8px;}
+    .step-box{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:20px 24px;margin:20px 0;display:flex;gap:16px;align-items:flex-start;}
+    .step-num{background:linear-gradient(135deg,var(--accent),var(--accent2));width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:0.8rem;flex-shrink:0;color:white;}
+    .step-box h3{font-size:0.95rem;font-weight:700;margin-bottom:6px;color:var(--text);}
+    .step-box p{margin-bottom:0;font-size:0.88rem;}
+    .compare{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:24px 0;}
+    @media(max-width:540px){.compare{grid-template-columns:1fr;}}
+    .compare-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:18px;}
+    .compare-card h3{font-size:0.9rem;font-weight:700;margin-bottom:10px;}
+    .compare-card ul{padding-left:16px;margin-bottom:0;}
+    .compare-card li{font-size:0.82rem;color:var(--muted);}
+    .pro .compare-card:first-child h3{color:var(--success, #10b981);}
+    .con .compare-card:last-child h3{color:var(--error, #ef4444);}
+    .tip{background:rgba(245,158,11,0.08);border-left:3px solid var(--accent3);border-radius:0 8px 8px 0;padding:14px 18px;margin:20px 0;font-size:0.88rem;color:var(--prose);}
+    .tip strong{color:var(--accent3);}
+    .highlight{background:var(--surface);border-left:3px solid var(--accent2);border-radius:0 8px 8px 0;padding:16px 20px;margin:24px 0;font-size:0.88rem;color:var(--prose);}
+    .cta{display:inline-block;margin-top:32px;padding:13px 28px;background:linear-gradient(135deg,var(--accent),var(--accent2));border-radius:8px;color:white;text-decoration:none;font-weight:700;font-size:0.9rem;}
+    footer{margin-top:64px;padding-top:24px;border-top:1px solid var(--border);text-align:center;font-family:'Space Mono',monospace;font-size:0.68rem;color:var(--muted);}
+    footer a{color:var(--muted);text-decoration:none;margin:0 8px;}
+    footer a:hover{color:var(--accent2);}
+    .lang-en{display:none;}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav">
+      <a href="../">← Velo AI Studio</a>
+      <a href="./">Blog</a>
+    </nav>
+
+    <!-- SPANISH -->
+    <div class="lang-es">
+      <span class="tag">Función</span>
+      <h1>Text-to-Speech en videos de IA: añade locución automática</h1>
+      <p class="meta">23 de marzo de 2026 · 5 min lectura · Velo AI Studio</p>
+
+      <p>Una de las preguntas más frecuentes de los nuevos creadores es: <em>"¿tengo que grabar mi voz para hacer videos?"</em>. La respuesta es no. Velo AI Studio incluye una función de <strong>Text-to-Speech (TTS)</strong> que convierte el texto de tu guion en una narración de voz sintética, completamente automática, sin que tengas que grabar ni un segundo de audio.</p>
+
+      <h2>¿Qué es Text-to-Speech?</h2>
+      <p>Text-to-Speech (TTS) es una tecnología que convierte texto escrito en habla sintetizada. Los modelos modernos de TTS, como los que usa Velo AI Studio a través del navegador, suenan cada vez más naturales, con entonación, pausas y ritmo similares a los de una locución humana.</p>
+      <p>Esto es posible gracias a la <strong>Web Speech API</strong> del navegador, una tecnología estándar integrada en Chrome, Edge y Firefox que permite generar audio directamente en el cliente sin necesidad de servicios externos de pago.</p>
+
+      <h2>Cómo activar la locución en Velo AI Studio</h2>
+
+      <div class="step-box">
+        <div class="step-num">1</div>
+        <div>
+          <h3>Sube tu archivo SRT</h3>
+          <p>La función de TTS requiere que uses un archivo SRT como entrada, ya que el sistema necesita el texto escrito para generar la voz. No funciona con archivos de audio MP3/WAV porque ya tienen audio propio.</p>
+        </div>
+      </div>
+
+      <div class="step-box">
+        <div class="step-num">2</div>
+        <div>
+          <h3>Activa "Generar Voz" antes de ejecutar el pipeline</h3>
+          <p>En la sección de configuración verás un interruptor llamado <strong>"Generar Voz (TTS)"</strong>. Actívalo antes de iniciar la generación. El sistema creará el audio de narración automáticamente mientras procesa las imágenes.</p>
+        </div>
+      </div>
+
+      <div class="step-box">
+        <div class="step-num">3</div>
+        <div>
+          <h3>El audio se sincroniza con las imágenes</h3>
+          <p>El video final tendrá la voz narrando el texto de cada segmento SRT mientras aparece la imagen correspondiente. Los subtítulos también se muestran sincronizados si tienes esa opción activada.</p>
+        </div>
+      </div>
+
+      <h2>Ventajas y limitaciones del TTS</h2>
+
+      <div class="compare">
+        <div class="compare-card">
+          <h3 style="color:#10b981;">✓ Ventajas</h3>
+          <ul>
+            <li>No necesitas micrófono ni espacio silencioso</li>
+            <li>Crea videos completos sin mostrar tu voz ni tu cara</li>
+            <li>Produce narración consistente en todos los videos</li>
+            <li>Completamente gratuito</li>
+            <li>Disponible en varios idiomas según el sistema</li>
+          </ul>
+        </div>
+        <div class="compare-card">
+          <h3 style="color:#ef4444;">✗ Limitaciones</h3>
+          <ul>
+            <li>La voz sintética no es tan carismática como una voz humana</li>
+            <li>Depende de las voces disponibles en el sistema operativo</li>
+            <li>Menor control emocional sobre la narración</li>
+            <li>No apta para nichos donde la personalidad del creador es clave</li>
+          </ul>
+        </div>
+      </div>
+
+      <h2>¿Cuándo usar TTS y cuándo grabar tu voz?</h2>
+      <p>La elección depende del tipo de canal que quieres construir:</p>
+      <ul>
+        <li><strong>Usa TTS si:</strong> tu canal es de nicho informativo (salud, historia, ciencia) y el valor está en la información, no en tu personalidad.</li>
+        <li><strong>Graba tu voz si:</strong> quieres construir una audiencia que te siga a ti como creador, ya que la voz propia genera más conexión y fidelidad.</li>
+        <li><strong>Usa audio externo si:</strong> ya tienes un podcast o grabación preexistente que quieres convertir en video.</li>
+      </ul>
+
+      <div class="tip">
+        <strong>Consejo:</strong> Para mejorar la calidad del TTS, escribe el guion SRT con puntuación clara. Los puntos y las comas le indican al motor de voz dónde hacer pausas naturales. Evita frases muy largas sin signos de puntuación.
+      </div>
+
+      <div class="highlight">
+        💡 Muchos canales exitosos de YouTube con millones de visualizaciones usan exclusivamente TTS. El algoritmo de YouTube no penaliza el uso de voces sintéticas siempre que el contenido sea original y de valor para el espectador.
+      </div>
+
+      <a href="../" class="cta">→ Crear video con locución automática</a>
+
+      <footer>
+        <p style="margin-bottom:10px;">© 2026 Velo AI Studio</p>
+        <div><a href="../">App</a> | <a href="./">Blog</a> | <a href="../privacy.html">Privacidad</a> | <a href="../tos.html">Términos</a></div>
+      </footer>
+    </div>
+
+    <!-- ENGLISH -->
+    <div class="lang-en">
+      <span class="tag">Feature</span>
+      <h1>Text-to-Speech in AI videos: add automatic voiceover</h1>
+      <p class="meta">March 23, 2026 · 5 min read · Velo AI Studio</p>
+
+      <p>One of the most common questions from new creators is: <em>"Do I have to record my voice to make videos?"</em> The answer is no. Velo AI Studio includes a <strong>Text-to-Speech (TTS)</strong> feature that converts your script text into a synthetic voice narration, completely automatic, without recording a single second of audio.</p>
+
+      <h2>What is Text-to-Speech?</h2>
+      <p>Text-to-Speech (TTS) is a technology that converts written text into synthesized speech. Modern TTS models, like those used by Velo AI Studio through the browser, sound increasingly natural, with intonation, pauses, and rhythm similar to human narration.</p>
+      <p>This is made possible by the browser's <strong>Web Speech API</strong>, a standard technology built into Chrome, Edge, and Firefox that generates audio directly on the client without needing paid external services.</p>
+
+      <h2>How to enable voiceover in Velo AI Studio</h2>
+
+      <div class="step-box">
+        <div class="step-num">1</div>
+        <div>
+          <h3>Upload your SRT file</h3>
+          <p>The TTS feature requires an SRT file as input, since the system needs the written text to generate the voice. It doesn't work with MP3/WAV audio files because they already have their own audio.</p>
+        </div>
+      </div>
+
+      <div class="step-box">
+        <div class="step-num">2</div>
+        <div>
+          <h3>Enable "Generate Voice" before running the pipeline</h3>
+          <p>In the configuration section you'll see a toggle called <strong>"Generate Voice (TTS)"</strong>. Enable it before starting generation. The system will automatically create the narration audio while it processes the images.</p>
+        </div>
+      </div>
+
+      <div class="step-box">
+        <div class="step-num">3</div>
+        <div>
+          <h3>The audio syncs with the images</h3>
+          <p>The final video will have the voice narrating the text of each SRT segment while the corresponding image appears. Subtitles also display in sync if you have that option enabled.</p>
+        </div>
+      </div>
+
+      <h2>Advantages and limitations of TTS</h2>
+
+      <div class="compare">
+        <div class="compare-card">
+          <h3 style="color:#10b981;">✓ Advantages</h3>
+          <ul>
+            <li>No microphone or quiet space needed</li>
+            <li>Create complete videos without showing your voice or face</li>
+            <li>Produces consistent narration across all videos</li>
+            <li>Completely free</li>
+            <li>Available in multiple languages depending on the system</li>
+          </ul>
+        </div>
+        <div class="compare-card">
+          <h3 style="color:#ef4444;">✗ Limitations</h3>
+          <ul>
+            <li>Synthetic voice is not as charismatic as a human voice</li>
+            <li>Depends on voices available on the operating system</li>
+            <li>Less emotional control over the narration</li>
+            <li>Not ideal for niches where creator personality is key</li>
+          </ul>
+        </div>
+      </div>
+
+      <h2>When to use TTS and when to record your voice?</h2>
+      <p>The choice depends on the type of channel you want to build:</p>
+      <ul>
+        <li><strong>Use TTS if:</strong> your channel is in an informational niche (health, history, science) where the value is in the information, not your personality.</li>
+        <li><strong>Record your voice if:</strong> you want to build an audience that follows you as a creator, since your own voice generates more connection and loyalty.</li>
+        <li><strong>Use external audio if:</strong> you already have a podcast or pre-existing recording you want to turn into a video.</li>
+      </ul>
+
+      <div class="tip">
+        <strong>Tip:</strong> To improve TTS quality, write your SRT script with clear punctuation. Periods and commas tell the voice engine where to make natural pauses. Avoid very long sentences without punctuation marks.
+      </div>
+
+      <div class="highlight">
+        💡 Many successful YouTube channels with millions of views use TTS exclusively. YouTube's algorithm does not penalize the use of synthetic voices as long as the content is original and valuable to the viewer.
+      </div>
+
+      <a href="../" class="cta">→ Create video with automatic voiceover</a>
+
+      <footer>
+        <p style="margin-bottom:10px;">© 2026 Velo AI Studio</p>
+        <div><a href="../">App</a> | <a href="./">Blog</a> | <a href="../privacy.html">Privacy</a> | <a href="../tos.html">Terms</a></div>
+      </footer>
+    </div>
+
+  </div>
+  <script>
+  (function(){
+    var isEN = !navigator.language.toLowerCase().startsWith('es');
+    if (isEN) {
+      document.documentElement.lang = 'en';
+      document.title = 'Text-to-Speech in AI videos: add automatic voiceover — Blog Velo AI Studio';
+      var md = document.querySelector('meta[name="description"]');
+      if (md) md.setAttribute('content', 'Learn how to use Velo AI Studio\'s Text-to-Speech feature to add automatic narration to your videos without recording a single second of audio.');
+      document.querySelectorAll('.lang-es').forEach(function(e){ e.style.display = 'none'; });
+      document.querySelectorAll('.lang-en').forEach(function(e){ e.style.display = 'block'; });
+    }
+  })();
+  </script>
+</body>
+</html>

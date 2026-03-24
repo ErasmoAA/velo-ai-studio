@@ -1,0 +1,13 @@
+{
+  "name": "velo-ai-studio",
+  "version": "1.0.0",
+  "description": "Velo AI Studio — static site with Eleventy",
+  "scripts": {
+    "build": "eleventy",
+    "dev": "eleventy --serve"
+  },
+  "dependencies": {
+    "@11ty/eleventy": "^2.0.1",
+    "markdown-it": "^14.1.0"
+  }
+}

@@ -1,0 +1,276 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3377827647746361" crossorigin="anonymous"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cómo crear tu primer video con IA paso a paso — Blog Velo AI Studio</title>
+  <meta name="description" content="Tutorial completo para crear tu primer video con Velo AI Studio. Aprende a preparar tu archivo SRT o MP3 y exportar un video 1080p con imágenes de IA.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://veloaistudio.online/blog/02-como-crear-videos-con-ia.html">
+  <link rel="alternate" hreflang="es" href="https://veloaistudio.online/blog/02-como-crear-videos-con-ia.html" />
+  <link rel="alternate" hreflang="en" href="https://veloaistudio.online/blog/02-como-crear-videos-con-ia.html" />
+  <link rel="alternate" hreflang="x-default" href="https://veloaistudio.online/blog/02-como-crear-videos-con-ia.html" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    "name": "How to create your first AI video step by step in Velo AI Studio",
+    "description": "Complete tutorial to create professional videos with artificial intelligence using Velo AI Studio.",
+    "datePublished": "2026-03-23",
+    "inLanguage": ["es", "en"],
+    "step": [
+      { "@type": "HowToStep", "position": 1, "name": "Prepare your SRT script", "text": "Create a .srt file with timestamps and text for your narration." },
+      { "@type": "HowToStep", "position": 2, "name": "Upload the file to Velo", "text": "Drag your SRT or MP3 file to the upload area of the tool." },
+      { "@type": "HowToStep", "position": 3, "name": "Configure the video", "text": "Select format, visual style and export quality." },
+      { "@type": "HowToStep", "position": 4, "name": "Run the pipeline", "text": "Launch Express mode or Review mode to generate images." },
+      { "@type": "HowToStep", "position": 5, "name": "Export the video", "text": "Download the final video in MP4 format ready to publish." }
+    ]
+  }
+  </script>
+  <link rel="stylesheet" href="/theme.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;800&display=swap');
+    *{margin:0;padding:0;box-sizing:border-box;}
+    body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;min-height:100vh;line-height:1.7;}
+    body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;background:radial-gradient(ellipse 80% 50% at 20% 10%,rgba(124,58,237,0.1) 0%,transparent 60%);}
+    .container{max-width:760px;margin:0 auto;padding:40px 24px;position:relative;z-index:1;}
+    .nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:48px;}
+    .nav a{color:var(--accent2);text-decoration:none;font-family:'Space Mono',monospace;font-size:0.78rem;}
+    .nav a:hover{text-decoration:underline;}
+    .tag{display:inline-block;background:rgba(6,182,212,0.12);border:1px solid rgba(6,182,212,0.25);color:var(--accent2);font-family:'Space Mono',monospace;font-size:0.62rem;text-transform:uppercase;letter-spacing:1.5px;padding:3px 10px;border-radius:20px;margin-bottom:16px;}
+    h1{font-size:clamp(1.6rem,4vw,2.4rem);font-weight:800;line-height:1.2;margin-bottom:16px;}
+    .meta{font-family:'Space Mono',monospace;font-size:0.7rem;color:var(--muted);margin-bottom:40px;}
+    h2{font-size:1.2rem;font-weight:700;margin:36px 0 12px;color:var(--text);}
+    p{color:var(--prose);margin-bottom:18px;font-size:0.95rem;}
+    ul,ol{color:var(--prose);font-size:0.95rem;padding-left:24px;margin-bottom:18px;}
+    li{margin-bottom:8px;}
+    .step-box{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:20px 24px;margin:20px 0;display:flex;gap:16px;align-items:flex-start;}
+    .step-num{background:linear-gradient(135deg,var(--accent),var(--accent2));width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:0.8rem;flex-shrink:0;color:white;}
+    .step-box h3{font-size:0.95rem;font-weight:700;margin-bottom:6px;}
+    .step-box p{margin-bottom:0;font-size:0.88rem;}
+    .code-block{background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:16px;font-family:'Space Mono',monospace;font-size:0.78rem;color:var(--accent2);margin:16px 0;overflow-x:auto;line-height:1.8;}
+    .tip{background:rgba(245,158,11,0.08);border-left:3px solid var(--accent3);border-radius:0 8px 8px 0;padding:14px 18px;margin:20px 0;font-size:0.88rem;color:var(--prose);}
+    .tip strong{color:var(--accent3);}
+    .cta{display:inline-block;margin-top:32px;padding:13px 28px;background:linear-gradient(135deg,var(--accent),var(--accent2));border-radius:8px;color:white;text-decoration:none;font-weight:700;font-size:0.9rem;}
+    footer{margin-top:64px;padding-top:24px;border-top:1px solid var(--border);text-align:center;font-family:'Space Mono',monospace;font-size:0.68rem;color:var(--muted);}
+    footer a{color:var(--muted);text-decoration:none;margin:0 8px;}
+    footer a:hover{color:var(--accent2);}
+    .lang-en{display:none;}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav">
+      <a href="../">← Velo AI Studio</a>
+      <a href="./">Blog</a>
+    </nav>
+
+    <!-- SPANISH -->
+    <div class="lang-es">
+      <span class="tag">Tutorial</span>
+      <h1>Cómo crear tu primer video con IA paso a paso</h1>
+      <p class="meta">23 de marzo de 2026 · 8 min lectura · Velo AI Studio</p>
+
+      <p>Este tutorial te guiará desde cero hasta tener tu primer video exportado en MP4 usando Velo AI Studio. No necesitas conocimientos técnicos previos ni software instalado. Solo necesitas un guion escrito o tu voz grabada.</p>
+
+      <h2>Paso 1 — Prepara tu contenido</h2>
+      <p>Tienes dos opciones para empezar:</p>
+
+      <div class="step-box">
+        <div class="step-num">A</div>
+        <div>
+          <h3>Opción A: Archivo SRT (guion con tiempos)</h3>
+          <p>Un archivo SRT es un archivo de subtítulos de texto plano. Cada bloque tiene un número, un rango de tiempo y el texto que se narrará. Ejemplo de formato correcto:</p>
+        </div>
+      </div>
+
+      <div class="code-block">
+1<br>
+00:00:00,000 --> 00:00:04,000<br>
+El corazón humano late aproximadamente 100.000 veces al día.<br>
+<br>
+2<br>
+00:00:04,000 --> 00:00:08,500<br>
+Esto equivale a más de 2.500 millones de latidos a lo largo de una vida.
+      </div>
+
+      <div class="step-box">
+        <div class="step-num">B</div>
+        <div>
+          <h3>Opción B: Archivo de audio MP3 o WAV</h3>
+          <p>Si prefieres grabar tu voz directamente, exporta el audio como MP3 o WAV. Velo AI Studio procesará el audio y sincronizará las imágenes con la duración del mismo.</p>
+        </div>
+      </div>
+
+      <div class="tip">
+        <strong>Consejo:</strong> Para mejores resultados con las imágenes generadas por IA, usa frases descriptivas y concretas en tu guion. En lugar de "hablamos del tema", escribe "el corazón humano late con fuerza".
+      </div>
+
+      <h2>Paso 2 — Sube tu archivo a Velo</h2>
+
+      <div class="step-box">
+        <div class="step-num">1</div>
+        <div>
+          <h3>Abre Velo AI Studio en tu navegador</h3>
+          <p>Ve a <strong>veloaistudio.online</strong> desde Google Chrome o Microsoft Edge. No necesitas crear cuenta.</p>
+        </div>
+      </div>
+
+      <div class="step-box">
+        <div class="step-num">2</div>
+        <div>
+          <h3>Arrastra tu archivo al área de carga</h3>
+          <p>En la sección "Origen de los Datos", elige la pestaña SRT o Audio según tu archivo. Arrastra el archivo o haz clic para seleccionarlo desde tu computadora.</p>
+        </div>
+      </div>
+
+      <h2>Paso 3 — Configura el video</h2>
+      <p>Una vez cargado el archivo, verás las opciones de configuración:</p>
+      <ul>
+        <li><strong>Formato:</strong> Elige 16:9 si es para YouTube o web. Elige 9:16 si es para TikTok, Reels o YouTube Shorts.</li>
+        <li><strong>Estilo visual:</strong> Para canales informativos, "Fotorrealista / Documental" suele funcionar mejor. Para canales de terror, usa "Horror / Oscuro".</li>
+        <li><strong>Calidad:</strong> Selecciona 1080p para videos de YouTube. Usa 720p si quieres que el proceso sea más rápido.</li>
+      </ul>
+
+      <h2>Paso 4 — Ejecuta el pipeline de generación</h2>
+
+      <div class="step-box">
+        <div class="step-num">3</div>
+        <div>
+          <h3>Elige Modo Express o Modo Revisión</h3>
+          <p><strong>Modo Express:</strong> genera todas las imágenes automáticamente de una sola vez. Ideal cuando tienes prisa.<br>
+          <strong>Modo Revisión:</strong> pausa después de cada imagen para que puedas aprobarla o regenerarla antes de continuar.</p>
+        </div>
+      </div>
+
+      <div class="tip">
+        <strong>Recomendación:</strong> En tu primer video, usa el Modo Revisión para aprender cómo responde la IA a tus prompts y ajustar las imágenes que no te satisfagan.
+      </div>
+
+      <h2>Paso 5 — Exporta tu video</h2>
+      <p>Una vez generadas todas las imágenes, aparecerá el botón de exportación. El video se genera directamente en tu navegador y se descarga como un archivo MP4. El proceso puede tardar entre 1 y 5 minutos dependiendo de la cantidad de segmentos y la resolución elegida.</p>
+
+      <h2>¿Y si una imagen no queda bien?</h2>
+      <p>Puedes hacer clic en cualquier imagen generada para verla ampliada. Desde ahí tienes la opción de regenerarla con un modelo diferente o incluso subir tu propia imagen para sustituirla. Velo AI Studio te da control total sobre el resultado final antes de exportar.</p>
+
+      <a href="../" class="cta">→ Crear mi primer video ahora</a>
+
+      <footer>
+        <p style="margin-bottom:10px;">© 2026 Velo AI Studio</p>
+        <div><a href="../">App</a> | <a href="./">Blog</a> | <a href="../privacy.html">Privacidad</a> | <a href="../tos.html">Términos</a></div>
+      </footer>
+    </div>
+
+    <!-- ENGLISH -->
+    <div class="lang-en">
+      <span class="tag">Tutorial</span>
+      <h1>How to create your first AI video step by step</h1>
+      <p class="meta">March 23, 2026 · 8 min read · Velo AI Studio</p>
+
+      <p>This tutorial will guide you from scratch to having your first video exported in MP4 using Velo AI Studio. You don't need any prior technical knowledge or installed software. All you need is a written script or your recorded voice.</p>
+
+      <h2>Step 1 — Prepare your content</h2>
+      <p>You have two options to get started:</p>
+
+      <div class="step-box">
+        <div class="step-num">A</div>
+        <div>
+          <h3>Option A: SRT file (timed script)</h3>
+          <p>An SRT file is a plain text subtitle file. Each block has a number, a time range, and the text to be narrated. Example of correct format:</p>
+        </div>
+      </div>
+
+      <div class="code-block">
+1<br>
+00:00:00,000 --> 00:00:04,000<br>
+The human heart beats approximately 100,000 times per day.<br>
+<br>
+2<br>
+00:00:04,000 --> 00:00:08,500<br>
+This equals more than 2.5 billion heartbeats over a lifetime.
+      </div>
+
+      <div class="step-box">
+        <div class="step-num">B</div>
+        <div>
+          <h3>Option B: MP3 or WAV audio file</h3>
+          <p>If you prefer to record your voice directly, export the audio as MP3 or WAV. Velo AI Studio will process the audio and synchronize the images with its duration.</p>
+        </div>
+      </div>
+
+      <div class="tip">
+        <strong>Tip:</strong> For better results with AI-generated images, use descriptive and specific phrases in your script. Instead of "we talk about the topic," write "the human heart beats powerfully."
+      </div>
+
+      <h2>Step 2 — Upload your file to Velo</h2>
+
+      <div class="step-box">
+        <div class="step-num">1</div>
+        <div>
+          <h3>Open Velo AI Studio in your browser</h3>
+          <p>Go to <strong>veloaistudio.online</strong> from Google Chrome or Microsoft Edge. No account creation needed.</p>
+        </div>
+      </div>
+
+      <div class="step-box">
+        <div class="step-num">2</div>
+        <div>
+          <h3>Drag your file to the upload area</h3>
+          <p>In the "Data Source" section, choose the SRT or Audio tab depending on your file. Drag the file or click to select it from your computer.</p>
+        </div>
+      </div>
+
+      <h2>Step 3 — Configure the video</h2>
+      <p>Once the file is uploaded, you'll see the configuration options:</p>
+      <ul>
+        <li><strong>Format:</strong> Choose 16:9 for YouTube or web. Choose 9:16 for TikTok, Reels, or YouTube Shorts.</li>
+        <li><strong>Visual style:</strong> For informational channels, "Photorealistic / Documentary" usually works best. For horror channels, use "Horror / Dark."</li>
+        <li><strong>Quality:</strong> Select 1080p for YouTube videos. Use 720p if you want the process to be faster.</li>
+      </ul>
+
+      <h2>Step 4 — Run the generation pipeline</h2>
+
+      <div class="step-box">
+        <div class="step-num">3</div>
+        <div>
+          <h3>Choose Express Mode or Review Mode</h3>
+          <p><strong>Express Mode:</strong> generates all images automatically at once. Ideal when you're in a hurry.<br>
+          <strong>Review Mode:</strong> pauses after each image so you can approve or regenerate it before continuing.</p>
+        </div>
+      </div>
+
+      <div class="tip">
+        <strong>Recommendation:</strong> For your first video, use Review Mode to learn how the AI responds to your prompts and adjust any images you're not happy with.
+      </div>
+
+      <h2>Step 5 — Export your video</h2>
+      <p>Once all images are generated, the export button will appear. The video is generated directly in your browser and downloads as an MP4 file. The process may take between 1 and 5 minutes depending on the number of segments and the chosen resolution.</p>
+
+      <h2>What if an image doesn't look right?</h2>
+      <p>You can click on any generated image to view it enlarged. From there you have the option to regenerate it with a different model or even upload your own image to replace it. Velo AI Studio gives you full control over the final result before exporting.</p>
+
+      <a href="../" class="cta">→ Create my first video now</a>
+
+      <footer>
+        <p style="margin-bottom:10px;">© 2026 Velo AI Studio</p>
+        <div><a href="../">App</a> | <a href="./">Blog</a> | <a href="../privacy.html">Privacy</a> | <a href="../tos.html">Terms</a></div>
+      </footer>
+    </div>
+
+  </div>
+  <script>
+  (function(){
+    var isEN = !navigator.language.toLowerCase().startsWith('es');
+    if (isEN) {
+      document.documentElement.lang = 'en';
+      document.title = 'How to create your first AI video step by step — Blog Velo AI Studio';
+      var md = document.querySelector('meta[name="description"]');
+      if (md) md.setAttribute('content', 'Complete tutorial to create your first video with Velo AI Studio. Learn how to prepare your SRT or MP3 file and export a 1080p video with AI-generated images.');
+      document.querySelectorAll('.lang-es').forEach(function(e){ e.style.display = 'none'; });
+      document.querySelectorAll('.lang-en').forEach(function(e){ e.style.display = 'block'; });
+    }
+  })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,146 @@
+# ================================================================
+# DECAP CMS — Velo AI Studio
+# Documentación: https://decapcms.org/docs/
+#
+# PASOS DE ACTIVACIÓN EN NETLIFY (solo una vez):
+#   1. Ve a tu sitio en app.netlify.com
+#   2. Site Settings → Identity → Enable Identity
+#   3. Identity → Services → Git Gateway → Enable Git Gateway
+#   4. Identity → Registration → Invite only (recomendado)
+#   5. Invítate a ti mismo por email desde Identity → Invite users
+#   6. Visita https://tudominio.com/admin y acepta la invitación
+# ================================================================
+
+backend:
+  name: git-gateway
+  branch: main
+
+# Carpeta donde el CMS guarda las imágenes subidas
+media_folder: "assets/uploads"
+public_folder: "/assets/uploads"
+
+# Idioma del panel de administración
+locale: "es"
+
+# Slug: cómo se generan los nombres de archivo
+slug:
+  encoding: "ascii"
+  clean_accents: true
+  sanitize_replacement: "-"
+
+collections:
+  # ── Artículos del Blog ──────────────────────────────────────────
+  - name: "blog"
+    label: "📝 Artículos del Blog"
+    label_singular: "Artículo"
+    folder: "blog/posts"
+    create: true
+    # Nombre del archivo: ej. "11-mi-articulo-nuevo.md"
+    slug: "{{num}}-{{slug}}"
+    preview_path: "blog/{{slug}}.html"
+    summary: "{{emoji}} [{{num}}] {{title_es}} — {{date}}"
+    sortable_fields: ["num", "date", "title_es"]
+    fields:
+      - label: "Número de artículo (ej: 11)"
+        name: "num"
+        widget: "string"
+        hint: "Número correlativo. El siguiente disponible es el mayor existente + 1."
+
+      - label: "Slug para la URL (ej: mi-nuevo-articulo)"
+        name: "slug"
+        widget: "string"
+        hint: "Solo letras minúsculas, números y guiones. Sin espacios ni tildes."
+        pattern:
+          - "^[a-z0-9-]+$"
+          - "Solo letras minúsculas, números y guiones (-)"
+
+      - label: "Emoji representativo"
+        name: "emoji"
+        widget: "string"
+        default: "🎬"
+        hint: "Un emoji que represente el tema del artículo."
+
+      - label: "Fecha de publicación"
+        name: "date"
+        widget: "datetime"
+        format: "YYYY-MM-DD"
+        date_format: "DD/MM/YYYY"
+        time_format: false
+        default: ""
+
+      - label: "Categoría en Español"
+        name: "tag_es"
+        widget: "select"
+        options:
+          - "Introducción"
+          - "Tutorial"
+          - "Referencia"
+          - "Tecnología"
+          - "Función"
+          - "Estrategia"
+          - "Guía Visual"
+          - "Consejos"
+
+      - label: "Category in English"
+        name: "tag_en"
+        widget: "select"
+        options:
+          - "Introduction"
+          - "Tutorial"
+          - "Reference"
+          - "Technology"
+          - "Feature"
+          - "Strategy"
+          - "Visual Guide"
+          - "Tips"
+
+      - label: "Título en Español"
+        name: "title_es"
+        widget: "string"
+        hint: "Título principal del artículo en español. Incluye palabras clave SEO."
+
+      - label: "Title in English"
+        name: "title_en"
+        widget: "string"
+        hint: "Main title in English. Include SEO keywords."
+
+      - label: "Descripción corta (ES)"
+        name: "desc_es"
+        widget: "text"
+        hint: "Aparece en la tarjeta del blog y en el meta description. 1–2 frases, máx. 155 caracteres."
+        pattern:
+          - "^.{1,200}$"
+          - "Máximo 200 caracteres"
+
+      - label: "Short description (EN)"
+        name: "desc_en"
+        widget: "text"
+        hint: "Appears on the blog card and meta description. 1–2 sentences, max 155 chars."
+
+      - label: "Tiempo de lectura (ES)"
+        name: "read_es"
+        widget: "string"
+        default: "5 min lectura"
+        hint: "Ej: '5 min lectura'"
+
+      - label: "Reading time (EN)"
+        name: "read_en"
+        widget: "string"
+        default: "5 min read"
+        hint: "E.g. '5 min read'"
+
+      - label: "Contenido en Español"
+        name: "content_es"
+        widget: "markdown"
+        hint: >
+          Escribe el cuerpo completo del artículo en español.
+          Usa ## para subtítulos, **negrita**, listas con -, etc.
+          El CTA a la app se agrega automáticamente al final.
+
+      - label: "Content in English"
+        name: "content_en"
+        widget: "markdown"
+        hint: >
+          Write the full article body in English.
+          Use ## for headings, **bold**, lists with -, etc.
+          The app CTA is added automatically at the end.

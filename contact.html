@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contacto — Velo AI Studio</title>
+  <meta name="description" content="¿Tienes una pregunta, sugerencia o reporte de error? Contáctanos a través de este formulario y te responderemos lo antes posible.">
+  <link rel="icon" type="image/png" href="/favicon.png">
+  <link rel="shortcut icon" href="/favicon.png">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://veloaistudio.online/contact.html">
+  <link rel="alternate" hreflang="es" href="https://veloaistudio.online/contact.html" />
+  <link rel="alternate" hreflang="en" href="https://veloaistudio.online/contact.html" />
+  <link rel="alternate" hreflang="x-default" href="https://veloaistudio.online/contact.html" />
+  <link rel="stylesheet" href="/theme.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;800&display=swap');
+    *{margin:0;padding:0;box-sizing:border-box;}
+    body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;min-height:100vh;line-height:1.7;}
+    body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;background:radial-gradient(ellipse 80% 50% at 20% 10%,rgba(124,58,237,0.12) 0%,transparent 60%),radial-gradient(ellipse 50% 40% at 80% 80%,rgba(6,182,212,0.07) 0%,transparent 60%);}
+    .container{max-width:600px;margin:0 auto;padding:40px 24px;position:relative;z-index:1;}
+    .nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:48px;}
+    .nav a{color:var(--accent2);text-decoration:none;font-family:'Space Mono',monospace;font-size:0.78rem;}
+    .nav a:hover{text-decoration:underline;}
+    h1{font-size:clamp(1.6rem,4vw,2.2rem);font-weight:800;line-height:1.2;margin-bottom:10px;}
+    .subtitle{font-family:'Space Mono',monospace;font-size:0.75rem;color:var(--muted);margin-bottom:36px;}
+    .form-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:32px;}
+    .form-group{display:flex;flex-direction:column;gap:4px;margin-bottom:16px;}
+    label{font-size:0.7rem;color:var(--muted);text-transform:uppercase;letter-spacing:1px;font-family:'Space Mono',monospace;}
+    input,select,textarea{width:100%;padding:11px 14px;background:var(--surface2);border:1px solid var(--border);border-radius:8px;color:var(--text);font-family:'Space Mono',monospace;font-size:0.82rem;outline:none;box-sizing:border-box;transition:border-color 0.2s;}
+    input:focus,select:focus,textarea:focus{border-color:var(--accent2);}
+    select option{background:var(--surface2);}
+    textarea{min-height:120px;resize:vertical;}
+    .submit-btn{width:100%;padding:13px 24px;background:linear-gradient(135deg,var(--accent),var(--accent2));border:none;border-radius:8px;color:white;font-family:'Syne',sans-serif;font-weight:700;font-size:0.9rem;cursor:pointer;margin-top:8px;transition:opacity 0.2s;}
+    .submit-btn:disabled{opacity:0.6;cursor:not-allowed;}
+    .submit-btn:hover:not(:disabled){opacity:0.9;}
+    #form-msg{font-size:0.78rem;font-family:'Space Mono',monospace;text-align:center;min-height:20px;margin-top:10px;}
+    .response-note{font-size:0.68rem;color:var(--muted);text-align:center;margin-top:8px;font-family:'Space Mono',monospace;}
+    footer{margin-top:56px;padding-top:24px;border-top:1px solid var(--border);text-align:center;font-family:'Space Mono',monospace;font-size:0.68rem;color:var(--muted);}
+    footer a{color:var(--muted);text-decoration:none;margin:0 8px;}
+    footer a:hover{color:var(--accent2);}
+    .lang-en{display:none;}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav">
+      <a href="/">← Velo AI Studio</a>
+      <a href="/blog/">Blog</a>
+    </nav>
+
+    <!-- SPANISH -->
+    <div class="lang-es">
+      <h1>✉️ Contacto</h1>
+      <p class="subtitle">// Escríbenos · Te respondemos en 24–48 horas //</p>
+
+      <div class="form-card">
+        <div class="form-group">
+          <label>Tu nombre</label>
+          <input type="text" id="contact-name" placeholder="María García" maxlength="60" autocomplete="name">
+        </div>
+        <div class="form-group">
+          <label>Tu correo electrónico</label>
+          <input type="email" id="contact-email" placeholder="tu@correo.com" maxlength="100" autocomplete="email">
+        </div>
+        <div class="form-group">
+          <label>Asunto</label>
+          <select id="contact-subject">
+            <option value="soporte">🛠️ Soporte técnico / Bug</option>
+            <option value="sugerencia">💡 Sugerencia de mejora</option>
+            <option value="colaboracion">🤝 Colaboración / Partnership</option>
+            <option value="otro">📌 Otro</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Mensaje</label>
+          <textarea id="contact-message" placeholder="Describe tu consulta con el mayor detalle posible..." maxlength="1000"></textarea>
+        </div>
+        <button class="submit-btn" id="submit-btn" onclick="sendContactForm()">✦ Enviar Mensaje</button>
+        <div id="form-msg"></div>
+        <p class="response-note">Te responderemos en un plazo de 24–48 horas.</p>
+      </div>
+
+      <footer>
+        <p style="margin-bottom:10px;">© 2026 <strong>Velo AI Studio</strong>. Todos los derechos reservados.</p>
+        <div>
+          <a href="/">Inicio</a> |
+          <a href="/blog/">Blog</a> |
+          <a href="/privacy.html">Privacidad</a> |
+          <a href="/tos.html">Términos</a>
+        </div>
+      </footer>
+    </div>
+
+    <!-- ENGLISH -->
+    <div class="lang-en">
+      <h1>✉️ Contact</h1>
+      <p class="subtitle">// Write to us · We reply within 24–48 hours //</p>
+
+      <div class="form-card">
+        <div class="form-group">
+          <label>Your name</label>
+          <input type="text" id="contact-name-en" placeholder="Maria Garcia" maxlength="60" autocomplete="name">
+        </div>
+        <div class="form-group">
+          <label>Your email address</label>
+          <input type="email" id="contact-email-en" placeholder="you@email.com" maxlength="100" autocomplete="email">
+        </div>
+        <div class="form-group">
+          <label>Subject</label>
+          <select id="contact-subject-en">
+            <option value="soporte">🛠️ Technical Support / Bug</option>
+            <option value="sugerencia">💡 Feature Suggestion</option>
+            <option value="colaboracion">🤝 Collaboration / Partnership</option>
+            <option value="otro">📌 Other</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Message</label>
+          <textarea id="contact-message-en" placeholder="Describe your inquiry in as much detail as possible..." maxlength="1000"></textarea>
+        </div>
+        <button class="submit-btn" id="submit-btn-en" onclick="sendContactFormEN()">✦ Send Message</button>
+        <div id="form-msg-en"></div>
+        <p class="response-note">We'll respond within 24–48 hours.</p>
+      </div>
+
+      <footer>
+        <p style="margin-bottom:10px;">© 2026 <strong>Velo AI Studio</strong>. All rights reserved.</p>
+        <div>
+          <a href="/">Home</a> |
+          <a href="/blog/">Blog</a> |
+          <a href="/privacy.html">Privacy</a> |
+          <a href="/tos.html">Terms</a>
+        </div>
+      </footer>
+    </div>
+
+  </div>
+
+  <script>
+  var IS_SPANISH = navigator.language.toLowerCase().startsWith('es');
+
+  (function(){
+    if (!IS_SPANISH) {
+      document.documentElement.lang = 'en';
+      document.title = 'Contact — Velo AI Studio';
+      var md = document.querySelector('meta[name="description"]');
+      if (md) md.setAttribute('content', 'Have a question, suggestion or bug report? Contact us through this form and we\'ll get back to you as soon as possible.');
+      document.querySelectorAll('.lang-es').forEach(function(e){ e.style.display = 'none'; });
+      document.querySelectorAll('.lang-en').forEach(function(e){ e.style.display = 'block'; });
+    }
+  })();
+
+  var FORMSPREE = 'https://formspree.io/f/xyknqeqo';
+
+  async function sendContactForm() {
+    var name    = document.getElementById('contact-name').value.trim();
+    var email   = document.getElementById('contact-email').value.trim();
+    var subject = document.getElementById('contact-subject').value;
+    var message = document.getElementById('contact-message').value.trim();
+    var msgEl   = document.getElementById('form-msg');
+    var btn     = document.getElementById('submit-btn');
+
+    if (!name)                      { msgEl.style.color = 'var(--error)'; msgEl.textContent = '⚠ Escribe tu nombre.'; return; }
+    if (!email || !email.includes('@')) { msgEl.style.color = 'var(--error)'; msgEl.textContent = '⚠ Escribe un correo válido.'; return; }
+    if (message.length < 15)        { msgEl.style.color = 'var(--error)'; msgEl.textContent = '⚠ El mensaje es muy corto.'; return; }
+
+    btn.disabled = true; btn.textContent = '⏳ Enviando...'; msgEl.textContent = '';
+    try {
+      var res = await fetch(FORMSPREE, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({ name: name, email: email, subject: subject, message: message })
+      });
+      if (res.ok) {
+        msgEl.style.color = 'var(--success)';
+        msgEl.textContent = '✓ Mensaje enviado. Te responderemos pronto.';
+        document.getElementById('contact-name').value = '';
+        document.getElementById('contact-email').value = '';
+        document.getElementById('contact-message').value = '';
+      } else { throw new Error(); }
+    } catch(e) {
+      msgEl.style.color = 'var(--error)';
+      msgEl.textContent = '✗ Error al enviar. Intenta más tarde.';
+    } finally {
+      btn.disabled = false; btn.textContent = '✦ Enviar Mensaje';
+    }
+  }
+
+  async function sendContactFormEN() {
+    var name    = document.getElementById('contact-name-en').value.trim();
+    var email   = document.getElementById('contact-email-en').value.trim();
+    var subject = document.getElementById('contact-subject-en').value;
+    var message = document.getElementById('contact-message-en').value.trim();
+    var msgEl   = document.getElementById('form-msg-en');
+    var btn     = document.getElementById('submit-btn-en');
+
+    if (!name)                      { msgEl.style.color = 'var(--error)'; msgEl.textContent = '⚠ Please enter your name.'; return; }
+    if (!email || !email.includes('@')) { msgEl.style.color = 'var(--error)'; msgEl.textContent = '⚠ Please enter a valid email.'; return; }
+    if (message.length < 15)        { msgEl.style.color = 'var(--error)'; msgEl.textContent = '⚠ Message is too short.'; return; }
+
+    btn.disabled = true; btn.textContent = '⏳ Sending...'; msgEl.textContent = '';
+    try {
+      var res = await fetch(FORMSPREE, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({ name: name, email: email, subject: subject, message: message })
+      });
+      if (res.ok) {
+        msgEl.style.color = 'var(--success)';
+        msgEl.textContent = '✓ Message sent. We\'ll get back to you soon.';
+        document.getElementById('contact-name-en').value = '';
+        document.getElementById('contact-email-en').value = '';
+        document.getElementById('contact-message-en').value = '';
+      } else { throw new Error(); }
+    } catch(e) {
+      msgEl.style.color = 'var(--error)';
+      msgEl.textContent = '✗ Failed to send. Please try again later.';
+    } finally {
+      btn.disabled = false; btn.textContent = '✦ Send Message';
+    }
+  }
+  </script>
+</body>
+</html>

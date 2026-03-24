@@ -1,0 +1,240 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3377827647746361" crossorigin="anonymous"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Subtítulos automáticos con archivos SRT — Blog Velo AI Studio</title>
+  <meta name="description" content="Aprende a crear y formatear archivos SRT correctamente para generar subtítulos perfectos en tus videos con Velo AI Studio. Guía completa con ejemplos.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://veloaistudio.online/blog/05-subtitulos-automaticos.html">
+  <link rel="alternate" hreflang="es" href="https://veloaistudio.online/blog/05-subtitulos-automaticos.html" />
+  <link rel="alternate" hreflang="en" href="https://veloaistudio.online/blog/05-subtitulos-automaticos.html" />
+  <link rel="alternate" hreflang="x-default" href="https://veloaistudio.online/blog/05-subtitulos-automaticos.html" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Automatic subtitles: how to use SRT files correctly",
+    "description": "Complete guide to creating and formatting SRT files to generate burned-in subtitles in AI-generated videos.",
+    "datePublished": "2026-03-23",
+    "dateModified": "2026-03-23",
+    "inLanguage": ["es", "en"],
+    "author": { "@type": "Organization", "name": "Velo AI Studio" },
+    "publisher": { "@type": "Organization", "name": "Velo AI Studio", "url": "https://veloaistudio.online" }
+  }
+  </script>
+  <link rel="stylesheet" href="/theme.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;800&display=swap');
+    *{margin:0;padding:0;box-sizing:border-box;}
+    body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;min-height:100vh;line-height:1.7;}
+    body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;background:radial-gradient(ellipse 80% 50% at 20% 10%,rgba(124,58,237,0.1) 0%,transparent 60%);}
+    .container{max-width:760px;margin:0 auto;padding:40px 24px;position:relative;z-index:1;}
+    .nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:48px;}
+    .nav a{color:var(--accent2);text-decoration:none;font-family:'Space Mono',monospace;font-size:0.78rem;}
+    .nav a:hover{text-decoration:underline;}
+    .tag{display:inline-block;background:rgba(6,182,212,0.12);border:1px solid rgba(6,182,212,0.25);color:var(--accent2);font-family:'Space Mono',monospace;font-size:0.62rem;text-transform:uppercase;letter-spacing:1.5px;padding:3px 10px;border-radius:20px;margin-bottom:16px;}
+    h1{font-size:clamp(1.6rem,4vw,2.4rem);font-weight:800;line-height:1.2;margin-bottom:16px;}
+    .meta{font-family:'Space Mono',monospace;font-size:0.7rem;color:var(--muted);margin-bottom:40px;}
+    h2{font-size:1.2rem;font-weight:700;margin:36px 0 12px;color:var(--text);}
+    h3{font-size:1rem;font-weight:700;margin:24px 0 8px;color:var(--accent2);}
+    p{color:var(--prose);margin-bottom:18px;font-size:0.95rem;}
+    ul,ol{color:var(--prose);font-size:0.95rem;padding-left:24px;margin-bottom:18px;}
+    li{margin-bottom:8px;}
+    .code-block{background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:18px;font-family:'Space Mono',monospace;font-size:0.78rem;color:var(--accent2);margin:16px 0;line-height:1.9;white-space:pre;}
+    .code-label{font-family:'Space Mono',monospace;font-size:0.65rem;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;}
+    .tip{background:rgba(245,158,11,0.08);border-left:3px solid var(--accent3);border-radius:0 8px 8px 0;padding:14px 18px;margin:20px 0;font-size:0.88rem;color:var(--prose);}
+    .tip strong{color:var(--accent3);}
+    .error-box{background:rgba(239,68,68,0.07);border-left:3px solid #ef4444;border-radius:0 8px 8px 0;padding:14px 18px;margin:20px 0;font-size:0.88rem;color:var(--prose);}
+    .error-box strong{color:#f87171;}
+    .cta{display:inline-block;margin-top:32px;padding:13px 28px;background:linear-gradient(135deg,var(--accent),var(--accent2));border-radius:8px;color:white;text-decoration:none;font-weight:700;font-size:0.9rem;}
+    footer{margin-top:64px;padding-top:24px;border-top:1px solid var(--border);text-align:center;font-family:'Space Mono',monospace;font-size:0.68rem;color:var(--muted);}
+    footer a{color:var(--muted);text-decoration:none;margin:0 8px;}
+    footer a:hover{color:var(--accent2);}
+    .lang-en{display:none;}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav">
+      <a href="../">← Velo AI Studio</a>
+      <a href="./">Blog</a>
+    </nav>
+
+    <!-- SPANISH -->
+    <div class="lang-es">
+      <span class="tag">Función</span>
+      <h1>Subtítulos automáticos: cómo usar archivos SRT</h1>
+      <p class="meta">23 de marzo de 2026 · 5 min lectura · Velo AI Studio</p>
+
+      <p>El archivo SRT (SubRip Subtitle) es el formato de entrada principal de Velo AI Studio. Es un archivo de texto plano con una estructura muy específica que indica qué texto aparece en pantalla y en qué momento exacto. Entender cómo crearlo y formatearlo correctamente es la clave para obtener videos con subtítulos perfectos.</p>
+
+      <h2>¿Qué es un archivo SRT?</h2>
+      <p>SRT son las siglas de SubRip Subtitle. Es el formato de subtítulos más universal y compatible. Se trata de un archivo de texto simple (con extensión <strong>.srt</strong>) que sigue este patrón repetido para cada subtítulo:</p>
+
+      <div class="code-label">Estructura de un bloque SRT</div>
+      <div class="code-block">[número del subtítulo]
+[hora inicio] --> [hora fin]
+[texto del subtítulo]
+[línea en blanco]</div>
+
+      <h2>Ejemplo de archivo SRT completo</h2>
+      <p>Así se ve un archivo SRT bien formateado para un video sobre el sistema solar:</p>
+
+      <div class="code-block">1
+00:00:00,000 --> 00:00:04,500
+El sistema solar tiene ocho planetas orbitando el Sol.
+
+2
+00:00:04,500 --> 00:00:09,000
+Mercurio es el más cercano y el más pequeño de todos.
+
+3
+00:00:09,000 --> 00:00:14,200
+Venus tiene una temperatura superficial de 465 grados centígrados.
+
+4
+00:00:14,200 --> 00:00:19,800
+La Tierra es el único planeta conocido con vida.</div>
+
+      <h2>Reglas de formato importantes</h2>
+
+      <h3>El separador de tiempo usa coma, no punto</h3>
+      <p>Los milisegundos van separados por una coma, no por un punto. Este es el error más común.</p>
+
+      <div class="error-box">
+        <strong>❌ Incorrecto:</strong> 00:00:04.500 --> 00:00:09.000
+      </div>
+      <div class="tip">
+        <strong>✓ Correcto:</strong> 00:00:04,500 --> 00:00:09,000
+      </div>
+
+      <h3>Línea en blanco entre cada bloque</h3>
+      <p>Debe haber exactamente una línea en blanco entre cada subtítulo. Si no hay línea en blanco, Velo no podrá separar correctamente los segmentos y las imágenes generadas no coincidirán con el audio.</p>
+
+      <h3>Los números deben ser secuenciales</h3>
+      <p>Cada bloque debe numerarse de forma consecutiva empezando desde 1. Si los números no son secuenciales, algunos reproductores y herramientas pueden rechazar el archivo.</p>
+
+      <h2>Herramientas gratuitas para crear archivos SRT</h2>
+      <ul>
+        <li><strong>Subtitle Edit</strong> (Windows) — Software gratuito y completo para crear y editar subtítulos.</li>
+        <li><strong>Aegisub</strong> (Windows/Mac/Linux) — Muy popular entre subtituladores profesionales.</li>
+        <li><strong>Jubler</strong> (multiplataforma) — Interfaz sencilla y compatible con muchos formatos.</li>
+        <li><strong>Notepad / TextEdit</strong> — Puedes crear el archivo SRT directamente en un editor de texto y guardarlo con la extensión .srt.</li>
+      </ul>
+
+      <div class="tip">
+        <strong>Consejo para creadores de YouTube:</strong> Si ya tienes videos en YouTube con subtítulos automáticos, puedes descargarlos en formato SRT desde el panel de YouTube Studio y usarlos directamente en Velo AI Studio para crear una versión visual mejorada de tu contenido.
+      </div>
+
+      <h2>Longitud ideal de cada segmento</h2>
+      <p>Para que las imágenes generadas por IA queden bien sincronizadas con el contenido, cada segmento SRT debería durar entre 3 y 8 segundos. Segmentos muy cortos (menos de 2 segundos) no dan tiempo suficiente para que la imagen se vea. Segmentos muy largos (más de 15 segundos) pueden hacer que una sola imagen acompañe demasiado texto, reduciendo el dinamismo visual del video.</p>
+
+      <h2>¿Puedo usar el modo Audio en vez de SRT?</h2>
+      <p>Sí. Si prefieres no crear un archivo SRT manualmente, puedes subir directamente tu archivo de audio MP3 o WAV. Velo AI Studio dividirá el audio en segmentos y generará imágenes para cada uno. Sin embargo, usar un SRT propio te da más control sobre exactamente qué imagen aparece con cada frase.</p>
+
+      <a href="../" class="cta">→ Crear video con mi archivo SRT</a>
+
+      <footer>
+        <p style="margin-bottom:10px;">© 2026 Velo AI Studio</p>
+        <div><a href="../">App</a> | <a href="./">Blog</a> | <a href="../privacy.html">Privacidad</a> | <a href="../tos.html">Términos</a></div>
+      </footer>
+    </div>
+
+    <!-- ENGLISH -->
+    <div class="lang-en">
+      <span class="tag">Feature</span>
+      <h1>Automatic subtitles: how to use SRT files</h1>
+      <p class="meta">March 23, 2026 · 5 min read · Velo AI Studio</p>
+
+      <p>The SRT (SubRip Subtitle) file is the primary input format for Velo AI Studio. It is a plain text file with a very specific structure that indicates what text appears on screen and at exactly what time. Understanding how to create and format it correctly is the key to getting videos with perfect subtitles.</p>
+
+      <h2>What is an SRT file?</h2>
+      <p>SRT stands for SubRip Subtitle. It is the most universal and compatible subtitle format. It is a simple text file (with a <strong>.srt</strong> extension) that follows this repeating pattern for each subtitle:</p>
+
+      <div class="code-label">SRT block structure</div>
+      <div class="code-block">[subtitle number]
+[start time] --> [end time]
+[subtitle text]
+[blank line]</div>
+
+      <h2>Example of a complete SRT file</h2>
+      <p>Here's what a well-formatted SRT file looks like for a video about the solar system:</p>
+
+      <div class="code-block">1
+00:00:00,000 --> 00:00:04,500
+The solar system has eight planets orbiting the Sun.
+
+2
+00:00:04,500 --> 00:00:09,000
+Mercury is the closest and smallest of all.
+
+3
+00:00:09,000 --> 00:00:14,200
+Venus has a surface temperature of 465 degrees Celsius.
+
+4
+00:00:14,200 --> 00:00:19,800
+Earth is the only planet known to harbor life.</div>
+
+      <h2>Important formatting rules</h2>
+
+      <h3>Time separator uses a comma, not a period</h3>
+      <p>Milliseconds are separated by a comma, not a period. This is the most common mistake.</p>
+
+      <div class="error-box">
+        <strong>❌ Wrong:</strong> 00:00:04.500 --> 00:00:09.000
+      </div>
+      <div class="tip">
+        <strong>✓ Correct:</strong> 00:00:04,500 --> 00:00:09,000
+      </div>
+
+      <h3>Blank line between each block</h3>
+      <p>There must be exactly one blank line between each subtitle. If there is no blank line, Velo won't be able to correctly separate the segments and the generated images won't match the audio.</p>
+
+      <h3>Numbers must be sequential</h3>
+      <p>Each block must be numbered consecutively starting from 1. If the numbers are not sequential, some players and tools may reject the file.</p>
+
+      <h2>Free tools to create SRT files</h2>
+      <ul>
+        <li><strong>Subtitle Edit</strong> (Windows) — Free and complete software for creating and editing subtitles.</li>
+        <li><strong>Aegisub</strong> (Windows/Mac/Linux) — Very popular among professional subtitlers.</li>
+        <li><strong>Jubler</strong> (multiplatform) — Simple interface compatible with many formats.</li>
+        <li><strong>Notepad / TextEdit</strong> — You can create the SRT file directly in a text editor and save it with the .srt extension.</li>
+      </ul>
+
+      <div class="tip">
+        <strong>Tip for YouTube creators:</strong> If you already have YouTube videos with automatic subtitles, you can download them in SRT format from the YouTube Studio panel and use them directly in Velo AI Studio to create an enhanced visual version of your content.
+      </div>
+
+      <h2>Ideal segment length</h2>
+      <p>For AI-generated images to be well synchronized with the content, each SRT segment should last between 3 and 8 seconds. Very short segments (less than 2 seconds) don't give enough time for the image to be seen. Very long segments (more than 15 seconds) can result in a single image accompanying too much text, reducing the visual dynamism of the video.</p>
+
+      <h2>Can I use Audio mode instead of SRT?</h2>
+      <p>Yes. If you prefer not to create an SRT file manually, you can directly upload your MP3 or WAV audio file. Velo AI Studio will split the audio into segments and generate images for each one. However, using your own SRT gives you more control over exactly which image appears with each phrase.</p>
+
+      <a href="../" class="cta">→ Create video with my SRT file</a>
+
+      <footer>
+        <p style="margin-bottom:10px;">© 2026 Velo AI Studio</p>
+        <div><a href="../">App</a> | <a href="./">Blog</a> | <a href="../privacy.html">Privacy</a> | <a href="../tos.html">Terms</a></div>
+      </footer>
+    </div>
+
+  </div>
+  <script>
+  (function(){
+    var isEN = !navigator.language.toLowerCase().startsWith('es');
+    if (isEN) {
+      document.documentElement.lang = 'en';
+      document.title = 'Automatic subtitles with SRT files — Blog Velo AI Studio';
+      var md = document.querySelector('meta[name="description"]');
+      if (md) md.setAttribute('content', 'Learn how to correctly create and format SRT files to generate perfect subtitles in your videos with Velo AI Studio. Complete guide with examples.');
+      document.querySelectorAll('.lang-es').forEach(function(e){ e.style.display = 'none'; });
+      document.querySelectorAll('.lang-en').forEach(function(e){ e.style.display = 'block'; });
+    }
+  })();
+  </script>
+</body>
+</html>
