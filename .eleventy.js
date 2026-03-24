@@ -46,6 +46,20 @@ module.exports = function (eleventyConfig) {
     return d.toISOString().split("T")[0];
   });
 
+  // ── Related posts filters ──────────────────────────────────────────
+  // Filters posts from CMS collection by same tag, excluding current slug
+  eleventyConfig.addFilter("relatedCMS", (collection, currentSlug, tag, limit) => {
+    return (collection || [])
+      .filter(p => p.data.slug !== currentSlug && p.data.tag_es === tag)
+      .slice(0, limit || 3);
+  });
+  // Filters legacy posts (from _data/legacyPosts.json) by same tag
+  eleventyConfig.addFilter("relatedLegacy", (posts, currentSlug, tag, limit) => {
+    return (posts || [])
+      .filter(p => p.slug !== currentSlug && p.tag_es === tag)
+      .slice(0, limit || 3);
+  });
+
   // ── Blog post collection (CMS-created .md files) ───────────────────
   eleventyConfig.addCollection("blogPost", (api) =>
     api.getFilteredByGlob("blog/posts/*.md").sort((a, b) => {

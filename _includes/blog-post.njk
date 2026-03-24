@@ -29,6 +29,8 @@
     "inLanguage": ["es", "en"]
   }
   </script>
+  <!-- Google AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3377827647746361" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="/theme.css">
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;800&display=swap');
@@ -87,6 +89,19 @@
     img{max-width:100%;border-radius:8px;margin:16px 0;}
     hr{border:none;border-top:1px solid var(--border);margin:36px 0;}
 
+    /* ── AdSense wrapper ── */
+    .ad-unit{
+      margin:36px 0;padding:8px 0;
+      border-top:1px solid var(--border);
+      border-bottom:1px solid var(--border);
+      text-align:center;min-height:90px;
+    }
+    .ad-label{
+      font-family:'Space Mono',monospace;font-size:0.58rem;
+      color:var(--muted);letter-spacing:1px;text-transform:uppercase;
+      margin-bottom:6px;display:block;
+    }
+
     /* ── Mid-article CTA ── */
     .mid-cta{
       background:var(--surface);border:1px solid var(--border);border-radius:14px;
@@ -120,6 +135,35 @@
     .end-cta-note{display:block;margin-top:12px;font-family:'Space Mono',monospace;
       font-size:0.65rem;color:var(--muted);}
 
+    /* ── Related posts ── */
+    .related{margin-top:56px;}
+    .related-title{
+      font-family:'Space Mono',monospace;font-size:0.65rem;text-transform:uppercase;
+      letter-spacing:2px;color:var(--muted);margin-bottom:20px;
+    }
+    .related-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px;}
+    .related-card{
+      background:var(--surface);border:1px solid var(--border);border-radius:12px;
+      padding:18px;text-decoration:none;display:block;transition:border-color 0.2s,transform 0.2s;
+    }
+    .related-card:hover{border-color:var(--accent);transform:translateY(-2px);text-decoration:none;}
+    .related-card-emoji{font-size:1.5rem;margin-bottom:8px;display:block;}
+    .related-card-tag{
+      font-family:'Space Mono',monospace;font-size:0.55rem;text-transform:uppercase;
+      letter-spacing:1px;color:var(--accent2);margin-bottom:6px;display:block;
+    }
+    .related-card-title{font-size:0.82rem;font-weight:700;color:var(--text);line-height:1.35;}
+
+    /* ── Comments section ── */
+    .comments{
+      margin-top:48px;padding-top:32px;
+      border-top:1px solid var(--border);
+    }
+    .comments-title{
+      font-family:'Space Mono',monospace;font-size:0.65rem;text-transform:uppercase;
+      letter-spacing:2px;color:var(--muted);margin-bottom:20px;
+    }
+
     /* ── Footer ── */
     footer{margin-top:64px;padding-top:24px;border-top:1px solid var(--border);
       text-align:center;font-family:'Space Mono',monospace;font-size:0.68rem;color:var(--muted);}
@@ -131,6 +175,7 @@
     @media(max-width:600px){
       .mid-cta{flex-direction:column;align-items:flex-start;}
       .app-top-banner{flex-direction:column;align-items:flex-start;gap:10px;}
+      .related-grid{grid-template-columns:1fr;}
     }
   </style>
 </head>
@@ -140,6 +185,10 @@
       <a href="/">← Velo AI Studio</a>
       <a href="/blog/">Blog</a>
     </nav>
+
+    {# ── Compute related posts once (used in both lang sections) ── #}
+    {% set relatedNew    = collections.blogPost | relatedCMS(slug, tag_es, 3) %}
+    {% set relatedOld    = legacyPosts | relatedLegacy(slug, tag_es, 3) %}
 
     {# ── SPANISH ──────────────────────────────────────────── #}
     <div class="lang-es">
@@ -154,9 +203,33 @@
       <h1>{{ title_es }}</h1>
       <p class="meta">{{ date | dateEs }} · {{ read_es }} · Velo AI Studio</p>
 
+      {# Ad — top of article #}
+      <div class="ad-unit">
+        <span class="ad-label">Publicidad</span>
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-3377827647746361"
+             data-ad-slot="AUTO"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+      </div>
+
       {# Article body — Markdown rendered #}
       <div class="article-body">
         {{ content_es | markdown | safe }}
+      </div>
+
+      {# Ad — mid article #}
+      <div class="ad-unit">
+        <span class="ad-label">Publicidad</span>
+        <ins class="adsbygoogle"
+             style="display:block;text-align:center"
+             data-ad-layout="in-article"
+             data-ad-format="fluid"
+             data-ad-client="ca-pub-3377827647746361"
+             data-ad-slot="AUTO"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
       </div>
 
       {# Mid-article CTA #}
@@ -176,6 +249,55 @@
            Velo AI Studio convierte tu guion o audio en video profesional en minutos.</p>
         <a href="/" class="end-cta-btn">→ Crear mi primer video gratis</a>
         <span class="end-cta-note">Sin cuenta · Sin instalación · 100% gratuito</span>
+      </div>
+
+      {# Ad — after end CTA #}
+      <div class="ad-unit">
+        <span class="ad-label">Publicidad</span>
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-3377827647746361"
+             data-ad-slot="AUTO"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+      </div>
+
+      {# Related posts #}
+      {% if relatedNew.length > 0 or relatedOld.length > 0 %}
+      <div class="related">
+        <p class="related-title">// También te puede interesar</p>
+        <div class="related-grid">
+          {% for p in relatedNew %}
+          <a href="/blog/{{ p.data.slug }}.html" class="related-card">
+            <span class="related-card-emoji">{{ p.data.emoji }}</span>
+            <span class="related-card-tag">{{ p.data.tag_es }}</span>
+            <span class="related-card-title">{{ p.data.title_es }}</span>
+          </a>
+          {% endfor %}
+          {% for p in relatedOld %}
+          <a href="/blog/{{ p.slug }}.html" class="related-card">
+            <span class="related-card-emoji">{{ p.emoji }}</span>
+            <span class="related-card-tag">{{ p.tag_es }}</span>
+            <span class="related-card-title">{{ p.title_es }}</span>
+          </a>
+          {% endfor %}
+        </div>
+      </div>
+      {% endif %}
+
+      {# Comments — Cusdis embed (reemplaza APP_ID con tu ID de cusdis.com) #}
+      <div class="comments">
+        <p class="comments-title">// Comentarios</p>
+        <div id="cusdis_thread"
+          data-host="https://cusdis.com"
+          data-app-id="TU_APP_ID_AQUI"
+          data-page-id="{{ slug }}"
+          data-page-url="https://veloaistudio.online/blog/{{ slug }}.html"
+          data-page-title="{{ title_es }}"
+          data-lang="es">
+        </div>
+        <script async defer src="https://cusdis.com/js/cusdis.es.js"></script>
       </div>
 
       <footer>
@@ -203,9 +325,33 @@
       <h1>{{ title_en }}</h1>
       <p class="meta">{{ date | dateEn }} · {{ read_en }} · Velo AI Studio</p>
 
+      {# Ad — top of article #}
+      <div class="ad-unit">
+        <span class="ad-label">Advertisement</span>
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-3377827647746361"
+             data-ad-slot="AUTO"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+      </div>
+
       {# Article body — Markdown rendered #}
       <div class="article-body">
         {{ content_en | markdown | safe }}
+      </div>
+
+      {# Ad — mid article #}
+      <div class="ad-unit">
+        <span class="ad-label">Advertisement</span>
+        <ins class="adsbygoogle"
+             style="display:block;text-align:center"
+             data-ad-layout="in-article"
+             data-ad-format="fluid"
+             data-ad-client="ca-pub-3377827647746361"
+             data-ad-slot="AUTO"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
       </div>
 
       {# Mid-article CTA #}
@@ -225,6 +371,55 @@
            Velo AI Studio turns your script or audio into a professional video in minutes.</p>
         <a href="/" class="end-cta-btn">→ Create my first free video</a>
         <span class="end-cta-note">No account · No install · 100% free</span>
+      </div>
+
+      {# Ad — after end CTA #}
+      <div class="ad-unit">
+        <span class="ad-label">Advertisement</span>
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-3377827647746361"
+             data-ad-slot="AUTO"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+      </div>
+
+      {# Related posts #}
+      {% if relatedNew.length > 0 or relatedOld.length > 0 %}
+      <div class="related">
+        <p class="related-title">// You might also like</p>
+        <div class="related-grid">
+          {% for p in relatedNew %}
+          <a href="/blog/{{ p.data.slug }}.html" class="related-card">
+            <span class="related-card-emoji">{{ p.data.emoji }}</span>
+            <span class="related-card-tag">{{ p.data.tag_en }}</span>
+            <span class="related-card-title">{{ p.data.title_en }}</span>
+          </a>
+          {% endfor %}
+          {% for p in relatedOld %}
+          <a href="/blog/{{ p.slug }}.html" class="related-card">
+            <span class="related-card-emoji">{{ p.emoji }}</span>
+            <span class="related-card-tag">{{ p.tag_en }}</span>
+            <span class="related-card-title">{{ p.title_en }}</span>
+          </a>
+          {% endfor %}
+        </div>
+      </div>
+      {% endif %}
+
+      {# Comments — Cusdis embed #}
+      <div class="comments">
+        <p class="comments-title">// Comments</p>
+        <div id="cusdis_thread"
+          data-host="https://cusdis.com"
+          data-app-id="TU_APP_ID_AQUI"
+          data-page-id="{{ slug }}"
+          data-page-url="https://veloaistudio.online/blog/{{ slug }}.html"
+          data-page-title="{{ title_en }}"
+          data-lang="en">
+        </div>
+        <script async defer src="https://cusdis.com/js/cusdis.es.js"></script>
       </div>
 
       <footer>
