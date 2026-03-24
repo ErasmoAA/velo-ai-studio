@@ -36,7 +36,8 @@ collections:
     folder: "blog/posts"
     create: true
     # Nombre del archivo: ej. "11-mi-articulo-nuevo.md"
-    slug: "{{num}}-{{slug}}"
+    # IMPORTANTE: solo usa campos cortos para evitar nombres de archivo largos
+    slug: "{{fields.num}}-{{fields.slug}}"
     preview_path: "blog/{{slug}}.html"
     summary: "{{emoji}} [{{num}}] {{title_es}} — {{date}}"
     sortable_fields: ["num", "date", "title_es"]
