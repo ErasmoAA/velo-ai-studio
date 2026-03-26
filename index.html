@@ -4323,39 +4323,44 @@ Responde ÚNICAMENTE con JSON válido:
       }
 
       if (canPickFile) {
-        const handle = await window.showSaveFilePicker({
-          suggestedName: fileName,
-          types: [{
-            description: 'MP4 Video',
-            accept: { 'video/mp4': ['.mp4'] }
-          }]
-        });
+        try {
+          const handle = await window.showSaveFilePicker({
+            suggestedName: fileName,
+            types: [{
+              description: 'MP4 Video',
+              accept: { 'video/mp4': ['.mp4'] }
+            }]
+          });
 
-        const writable = await handle.createWritable();
-        let writeChain = Promise.resolve();
+          const writable = await handle.createWritable();
+          let writeChain = Promise.resolve();
 
-        const target = new Mp4Muxer.StreamTarget({
-          onData: (data, position) => {
-            const copy = new Uint8Array(data);
-            writeChain = writeChain.then(async () => {
-              await writable.seek(position);
-              await writable.write(copy);
-            });
-          },
-          chunked: true,
-          chunkSize: 4 * 1024 * 1024
-        });
+          const target = new Mp4Muxer.StreamTarget({
+            onData: (data, position) => {
+              const copy = new Uint8Array(data);
+              writeChain = writeChain.then(async () => {
+                await writable.seek(position);
+                await writable.write(copy);
+              });
+            },
+            chunked: true,
+            chunkSize: 4 * 1024 * 1024
+          });
 
-        return {
-          mode: 'file',
-          target,
-          finalizeResult: async () => {
-            await writeChain;
-            await writable.close();
-            const file = await handle.getFile();
-            return file;
-          }
-        };
+          return {
+            mode: 'file',
+            target,
+            finalizeResult: async () => {
+              await writeChain;
+              await writable.close();
+              const file = await handle.getFile();
+              return file;
+            }
+          };
+        } catch (e) {
+          // showSaveFilePicker fails in Express mode (no user gesture) — fall through to memory mode
+          log('⚠️ File picker no disponible (modo automático). Usando renderizado en memoria.', 'warn');
+        }
       }
 
       const store = new SparseChunkStore();
