@@ -3568,7 +3568,29 @@
       document.getElementById('progressText').textContent = pct + '% - ' + msg;
     }
 
+    // Pre-acquired file handle for Express mode (obtained during user gesture)
+    let _preAcquiredFileHandle = null;
+
     async function runPipeline(isAutoMode) {
+      _preAcquiredFileHandle = null; // reset from previous run
+
+      // In Express mode, acquire file handle NOW (user gesture is active)
+      // so large videos can stream to disk instead of filling RAM
+      if (isAutoMode && typeof window.showSaveFilePicker === 'function') {
+        try {
+          const fmt = document.getElementById('formatSelect').value.replace(':', 'x');
+          _preAcquiredFileHandle = await window.showSaveFilePicker({
+            suggestedName: `video_ia_${fmt}_${Date.now()}.mp4`,
+            types: [{ description: 'MP4 Video', accept: { 'video/mp4': ['.mp4'] } }]
+          });
+          log('📁 Ubicación de archivo seleccionada. El video se escribirá directo al disco.', 'ok');
+        } catch (e) {
+          // User cancelled the picker — fall through to memory mode later
+          _preAcquiredFileHandle = null;
+          log('ℹ️ Sin ubicación seleccionada. El video se guardará en memoria.', 'info');
+        }
+      }
+
       const apiKey = getAndSecureKey();
       if (!apiKey) return alert('Por favor, ingresa tu API Key de Pollinations.');
       if (!srtContent) return alert('Falta el guion SRT o transcribir el audio.');
@@ -4322,45 +4344,42 @@ Responde ÚNICAMENTE con JSON válido:
         };
       }
 
-      if (canPickFile) {
+      // Use pre-acquired handle (Express mode) or try picker (Review mode with user gesture)
+      const fileHandle = _preAcquiredFileHandle || (canPickFile ? await (async () => {
         try {
-          const handle = await window.showSaveFilePicker({
+          return await window.showSaveFilePicker({
             suggestedName: fileName,
-            types: [{
-              description: 'MP4 Video',
-              accept: { 'video/mp4': ['.mp4'] }
-            }]
+            types: [{ description: 'MP4 Video', accept: { 'video/mp4': ['.mp4'] } }]
           });
+        } catch (e) { return null; }
+      })() : null);
 
-          const writable = await handle.createWritable();
-          let writeChain = Promise.resolve();
+      if (fileHandle) {
+        const writable = await fileHandle.createWritable();
+        let writeChain = Promise.resolve();
 
-          const target = new Mp4Muxer.StreamTarget({
-            onData: (data, position) => {
-              const copy = new Uint8Array(data);
-              writeChain = writeChain.then(async () => {
-                await writable.seek(position);
-                await writable.write(copy);
-              });
-            },
-            chunked: true,
-            chunkSize: 4 * 1024 * 1024
-          });
+        const target = new Mp4Muxer.StreamTarget({
+          onData: (data, position) => {
+            const copy = new Uint8Array(data);
+            writeChain = writeChain.then(async () => {
+              await writable.seek(position);
+              await writable.write(copy);
+            });
+          },
+          chunked: true,
+          chunkSize: 4 * 1024 * 1024
+        });
 
-          return {
-            mode: 'file',
-            target,
-            finalizeResult: async () => {
-              await writeChain;
-              await writable.close();
-              const file = await handle.getFile();
-              return file;
-            }
-          };
-        } catch (e) {
-          // showSaveFilePicker fails in Express mode (no user gesture) — fall through to memory mode
-          log('⚠️ File picker no disponible (modo automático). Usando renderizado en memoria.', 'warn');
-        }
+        return {
+          mode: 'file',
+          target,
+          finalizeResult: async () => {
+            await writeChain;
+            await writable.close();
+            const file = await fileHandle.getFile();
+            return file;
+          }
+        };
       }
 
       const store = new SparseChunkStore();
