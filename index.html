@@ -4333,7 +4333,7 @@ Responde ÚNICAMENTE con JSON válido:
       const canPickFile = typeof window.showSaveFilePicker === 'function';
       const canStream = typeof Mp4Muxer.StreamTarget !== 'undefined';
 
-      if (estimatedBytes < LARGE_FILE_THRESHOLD || !canStream) {
+      if (!_preAcquiredFileHandle && (estimatedBytes < LARGE_FILE_THRESHOLD || !canStream)) {
         return {
           mode: 'buffer',
           target: new Mp4Muxer.ArrayBufferTarget(),
