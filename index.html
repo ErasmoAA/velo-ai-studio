@@ -1186,139 +1186,7 @@
     </div>
   </noscript>
 
-  <div id="welcomeModal" class="modal" style="z-index: 1005;">
-    <div class="welcome-box" style="max-width:540px; padding:0; overflow:hidden;">
-
-      <!-- Progress bar -->
-      <div style="height:4px; background:var(--border);">
-        <div id="wb-progress"
-          style="height:100%; width:33%; background:linear-gradient(90deg,var(--accent),var(--accent2)); transition:width 0.4s;">
-        </div>
-      </div>
-
-      <!-- SLIDE 1: Qué es Velo -->
-      <div id="wb-slide-1" style="padding:32px 28px;">
-        <div style="text-align:center; margin-bottom:20px;">
-          <div style="font-size:3rem; margin-bottom:8px;">🎬</div>
-          <div style="font-size:1.4rem; font-weight:800; color:var(--text); letter-spacing:-1px;">¡Bienvenido a Velo AI
-            Studio!</div>
-          <p style="color:var(--muted); font-size:0.85rem; margin-top:8px; line-height:1.6;">
-            Convierte un <strong>guion de texto o un audio</strong> en un <strong>video profesional</strong>
-            automáticamente con Inteligencia Artificial.<br>
-            <span style="font-size:0.78rem; opacity:0.7;">Sin instalar nada. Sin experiencia técnica. Gratis.</span>
-          </p>
-        </div>
-        <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px; margin-bottom:24px;">
-          <div
-            style="background:var(--surface2); border:1px solid var(--border); border-radius:10px; padding:14px; text-align:center;">
-            <div style="font-size:1.5rem;">📝</div>
-            <div style="font-size:0.72rem; color:var(--muted); margin-top:6px; line-height:1.4;">Escribe o sube tu guion
-            </div>
-          </div>
-          <div
-            style="background:var(--surface2); border:1px solid var(--border); border-radius:10px; padding:14px; text-align:center;">
-            <div style="font-size:1.5rem;">🤖</div>
-            <div style="font-size:0.72rem; color:var(--muted); margin-top:6px; line-height:1.4;">La IA genera las
-              imágenes</div>
-          </div>
-          <div
-            style="background:var(--surface2); border:1px solid var(--border); border-radius:10px; padding:14px; text-align:center;">
-            <div style="font-size:1.5rem;">🎥</div>
-            <div style="font-size:0.72rem; color:var(--muted); margin-top:6px; line-height:1.4;">Descarga tu video en
-              MP4</div>
-          </div>
-        </div>
-        <button class="btn btn-auto" style="width:100%; font-size:1rem; padding:14px;" onclick="wbNext(2)">
-          ¿Cómo empiezo? →
-        </button>
-      </div>
-
-      <!-- SLIDE 2: La API Key explicada para no técnicos -->
-      <div id="wb-slide-2" style="padding:32px 28px; display:none;">
-        <div style="text-align:center; margin-bottom:20px;">
-          <div style="font-size:2.5rem; margin-bottom:8px;">🔑</div>
-          <div style="font-size:1.2rem; font-weight:800; color:var(--text);">Solo necesitas una "llave" gratuita</div>
-        </div>
-
-        <div
-          style="background:rgba(124,58,237,0.08); border:1px solid rgba(124,58,237,0.25); border-radius:12px; padding:16px; margin-bottom:16px;">
-          <p style="font-size:0.85rem; color:var(--text); line-height:1.7; margin:0;">
-            <strong>¿Qué es la API Key?</strong><br>
-            Imagínala como una <em>tarjeta de membresía gratuita</em> de Pollinations AI — la plataforma que genera las
-            imágenes. Sin ella, la app no puede crear imágenes. Con ella, tienes acceso gratis a docenas de modelos de
-            IA.
-          </p>
-        </div>
-
-        <div
-          style="background:rgba(6,182,212,0.08); border:1px solid rgba(6,182,212,0.25); border-radius:12px; padding:14px; margin-bottom:20px;">
-          <p style="font-size:0.8rem; color:var(--text); line-height:1.6; margin:0;">
-            <strong>🚀 Cómo obtenerla en 30 segundos:</strong><br>
-            1. Haz clic en el botón verde <strong>"Conectar con Pollinations"</strong> que verás en la app<br>
-            2. Inicia sesión con Google o email<br>
-            3. ¡Listo! La llave se guarda automáticamente
-          </p>
-        </div>
-
-        <div style="display:flex; gap:10px;">
-          <button class="btn btn-secondary" style="flex:1; padding:12px;" onclick="wbNext(1)">← Atrás</button>
-          <button class="btn btn-auto" style="flex:2; padding:12px;" onclick="wbNext(3)">Entendido, ¡siguiente!
-            →</button>
-        </div>
-      </div>
-
-      <!-- SLIDE 3: Modos de trabajo -->
-      <div id="wb-slide-3" style="padding:32px 28px; display:none;">
-        <div style="text-align:center; margin-bottom:20px;">
-          <div style="font-size:2.5rem; margin-bottom:8px;">⚡</div>
-          <div style="font-size:1.2rem; font-weight:800; color:var(--text);">Elige cómo quieres trabajar</div>
-          <p style="color:var(--muted); font-size:0.8rem; margin-top:6px;">Puedes cambiarlo cuando quieras.</p>
-        </div>
-
-        <div style="display:grid; gap:12px; margin-bottom:20px;">
-          <div
-            style="background:var(--surface2); border:2px solid rgba(6,182,212,0.4); border-radius:12px; padding:16px;">
-            <div style="display:flex; align-items:center; gap:10px; margin-bottom:8px;">
-              <span style="font-size:1.3rem;">👀</span>
-              <strong style="color:var(--accent2);">Modo Revisión</strong>
-              <span
-                style="font-size:0.65rem; background:rgba(6,182,212,0.15); color:var(--accent2); padding:2px 8px; border-radius:20px; margin-left:auto;">Recomendado
-                para empezar</span>
-            </div>
-            <p style="font-size:0.78rem; color:var(--muted); line-height:1.5; margin:0;">La IA genera las imágenes y
-              <strong>te las muestra para que las apruebes</strong> antes de armar el video. Puedes cambiar cualquier
-              imagen que no te guste.
-            </p>
-          </div>
-          <div style="background:var(--surface2); border:1px solid var(--border); border-radius:12px; padding:16px;">
-            <div style="display:flex; align-items:center; gap:10px; margin-bottom:8px;">
-              <span style="font-size:1.3rem;">⚡</span>
-              <strong style="color:var(--accent3);">Modo Express</strong>
-              <span
-                style="font-size:0.65rem; background:rgba(245,158,11,0.15); color:var(--accent3); padding:2px 8px; border-radius:20px; margin-left:auto;">Para
-                usuarios avanzados</span>
-            </div>
-            <p style="font-size:0.78rem; color:var(--muted); line-height:1.5; margin:0;">Todo automático en segundo
-              plano. Puedes ir a otra pestaña y el video se descargará solo cuando termine.</p>
-          </div>
-        </div>
-
-        <div style="display:flex; gap:10px;">
-          <button class="btn btn-secondary" style="flex:1; padding:12px;" onclick="wbNext(2)">← Atrás</button>
-          <button class="btn btn-success" style="flex:2; padding:12px; font-size:0.95rem;"
-            onclick="closeWelcomeAndHighlight()">
-            🚀 ¡Crear mi primer video!
-          </button>
-        </div>
-
-        <label class="checkbox-wrapper" style="margin-top:14px; justify-content:center;">
-          <input type="checkbox" id="dontShowAgainCB">
-          No mostrar esta guía de nuevo
-        </label>
-      </div>
-
-    </div>
-  </div>
+  <!-- Welcome modal removed — replaced by inline #heroOnboarding section above -->
 
   <div id="imageModal" class="modal lightbox-container" onclick="closeImageModal()">
     <span class="modal-close">&times;</span>
@@ -1348,6 +1216,76 @@
           Blog &amp; Tutoriales</a>
       </div>
     </header>
+
+    <!-- ══════════════════════════════════════════════════════════════════
+         HERO / ONBOARDING SECTION — contenido editorial integrado (no modal)
+         Reemplaza el popup de bienvenida para cumplir con politicas AdSense
+         ════════════════════════════════════════════════════════════════ -->
+    <div id="heroOnboarding" class="card" style="margin-bottom:24px; border:1px solid rgba(6,182,212,0.25); background:linear-gradient(135deg, var(--surface) 0%, rgba(124,58,237,0.04) 100%);">
+
+      <!-- Encabezado siempre visible -->
+      <div style="text-align:center; margin-bottom:16px;">
+        <div style="font-size:2.2rem; margin-bottom:6px;">🎬</div>
+        <h2 id="hero-title" style="font-size:1.3rem; font-weight:800; color:var(--text); letter-spacing:-0.5px; margin:0 0 8px;">¿Primera vez aquí? Te explicamos cómo crear tu primer video con IA</h2>
+        <p id="hero-subtitle" style="color:var(--muted); font-size:0.82rem; line-height:1.6; margin:0;">
+          Convierte un <strong>guion de texto o un audio</strong> en un <strong>video profesional</strong> automáticamente con Inteligencia Artificial. Sin instalar nada. Sin experiencia técnica. Gratis.
+        </p>
+      </div>
+
+      <!-- Contenido expandible -->
+      <div id="heroDetails" style="overflow:hidden; transition: max-height 0.4s ease, opacity 0.3s ease;">
+
+        <!-- 3 pasos rápidos -->
+        <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px; margin-bottom:20px;">
+          <div style="background:var(--surface2); border:1px solid var(--border); border-radius:10px; padding:14px; text-align:center;">
+            <div style="font-size:1.5rem;">📝</div>
+            <div class="hero-step-label" style="font-size:0.72rem; color:var(--muted); margin-top:6px; line-height:1.4;">Escribe o sube tu guion</div>
+          </div>
+          <div style="background:var(--surface2); border:1px solid var(--border); border-radius:10px; padding:14px; text-align:center;">
+            <div style="font-size:1.5rem;">🤖</div>
+            <div class="hero-step-label" style="font-size:0.72rem; color:var(--muted); margin-top:6px; line-height:1.4;">La IA genera las imágenes</div>
+          </div>
+          <div style="background:var(--surface2); border:1px solid var(--border); border-radius:10px; padding:14px; text-align:center;">
+            <div style="font-size:1.5rem;">🎥</div>
+            <div class="hero-step-label" style="font-size:0.72rem; color:var(--muted); margin-top:6px; line-height:1.4;">Descarga tu video en MP4</div>
+          </div>
+        </div>
+
+        <!-- API Key explicación -->
+        <div style="background:rgba(124,58,237,0.08); border:1px solid rgba(124,58,237,0.25); border-radius:12px; padding:16px; margin-bottom:14px;">
+          <p id="hero-apikey-title" style="font-size:0.85rem; color:var(--text); line-height:1.7; margin:0;">
+            <strong>🔑 Solo necesitas una "llave" gratuita</strong><br>
+            Imagínala como una <em>tarjeta de membresía gratuita</em> de Pollinations AI — la plataforma que genera las imágenes. Haz clic en el botón verde <strong>"Conectar — Es Gratis"</strong> más abajo para obtenerla en 30 segundos.
+          </p>
+        </div>
+
+        <!-- Modos de trabajo -->
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:16px;">
+          <div style="background:var(--surface2); border:2px solid rgba(6,182,212,0.4); border-radius:12px; padding:14px;">
+            <div style="display:flex; align-items:center; gap:8px; margin-bottom:6px;">
+              <span style="font-size:1.1rem;">👀</span>
+              <strong id="hero-mode1-title" style="color:var(--accent2); font-size:0.85rem;">Modo Revisión</strong>
+            </div>
+            <p id="hero-mode1-desc" style="font-size:0.75rem; color:var(--muted); line-height:1.5; margin:0;">La IA genera imágenes y <strong>te las muestra para que las apruebes</strong> antes de armar el video.</p>
+          </div>
+          <div style="background:var(--surface2); border:1px solid var(--border); border-radius:12px; padding:14px;">
+            <div style="display:flex; align-items:center; gap:8px; margin-bottom:6px;">
+              <span style="font-size:1.1rem;">⚡</span>
+              <strong id="hero-mode2-title" style="color:var(--accent3); font-size:0.85rem;">Modo Express</strong>
+            </div>
+            <p id="hero-mode2-desc" style="font-size:0.75rem; color:var(--muted); line-height:1.5; margin:0;">Todo automático en segundo plano. El video se descarga solo cuando termine.</p>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Botón para colapsar/expandir -->
+      <div style="text-align:center;">
+        <button id="heroToggleBtn" onclick="toggleHeroDetails()" style="padding:8px 20px; background:var(--surface2); border:1px solid var(--border); border-radius:8px; color:var(--muted); font-family:'Space Mono',monospace; font-size:0.72rem; cursor:pointer;">
+          ▲ Ocultar guía
+        </button>
+      </div>
+    </div>
 
     <div class="card">
       <div class="card-title"><span class="step-num">1</span> Origen de los Datos</div>
@@ -2248,30 +2186,26 @@
         if (lis[1]) lis[1].innerHTML = 'Click the <b>"Retry all failed images"</b> button below.';
       }
 
-      // ── Welcome modal ──
-      const welcomeTitle = document.querySelector('.welcome-title');
-      if (welcomeTitle) welcomeTitle.textContent = 'Welcome to the Pro Generator! 🎬';
-      const welcomeSteps = document.querySelectorAll('.welcome-step');
-      const stepsEN = [
-        { h4: '1️⃣ Upload your Script or Audio', p: 'Drag a <b>.SRT</b> file or upload your voice as <b>.MP3/.WAV</b>. If you upload audio, our Whisper AI will transcribe it for you automatically.' },
-        { h4: '2️⃣ Configure to your liking', p: 'You need to connect your <a href="https://enter.pollinations.ai" target="_blank" style="color:var(--accent2)">Pollinations API Key</a>. Then choose the format (Vertical/Horizontal), the image style, and whether you want Ken Burns camera effects.' },
-        { h4: '3️⃣ Choose your Workflow', p: '<b>👀 Review Mode:</b> Pauses before making the video so you can approve each image. You can change the AI model or upload photos from your PC.<br><b>⚡ Express Mode:</b> Runs in the background (Web Worker). You can switch tabs and your video will download automatically when done.' }
-      ];
-      welcomeSteps.forEach((step, i) => {
-        if (!stepsEN[i]) return;
-        const h4 = step.querySelector('h4');
-        const p = step.querySelector('p');
-        if (h4) h4.innerHTML = stepsEN[i].h4;
-        if (p) p.innerHTML = stepsEN[i].p;
-      });
-      const checkboxLabel = document.querySelector('.checkbox-wrapper');
-      if (checkboxLabel) {
-        const cb = document.getElementById('dontShowAgainCB');
-        checkboxLabel.textContent = `Got it, don\u2019t show this again`;
-        if (cb) checkboxLabel.prepend(cb);
-      }
-      const welcomeFooterBtn = document.querySelector('.welcome-footer .btn');
-      if (welcomeFooterBtn) welcomeFooterBtn.textContent = 'Start creating!';
+      // ── Hero onboarding section ──
+      var heroTitle = document.getElementById('hero-title');
+      if (heroTitle) heroTitle.textContent = 'First time here? Learn how to create your first AI video';
+      var heroSubtitle = document.getElementById('hero-subtitle');
+      if (heroSubtitle) heroSubtitle.innerHTML = 'Convert a <strong>text script or audio</strong> into a <strong>professional video</strong> automatically with AI. No installation. No technical experience. Free.';
+      var heroStepLabels = document.querySelectorAll('.hero-step-label');
+      var heroStepTexts = ['Write or upload your script', 'AI generates the images', 'Download your video in MP4'];
+      heroStepLabels.forEach(function(el, i) { if (heroStepTexts[i]) el.textContent = heroStepTexts[i]; });
+      var heroApiKey = document.getElementById('hero-apikey-title');
+      if (heroApiKey) heroApiKey.innerHTML = '<strong>🔑 You just need a free "key"</strong><br>Think of it as a <em>free membership card</em> for Pollinations AI — the platform that generates the images. Click the green <strong>"Connect — It\'s Free"</strong> button below to get it in 30 seconds.';
+      var heroMode1 = document.getElementById('hero-mode1-title');
+      if (heroMode1) heroMode1.textContent = 'Review Mode';
+      var heroMode1Desc = document.getElementById('hero-mode1-desc');
+      if (heroMode1Desc) heroMode1Desc.innerHTML = 'AI generates images and <strong>shows them for your approval</strong> before assembling the video.';
+      var heroMode2 = document.getElementById('hero-mode2-title');
+      if (heroMode2) heroMode2.textContent = 'Express Mode';
+      var heroMode2Desc = document.getElementById('hero-mode2-desc');
+      if (heroMode2Desc) heroMode2Desc.textContent = 'Fully automatic in the background. The video downloads automatically when done.';
+      var heroToggle = document.getElementById('heroToggleBtn');
+      if (heroToggle) heroToggle.textContent = heroToggle.textContent.includes('Ocultar') ? '▲ Hide guide' : '▼ Show guide';
 
       // ── Penalty modal ──
       const penaltyH1 = document.querySelector('#penaltyModal h1');
@@ -2386,52 +2320,6 @@
         if (footerLinks[2]) footerLinks[2].textContent = 'Terms of Service';
         if (footerLinks[4]) footerLinks[4].textContent = 'Contact';
         if (footerLinks[5]) footerLinks[5].textContent = 'About';
-      }
-
-      // ── Welcome modal slides (wb-slide-1/2/3) ──
-      const slide1 = document.getElementById('wb-slide-1');
-      if (slide1) {
-        const title = slide1.querySelector('div[style*="1.4rem"]');
-        if (title) title.innerHTML = 'Welcome to Velo AI Studio!';
-        const desc = slide1.querySelector('p');
-        if (desc) desc.innerHTML = 'Convert a <strong>text script or audio</strong> into a <strong>professional video</strong> automatically with AI.<br><span style="font-size:0.78rem; opacity:0.7;">No installation. No technical experience. Free.</span>';
-        const cardLabels = slide1.querySelectorAll('div[style*="font-size:0.72rem"]');
-        const cardTexts = ['Write or upload your script', 'AI generates the images', 'Download your video in MP4'];
-        cardLabels.forEach((el, i) => { if (cardTexts[i]) el.textContent = cardTexts[i]; });
-        const btn = slide1.querySelector('button');
-        if (btn) btn.textContent = 'How do I start? →';
-      }
-
-      const slide2 = document.getElementById('wb-slide-2');
-      if (slide2) {
-        const title = slide2.querySelector('div[style*="1.2rem"]');
-        if (title) title.textContent = 'You just need a free "key"';
-        const boxes = slide2.querySelectorAll('div[style*="border-radius:12px"] p');
-        if (boxes[0]) boxes[0].innerHTML = '<strong>What is the API Key?</strong><br>Think of it as a <em>free membership card</em> for Pollinations AI — the platform that generates the images. Without it, the app can\'t create images. With it, you get free access to dozens of AI models.';
-        if (boxes[1]) boxes[1].innerHTML = '<strong>🚀 How to get it in 30 seconds:</strong><br>1. Click the green <strong>"Connect with Pollinations"</strong> button in the app<br>2. Sign in with Google or email<br>3. Done! The key is saved automatically';
-        const btns2 = slide2.querySelectorAll('button');
-        if (btns2[0]) btns2[0].textContent = '← Back';
-        if (btns2[1]) btns2[1].textContent = 'Got it, next! →';
-      }
-
-      const slide3 = document.getElementById('wb-slide-3');
-      if (slide3) {
-        const title3 = slide3.querySelector('div[style*="1.2rem"]');
-        if (title3) title3.textContent = 'Choose how you want to work';
-        const subtitle3 = slide3.querySelector('p[style*="0.8rem"]');
-        if (subtitle3) subtitle3.textContent = 'You can change it anytime.';
-        const strongWithColor = slide3.querySelectorAll('strong[style*="color"]');
-        if (strongWithColor[0]) strongWithColor[0].textContent = 'Review Mode';
-        if (strongWithColor[1]) strongWithColor[1].textContent = 'Express Mode';
-        const badges3 = slide3.querySelectorAll('span[style*="border-radius:20px"]');
-        if (badges3[0]) badges3[0].textContent = 'Recommended for beginners';
-        if (badges3[1]) badges3[1].textContent = 'For advanced users';
-        const modeDescs = slide3.querySelectorAll('div[style*="border-radius:12px"] p');
-        if (modeDescs[0]) modeDescs[0].innerHTML = 'AI generates the images and <strong>shows them for your approval</strong> before assembling the video. You can replace any image you don\'t like.';
-        if (modeDescs[1]) modeDescs[1].textContent = 'Fully automatic in the background. You can switch tabs and the video will download automatically when done.';
-        const slidebtns3 = slide3.querySelectorAll('button');
-        if (slidebtns3[0]) slidebtns3[0].textContent = '← Back';
-        if (slidebtns3[1]) slidebtns3[1].textContent = '🚀 Create my first video!';
       }
 
       // ── API Key label and hint ──
@@ -2713,23 +2601,14 @@
     // INICIALIZACIÓN Y MODAL DE BIENVENIDA ✨
     // ----------------------------------------------------
     document.addEventListener('DOMContentLoaded', async function () {
-      // 🌐 Patch 2 — FOUC prevention: hide modal before translation for English users
-      if (!IS_SPANISH) {
-        const wm = document.getElementById('welcomeModal');
-        if (wm) wm.style.visibility = 'hidden';
-      }
-
       applyTranslations();
 
-      // Reveal modal now that it's fully translated
-      if (!IS_SPANISH) {
-        const wm = document.getElementById('welcomeModal');
-        if (wm) wm.style.visibility = 'visible';
-      }
-
-      // Mostrar Welcome Modal si no está marcado "No mostrar"
-      if (localStorage.getItem('hideAppWelcomeModal') !== 'true') {
-        document.getElementById('welcomeModal').style.display = 'block';
+      // Hero onboarding: colapsar si el usuario ya lo cerró antes
+      if (localStorage.getItem('hideAppWelcomeModal') === 'true') {
+        var heroDetails = document.getElementById('heroDetails');
+        var heroBtn = document.getElementById('heroToggleBtn');
+        if (heroDetails) heroDetails.style.display = 'none';
+        if (heroBtn) heroBtn.textContent = IS_SPANISH ? '▼ Mostrar guía' : '▼ Show guide';
       }
 
       // --- BYOP (Bring Your Own Pollen) LOGIC ---
@@ -2793,38 +2672,21 @@
       if ("Notification" in window) Notification.requestPermission();
     });
 
-    // ── WELCOME MODAL ONBOARDING ──────────────────────────────────────
-    function wbNext(slide) {
-      [1, 2, 3].forEach(n => {
-        const el = document.getElementById('wb-slide-' + n);
-        if (el) el.style.display = n === slide ? 'block' : 'none';
-      });
-      const prog = document.getElementById('wb-progress');
-      if (prog) prog.style.width = (slide * 33.3) + '%';
-    }
-
-    function closeWelcomeAndHighlight() {
-      closeWelcomeModal();
-      // Resaltar el botón de conectar si no hay API key aún
-      const key = document.getElementById('pollinationsKey');
-      const savedKey = localStorage.getItem('pollinations_byop_key');
-      if (!savedKey && key && !key.value) {
-        const btn = document.getElementById('byopBtn');
-        if (btn) btn.classList.add('onboarding-glow');
-        // Hacer scroll suave al campo de API key
-        setTimeout(() => {
-          const apiArea = document.getElementById('pollinationsKey');
-          if (apiArea) apiArea.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        }, 300);
-      }
-    }
-
-    function closeWelcomeModal() {
-      const cb = document.getElementById('dontShowAgainCB');
-      if (cb && cb.checked) {
+    // ── HERO ONBOARDING (inline, replaces old welcome modal) ──────────
+    function toggleHeroDetails() {
+      var details = document.getElementById('heroDetails');
+      var btn = document.getElementById('heroToggleBtn');
+      if (!details || !btn) return;
+      var isVisible = details.style.display !== 'none';
+      if (isVisible) {
+        details.style.display = 'none';
+        btn.textContent = IS_SPANISH ? '▼ Mostrar guía' : '▼ Show guide';
         localStorage.setItem('hideAppWelcomeModal', 'true');
+      } else {
+        details.style.display = 'block';
+        btn.textContent = IS_SPANISH ? '▲ Ocultar guía' : '▲ Hide guide';
+        localStorage.removeItem('hideAppWelcomeModal');
       }
-      document.getElementById('welcomeModal').style.display = 'none';
     }
 
     function switchTab(mode) {
