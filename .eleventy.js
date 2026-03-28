@@ -9,6 +9,7 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy("privacy.html");
   eleventyConfig.addPassthroughCopy("tos.html");
   eleventyConfig.addPassthroughCopy("contact.html");
+  eleventyConfig.addPassthroughCopy("about.html");
   eleventyConfig.addPassthroughCopy("sitemap.xml");
   eleventyConfig.addPassthroughCopy("robots.txt");
   eleventyConfig.addPassthroughCopy("ads.txt");

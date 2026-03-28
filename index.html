@@ -1939,6 +1939,8 @@
       <a href="blog/" style="color:var(--muted); text-decoration:none; margin:0 10px;">Blog</a>
       <span style="opacity:0.4;">|</span>
       <a href="contact.html" style="color:var(--muted); text-decoration:none; margin:0 10px;">Contacto</a>
+      <span style="opacity:0.4;">|</span>
+      <a href="about.html" style="color:var(--muted); text-decoration:none; margin:0 10px;">Acerca de</a>
     </div>
   </footer>
 
@@ -2383,6 +2385,7 @@
         if (footerLinks[1]) footerLinks[1].textContent = 'Privacy Policy';
         if (footerLinks[2]) footerLinks[2].textContent = 'Terms of Service';
         if (footerLinks[4]) footerLinks[4].textContent = 'Contact';
+        if (footerLinks[5]) footerLinks[5].textContent = 'About';
       }
 
       // ── Welcome modal slides (wb-slide-1/2/3) ──
@@ -6500,6 +6503,58 @@ CRITICAL LAYOUT INSTRUCTION: The text MUST be placed perfectly in the frame with
     <div class="timer" id="penaltyTimer">0</div>
     <button id="penaltyCloseBtn" disabled>Esperando...</button>
   </div>
+
+  <!-- ══════════════════════════════════════════════════════════════════
+       COOKIE CONSENT BANNER — requerido por Google AdSense / GDPR
+       ════════════════════════════════════════════════════════════════ -->
+  <div id="cookieConsent" style="display:none; position:fixed; bottom:0; left:0; right:0; z-index:99999; background:var(--surface); border-top:2px solid var(--accent); padding:18px 24px; font-family:'Space Mono',monospace; font-size:0.75rem; color:var(--text); box-shadow:0 -4px 24px rgba(0,0,0,0.3);">
+    <div style="max-width:960px; margin:0 auto; display:flex; flex-wrap:wrap; align-items:center; gap:14px; justify-content:space-between;">
+      <p class="cc-text-es" style="flex:1; min-width:240px; line-height:1.6; margin:0; color:var(--prose);">
+        Este sitio usa cookies propias y de terceros (Google AdSense, Google Analytics) para mostrar anuncios personalizados y analizar el tráfico.
+        Al hacer clic en <strong>"Aceptar"</strong>, consientes el uso de cookies. Puedes rechazarlas o consultar nuestra
+        <a href="/privacy.html" style="color:var(--accent2);">Política de Privacidad</a>.
+      </p>
+      <p class="cc-text-en" style="flex:1; min-width:240px; line-height:1.6; margin:0; color:var(--prose); display:none;">
+        This site uses first-party and third-party cookies (Google AdSense, Google Analytics) to show personalized ads and analyze traffic.
+        By clicking <strong>"Accept"</strong>, you consent to the use of cookies. You can reject them or review our
+        <a href="/privacy.html" style="color:var(--accent2);">Privacy Policy</a>.
+      </p>
+      <div style="display:flex; gap:10px; flex-shrink:0;">
+        <button onclick="acceptCookies()" style="padding:10px 22px; background:linear-gradient(135deg,var(--accent),var(--accent2)); border:none; border-radius:8px; color:white; font-family:'Syne',sans-serif; font-weight:700; font-size:0.82rem; cursor:pointer;" class="cc-btn-accept">Aceptar</button>
+        <button onclick="rejectCookies()" style="padding:10px 22px; background:var(--surface2); border:1px solid var(--border); border-radius:8px; color:var(--muted); font-family:'Syne',sans-serif; font-weight:600; font-size:0.82rem; cursor:pointer;" class="cc-btn-reject">Rechazar</button>
+      </div>
+    </div>
+  </div>
+  <script>
+  (function(){
+    var isEN = !navigator.language.toLowerCase().startsWith('es');
+    if (isEN) {
+      var esText = document.querySelector('.cc-text-es');
+      var enText = document.querySelector('.cc-text-en');
+      if (esText) esText.style.display = 'none';
+      if (enText) enText.style.display = 'block';
+      var btnA = document.querySelector('.cc-btn-accept');
+      var btnR = document.querySelector('.cc-btn-reject');
+      if (btnA) btnA.textContent = 'Accept';
+      if (btnR) btnR.textContent = 'Reject';
+    }
+    if (!localStorage.getItem('cookieConsent')) {
+      var el = document.getElementById('cookieConsent');
+      if (el) el.style.display = 'block';
+    }
+  })();
+  function acceptCookies() {
+    localStorage.setItem('cookieConsent', 'accepted');
+    document.getElementById('cookieConsent').style.display = 'none';
+  }
+  function rejectCookies() {
+    localStorage.setItem('cookieConsent', 'rejected');
+    document.getElementById('cookieConsent').style.display = 'none';
+    // Disable ad personalization
+    window.adsbygoogle = window.adsbygoogle || [];
+    window.adsbygoogle.requestNonPersonalizedAds = 1;
+  }
+  </script>
 
 </body>
 

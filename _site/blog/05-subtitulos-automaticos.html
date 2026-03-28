@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Subtítulos automáticos: cómo usar archivos SRT — Blog Velo AI Studio</title>
+  <meta name="description" content="Aprende a crear y formatear archivos SRT correctamente para generar subtítulos perfectos en tus videos con Velo AI Studio. Guía completa con ejemplos.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://veloaistudio.online/blog/05-subtitulos-automaticos.html">
+  <link rel="alternate" hreflang="es" href="https://veloaistudio.online/blog/05-subtitulos-automaticos.html" />
+  <link rel="alternate" hreflang="en" href="https://veloaistudio.online/blog/05-subtitulos-automaticos.html" />
+  <link rel="alternate" hreflang="x-default" href="https://veloaistudio.online/blog/05-subtitulos-automaticos.html" />
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://veloaistudio.online/blog/05-subtitulos-automaticos.html">
+  <meta property="og:title" content="Subtítulos automáticos: cómo usar archivos SRT — Blog Velo AI Studio">
+  <meta property="og:description" content="Aprende a crear y formatear archivos SRT correctamente para generar subtítulos perfectos en tus videos con Velo AI Studio. Guía completa con ejemplos.">
+  <meta property="og:image" content="https://veloaistudio.online/og-image.png">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Automatic subtitles: how to use SRT files",
+    "description": "Learn how to correctly create and format SRT files to generate perfect subtitles in your videos with Velo AI Studio. Complete guide with examples.",
+    "datePublished": "2026-03-23",
+    "dateModified": "2026-03-23",
+    "author": { "@type": "Organization", "name": "Velo AI Studio" },
+    "publisher": { "@type": "Organization", "name": "Velo AI Studio", "url": "https://veloaistudio.online" },
+    "mainEntityOfPage": { "@type": "WebPage", "@id": "https://veloaistudio.online/blog/05-subtitulos-automaticos.html" },
+    "inLanguage": ["es", "en"]
+  }
+  </script>
+  <!-- Google AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3377827647746361" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="/theme.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;800&display=swap');
+    *{margin:0;padding:0;box-sizing:border-box;}
+    body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;min-height:100vh;line-height:1.7;}
+    body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+      background:radial-gradient(ellipse 80% 50% at 20% 10%,rgba(124,58,237,0.1) 0%,transparent 60%);}
+    .container{max-width:760px;margin:0 auto;padding:40px 24px;position:relative;z-index:1;}
+
+    /* ── Nav ── */
+    .nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:48px;}
+    .nav a{color:var(--accent2);text-decoration:none;font-family:'Space Mono',monospace;font-size:0.78rem;}
+    .nav a:hover{text-decoration:underline;}
+
+    /* ── Top app banner ── */
+    .app-top-banner{
+      background:linear-gradient(135deg,rgba(124,58,237,0.12),rgba(6,182,212,0.1));
+      border:1px solid rgba(124,58,237,0.25);border-radius:12px;
+      padding:14px 20px;margin-bottom:40px;
+      display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;
+    }
+    .app-top-banner p{font-family:'Space Mono',monospace;font-size:0.72rem;color:var(--muted);margin:0;}
+    .app-top-banner strong{color:var(--text);}
+    .banner-btn{
+      flex-shrink:0;padding:8px 18px;background:linear-gradient(135deg,var(--accent),var(--accent2));
+      border-radius:8px;color:#fff;text-decoration:none;font-family:'Space Mono',monospace;
+      font-size:0.7rem;font-weight:700;white-space:nowrap;transition:opacity 0.2s;
+    }
+    .banner-btn:hover{opacity:0.85;}
+
+    /* ── Article header ── */
+    .tag{display:inline-block;background:rgba(6,182,212,0.12);border:1px solid rgba(6,182,212,0.25);
+      color:var(--accent2);font-family:'Space Mono',monospace;font-size:0.62rem;text-transform:uppercase;
+      letter-spacing:1.5px;padding:3px 10px;border-radius:20px;margin-bottom:16px;}
+    h1{font-size:clamp(1.6rem,4vw,2.4rem);font-weight:800;line-height:1.2;margin-bottom:16px;}
+    .meta{font-family:'Space Mono',monospace;font-size:0.7rem;color:var(--muted);margin-bottom:40px;}
+
+    /* ── Article body ── */
+    h2{font-size:1.2rem;font-weight:700;margin:36px 0 12px;color:var(--text);}
+    h3{font-size:1rem;font-weight:700;margin:28px 0 10px;color:var(--accent2);}
+    p{color:var(--prose);margin-bottom:18px;font-size:0.95rem;}
+    ul,ol{color:var(--prose);font-size:0.95rem;padding-left:24px;margin-bottom:18px;}
+    li{margin-bottom:8px;}
+    strong{color:var(--text);}
+    a{color:var(--accent2);text-decoration:none;}
+    a:hover{text-decoration:underline;}
+    blockquote{
+      background:var(--surface);border-left:3px solid var(--accent2);border-radius:0 8px 8px 0;
+      padding:16px 20px;margin:24px 0;font-family:'Space Mono',monospace;font-size:0.82rem;color:var(--accent2);
+    }
+    code{font-family:'Space Mono',monospace;font-size:0.85em;background:var(--surface2);
+      padding:2px 6px;border-radius:4px;color:var(--accent2);}
+    pre{background:var(--surface2);border:1px solid var(--border);border-radius:8px;
+      padding:16px;overflow-x:auto;margin:20px 0;}
+    pre code{background:none;padding:0;}
+    img{max-width:100%;border-radius:8px;margin:16px 0;}
+    hr{border:none;border-top:1px solid var(--border);margin:36px 0;}
+
+    /* ── AdSense wrapper ── */
+    .ad-unit{
+      margin:36px 0;padding:8px 0;
+      border-top:1px solid var(--border);
+      border-bottom:1px solid var(--border);
+      text-align:center;min-height:90px;
+    }
+    .ad-label{
+      font-family:'Space Mono',monospace;font-size:0.58rem;
+      color:var(--muted);letter-spacing:1px;text-transform:uppercase;
+      margin-bottom:6px;display:block;
+    }
+
+    /* ── Mid-article CTA ── */
+    .mid-cta{
+      background:var(--surface);border:1px solid var(--border);border-radius:14px;
+      padding:24px;margin:40px 0;display:flex;align-items:center;gap:20px;flex-wrap:wrap;
+    }
+    .mid-cta-icon{font-size:2rem;flex-shrink:0;}
+    .mid-cta-text p{font-size:0.85rem;color:var(--muted);margin:0 0 8px;}
+    .mid-cta-text strong{color:var(--text);display:block;font-size:0.95rem;margin-bottom:4px;}
+    .mid-cta-btn{
+      flex-shrink:0;padding:10px 22px;background:linear-gradient(135deg,var(--accent),var(--accent2));
+      border-radius:8px;color:#fff;text-decoration:none;font-weight:700;font-size:0.85rem;
+      font-family:'Syne',sans-serif;transition:opacity 0.2s;
+    }
+    .mid-cta-btn:hover{opacity:0.88;text-decoration:none;}
+
+    /* ── End-of-article CTA ── */
+    .end-cta{
+      margin-top:56px;padding:36px;
+      background:linear-gradient(135deg,rgba(124,58,237,0.15),rgba(6,182,212,0.1));
+      border:1px solid rgba(124,58,237,0.3);border-radius:20px;text-align:center;
+    }
+    .end-cta h3{font-size:1.3rem;font-weight:800;margin-bottom:10px;}
+    .end-cta p{color:var(--muted);font-size:0.88rem;margin-bottom:24px;}
+    .end-cta-btn{
+      display:inline-block;padding:14px 36px;
+      background:linear-gradient(135deg,var(--accent),var(--accent2));
+      border-radius:10px;color:#fff;text-decoration:none;font-weight:700;font-size:0.95rem;
+      font-family:'Syne',sans-serif;transition:opacity 0.2s;
+    }
+    .end-cta-btn:hover{opacity:0.88;text-decoration:none;}
+    .end-cta-note{display:block;margin-top:12px;font-family:'Space Mono',monospace;
+      font-size:0.65rem;color:var(--muted);}
+
+    /* ── Related posts ── */
+    .related{margin-top:56px;}
+    .related-title{
+      font-family:'Space Mono',monospace;font-size:0.65rem;text-transform:uppercase;
+      letter-spacing:2px;color:var(--muted);margin-bottom:20px;
+    }
+    .related-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px;}
+    .related-card{
+      background:var(--surface);border:1px solid var(--border);border-radius:12px;
+      padding:18px;text-decoration:none;display:block;transition:border-color 0.2s,transform 0.2s;
+    }
+    .related-card:hover{border-color:var(--accent);transform:translateY(-2px);text-decoration:none;}
+    .related-card-emoji{font-size:1.5rem;margin-bottom:8px;display:block;}
+    .related-card-tag{
+      font-family:'Space Mono',monospace;font-size:0.55rem;text-transform:uppercase;
+      letter-spacing:1px;color:var(--accent2);margin-bottom:6px;display:block;
+    }
+    .related-card-title{font-size:0.82rem;font-weight:700;color:var(--text);line-height:1.35;}
+
+    /* ── Comments section ── */
+    .comments{
+      margin-top:48px;padding-top:32px;
+      border-top:1px solid var(--border);
+    }
+    .comments-title{
+      font-family:'Space Mono',monospace;font-size:0.65rem;text-transform:uppercase;
+      letter-spacing:2px;color:var(--muted);margin-bottom:20px;
+    }
+
+    /* ── Footer ── */
+    footer{margin-top:64px;padding-top:24px;border-top:1px solid var(--border);
+      text-align:center;font-family:'Space Mono',monospace;font-size:0.68rem;color:var(--muted);}
+    footer a{color:var(--muted);text-decoration:none;margin:0 8px;}
+    footer a:hover{color:var(--accent2);}
+
+    .lang-en{display:none;}
+
+    @media(max-width:600px){
+      .mid-cta{flex-direction:column;align-items:flex-start;}
+      .app-top-banner{flex-direction:column;align-items:flex-start;gap:10px;}
+      .related-grid{grid-template-columns:1fr;}
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav">
+      <a href="/">← Velo AI Studio</a>
+      <a href="/blog/">Blog</a>
+    </nav>
+
+    
+    
+    
+
+    
+    <div class="lang-es">
+
+      
+      <div class="app-top-banner">
+        <p><strong>Velo AI Studio</strong> — Crea videos con IA, gratis y sin registrarte</p>
+        <a href="/" class="banner-btn">→ Ir a la app</a>
+      </div>
+
+      <span class="tag">Función</span>
+      <h1>Subtítulos automáticos: cómo usar archivos SRT</h1>
+      <p class="meta">22 de marzo de 2026 · 5 min lectura · Velo AI Studio</p>
+
+      
+      <div class="ad-unit">
+        <span class="ad-label">Publicidad</span>
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-3377827647746361"
+             data-ad-slot="AUTO"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+      </div>
+
+      
+      <div class="article-body">
+        <p>El archivo SRT (SubRip Subtitle) es el formato de entrada principal de Velo AI Studio. Es un archivo de texto plano con una estructura muy específica que indica qué texto aparece en pantalla y en qué momento exacto. Entender cómo crearlo y formatearlo correctamente es la clave para obtener videos con subtítulos perfectos.</p>
+<h2>¿Qué es un archivo SRT?</h2>
+<p>SRT son las siglas de SubRip Subtitle. Es el formato de subtítulos más universal y compatible. Se trata de un archivo de texto simple (con extensión <strong>.srt</strong>) que sigue este patrón repetido para cada subtítulo:</p>
+<pre><code>[número del subtítulo]
+[hora inicio] --&gt; [hora fin]
+[texto del subtítulo]
+[línea en blanco]
+</code></pre>
+<h2>Ejemplo de archivo SRT completo</h2>
+<p>Así se ve un archivo SRT bien formateado para un video sobre el sistema solar:</p>
+<pre><code>1
+00:00:00,000 --&gt; 00:00:04,500
+El sistema solar tiene ocho planetas orbitando el Sol.
+
+2
+00:00:04,500 --&gt; 00:00:09,000
+Mercurio es el más cercano y el más pequeño de todos.
+
+3
+00:00:09,000 --&gt; 00:00:14,200
+Venus tiene una temperatura superficial de 465 grados centígrados.
+
+4
+00:00:14,200 --&gt; 00:00:19,800
+La Tierra es el único planeta conocido con vida.
+</code></pre>
+<h2>Reglas de formato importantes</h2>
+<h3>El separador de tiempo usa coma, no punto</h3>
+<p>Los milisegundos van separados por una coma, no por un punto. Este es el error más común.</p>
+<ul>
+<li>❌ Incorrecto: <code>00:00:04.500 --&gt; 00:00:09.000</code></li>
+<li>✓ Correcto: <code>00:00:04,500 --&gt; 00:00:09,000</code></li>
+</ul>
+<h3>Línea en blanco entre cada bloque</h3>
+<p>Debe haber exactamente una línea en blanco entre cada subtítulo. Si no hay línea en blanco, Velo no podrá separar correctamente los segmentos.</p>
+<h3>Los números deben ser secuenciales</h3>
+<p>Cada bloque debe numerarse de forma consecutiva empezando desde 1.</p>
+<h2>Herramientas gratuitas para crear archivos SRT</h2>
+<ul>
+<li><strong>Subtitle Edit</strong> (Windows) — Software gratuito y completo para crear y editar subtítulos.</li>
+<li><strong>Aegisub</strong> (Windows/Mac/Linux) — Muy popular entre subtituladores profesionales.</li>
+<li><strong>Jubler</strong> (multiplataforma) — Interfaz sencilla y compatible con muchos formatos.</li>
+<li><strong>Notepad / TextEdit</strong> — Puedes crear el archivo SRT directamente en un editor de texto y guardarlo con la extensión .srt.</li>
+</ul>
+<blockquote>
+<p><strong>Consejo para creadores de YouTube:</strong> Si ya tienes videos en YouTube con subtítulos automáticos, puedes descargarlos en formato SRT desde el panel de YouTube Studio y usarlos directamente en Velo AI Studio.</p>
+</blockquote>
+<h2>Longitud ideal de cada segmento</h2>
+<p>Para que las imágenes generadas por IA queden bien sincronizadas, cada segmento SRT debería durar entre <strong>3 y 8 segundos</strong>. Segmentos muy cortos (menos de 2 segundos) no dan tiempo suficiente para que la imagen se vea. Segmentos muy largos (más de 15 segundos) reducen el dinamismo visual del video.</p>
+<h2>¿Puedo usar el modo Audio en vez de SRT?</h2>
+<p>Sí. Si prefieres no crear un archivo SRT manualmente, puedes subir directamente tu archivo de audio MP3 o WAV. Velo AI Studio dividirá el audio en segmentos y generará imágenes para cada uno. Sin embargo, usar un SRT propio te da más control sobre exactamente qué imagen aparece con cada frase.</p>
+
+      </div>
+
+      
+      <div class="ad-unit">
+        <span class="ad-label">Publicidad</span>
+        <ins class="adsbygoogle"
+             style="display:block;text-align:center"
+             data-ad-layout="in-article"
+             data-ad-format="fluid"
+             data-ad-client="ca-pub-3377827647746361"
+             data-ad-slot="AUTO"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+      </div>
+
+      
+      <div class="mid-cta">
+        <div class="mid-cta-icon">🎬</div>
+        <div class="mid-cta-text">
+          <strong>¿Listo para crear tu primer video con IA?</strong>
+          <p>Velo AI Studio es 100% gratuito. No requiere cuenta ni instalación.</p>
+        </div>
+        <a href="/" class="mid-cta-btn">Probar gratis →</a>
+      </div>
+
+      
+      <div class="end-cta">
+        <h3>✦ Ponlo en práctica ahora</h3>
+        <p>Todo lo que acabas de leer lo puedes aplicar hoy mismo.<br>
+           Velo AI Studio convierte tu guion o audio en video profesional en minutos.</p>
+        <a href="/" class="end-cta-btn">→ Crear mi primer video gratis</a>
+        <span class="end-cta-note">Sin cuenta · Sin instalación · 100% gratuito</span>
+      </div>
+
+      
+      <div class="ad-unit">
+        <span class="ad-label">Publicidad</span>
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-3377827647746361"
+             data-ad-slot="AUTO"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+      </div>
+
+      
+      
+      <div class="related">
+        <p class="related-title">// También te puede interesar</p>
+        <div class="related-grid">
+          
+          <a href="/blog/08-text-to-speech-videos-ia.html" class="related-card">
+            <span class="related-card-emoji">🎙️</span>
+            <span class="related-card-tag">Función</span>
+            <span class="related-card-title">Text-to-Speech en videos de IA: añade locución automática</span>
+          </a>
+          
+          <a href="/blog/15-modo-express-vs-revision.html" class="related-card">
+            <span class="related-card-emoji">⚡</span>
+            <span class="related-card-tag">Función</span>
+            <span class="related-card-title">Modo Express vs Modo Revisión — ¿cuándo usar cada uno?</span>
+          </a>
+          
+          
+          <a href="/blog/08-text-to-speech-videos-ia.html" class="related-card">
+            <span class="related-card-emoji">🔊</span>
+            <span class="related-card-tag">Función</span>
+            <span class="related-card-title">Text-to-Speech en videos de IA: añade locución automática</span>
+          </a>
+          
+        </div>
+      </div>
+      
+
+      
+      <div class="comments">
+        <p class="comments-title">// Comentarios</p>
+        <div id="cusdis_thread"
+          data-host="https://cusdis.com"
+          data-app-id="3f5dadf1-cfda-4705-af51-198b5937e093"
+          data-page-id="05-subtitulos-automaticos"
+          data-page-url="https://veloaistudio.online/blog/05-subtitulos-automaticos.html"
+          data-page-title="Subtítulos automáticos: cómo usar archivos SRT"
+          data-lang="es">
+        </div>
+        <script async defer src="https://cusdis.com/js/cusdis.es.js"></script>
+      </div>
+
+      <footer>
+        <p style="margin-bottom:10px;">© 2026 Velo AI Studio</p>
+        <div>
+          <a href="/">App</a> |
+          <a href="/blog/">Blog</a> |
+          <a href="/privacy.html">Privacidad</a> |
+          <a href="/tos.html">Términos</a> |
+          <a href="/contact.html">Contacto</a>
+        </div>
+      </footer>
+    </div>
+
+    
+    <div class="lang-en">
+
+      
+      <div class="app-top-banner">
+        <p><strong>Velo AI Studio</strong> — Create AI videos, free and no sign-up required</p>
+        <a href="/" class="banner-btn">→ Go to the app</a>
+      </div>
+
+      <span class="tag">Feature</span>
+      <h1>Automatic subtitles: how to use SRT files</h1>
+      <p class="meta">March 22, 2026 · 5 min read · Velo AI Studio</p>
+
+      
+      <div class="ad-unit">
+        <span class="ad-label">Advertisement</span>
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-3377827647746361"
+             data-ad-slot="AUTO"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+      </div>
+
+      
+      <div class="article-body">
+        <p>The SRT (SubRip Subtitle) file is the primary input format for Velo AI Studio. It is a plain text file with a very specific structure that indicates what text appears on screen and at exactly what time. Understanding how to create and format it correctly is the key to getting videos with perfect subtitles.</p>
+<h2>What is an SRT file?</h2>
+<p>SRT stands for SubRip Subtitle. It is the most universal and compatible subtitle format. It is a simple text file (with a <strong>.srt</strong> extension) that follows this repeating pattern for each subtitle:</p>
+<pre><code>[subtitle number]
+[start time] --&gt; [end time]
+[subtitle text]
+[blank line]
+</code></pre>
+<h2>Example of a complete SRT file</h2>
+<p>Here’s what a well-formatted SRT file looks like for a video about the solar system:</p>
+<pre><code>1
+00:00:00,000 --&gt; 00:00:04,500
+The solar system has eight planets orbiting the Sun.
+
+2
+00:00:04,500 --&gt; 00:00:09,000
+Mercury is the closest and smallest of all.
+
+3
+00:00:09,000 --&gt; 00:00:14,200
+Venus has a surface temperature of 465 degrees Celsius.
+
+4
+00:00:14,200 --&gt; 00:00:19,800
+Earth is the only planet known to harbor life.
+</code></pre>
+<h2>Important formatting rules</h2>
+<h3>Time separator uses a comma, not a period</h3>
+<p>Milliseconds are separated by a comma, not a period. This is the most common mistake.</p>
+<ul>
+<li>❌ Wrong: <code>00:00:04.500 --&gt; 00:00:09.000</code></li>
+<li>✓ Correct: <code>00:00:04,500 --&gt; 00:00:09,000</code></li>
+</ul>
+<h3>Blank line between each block</h3>
+<p>There must be exactly one blank line between each subtitle. If there is no blank line, Velo won’t be able to correctly separate the segments.</p>
+<h3>Numbers must be sequential</h3>
+<p>Each block must be numbered consecutively starting from 1.</p>
+<h2>Free tools to create SRT files</h2>
+<ul>
+<li><strong>Subtitle Edit</strong> (Windows) — Free and complete software for creating and editing subtitles.</li>
+<li><strong>Aegisub</strong> (Windows/Mac/Linux) — Very popular among professional subtitlers.</li>
+<li><strong>Jubler</strong> (multiplatform) — Simple interface compatible with many formats.</li>
+<li><strong>Notepad / TextEdit</strong> — You can create the SRT file directly in a text editor and save it with the .srt extension.</li>
+</ul>
+<blockquote>
+<p><strong>Tip for YouTube creators:</strong> If you already have YouTube videos with automatic subtitles, you can download them in SRT format from the YouTube Studio panel and use them directly in Velo AI Studio.</p>
+</blockquote>
+<h2>Ideal segment length</h2>
+<p>For AI-generated images to be well synchronized with the content, each SRT segment should last between <strong>3 and 8 seconds</strong>. Very short segments (less than 2 seconds) don’t give enough time for the image to be seen. Very long segments (more than 15 seconds) reduce the visual dynamism of the video.</p>
+<h2>Can I use Audio mode instead of SRT?</h2>
+<p>Yes. If you prefer not to create an SRT file manually, you can directly upload your MP3 or WAV audio file. Velo AI Studio will split the audio into segments and generate images for each one. However, using your own SRT gives you more control over exactly which image appears with each phrase.</p>
+
+      </div>
+
+      
+      <div class="ad-unit">
+        <span class="ad-label">Advertisement</span>
+        <ins class="adsbygoogle"
+             style="display:block;text-align:center"
+             data-ad-layout="in-article"
+             data-ad-format="fluid"
+             data-ad-client="ca-pub-3377827647746361"
+             data-ad-slot="AUTO"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+      </div>
+
+      
+      <div class="mid-cta">
+        <div class="mid-cta-icon">🎬</div>
+        <div class="mid-cta-text">
+          <strong>Ready to create your first AI video?</strong>
+          <p>Velo AI Studio is 100% free. No account or installation needed.</p>
+        </div>
+        <a href="/" class="mid-cta-btn">Try it free →</a>
+      </div>
+
+      
+      <div class="end-cta">
+        <h3>✦ Put it into practice now</h3>
+        <p>Everything you just read you can apply today.<br>
+           Velo AI Studio turns your script or audio into a professional video in minutes.</p>
+        <a href="/" class="end-cta-btn">→ Create my first free video</a>
+        <span class="end-cta-note">No account · No install · 100% free</span>
+      </div>
+
+      
+      <div class="ad-unit">
+        <span class="ad-label">Advertisement</span>
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-3377827647746361"
+             data-ad-slot="AUTO"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+      </div>
+
+      
+      
+      <div class="related">
+        <p class="related-title">// You might also like</p>
+        <div class="related-grid">
+          
+          <a href="/blog/08-text-to-speech-videos-ia.html" class="related-card">
+            <span class="related-card-emoji">🎙️</span>
+            <span class="related-card-tag">Feature</span>
+            <span class="related-card-title">Text-to-Speech in AI videos: add automatic voiceover</span>
+          </a>
+          
+          <a href="/blog/15-modo-express-vs-revision.html" class="related-card">
+            <span class="related-card-emoji">⚡</span>
+            <span class="related-card-tag">Feature</span>
+            <span class="related-card-title">Express Mode vs Review Mode — when to use each one?</span>
+          </a>
+          
+          
+          <a href="/blog/08-text-to-speech-videos-ia.html" class="related-card">
+            <span class="related-card-emoji">🔊</span>
+            <span class="related-card-tag">Feature</span>
+            <span class="related-card-title">Text-to-Speech in AI videos: add automatic voiceover</span>
+          </a>
+          
+        </div>
+      </div>
+      
+
+      
+      <div class="comments">
+        <p class="comments-title">// Comments</p>
+        <div id="cusdis_thread"
+          data-host="https://cusdis.com"
+          data-app-id="3f5dadf1-cfda-4705-af51-198b5937e093"
+          data-page-id="05-subtitulos-automaticos"
+          data-page-url="https://veloaistudio.online/blog/05-subtitulos-automaticos.html"
+          data-page-title="Automatic subtitles: how to use SRT files"
+          data-lang="en">
+        </div>
+        <script async defer src="https://cusdis.com/js/cusdis.es.js"></script>
+      </div>
+
+      <footer>
+        <p style="margin-bottom:10px;">© 2026 Velo AI Studio</p>
+        <div>
+          <a href="/">App</a> |
+          <a href="/blog/">Blog</a> |
+          <a href="/privacy.html">Privacy</a> |
+          <a href="/tos.html">Terms</a> |
+          <a href="/contact.html">Contact</a>
+        </div>
+      </footer>
+    </div>
+
+  </div>
+
+  <script>
+  (function () {
+    var isEN = !navigator.language.toLowerCase().startsWith('es');
+    if (isEN) {
+      document.documentElement.lang = 'en';
+      document.title = 'Automatic subtitles: how to use SRT files — Blog Velo AI Studio';
+      var md = document.querySelector('meta[name="description"]');
+      if (md) md.setAttribute('content', 'Learn how to correctly create and format SRT files to generate perfect subtitles in your videos with Velo AI Studio. Complete guide with examples.');
+      var ogTitle = document.querySelector('meta[property="og:title"]');
+      if (ogTitle) ogTitle.setAttribute('content', 'Automatic subtitles: how to use SRT files — Blog Velo AI Studio');
+      var ogDesc = document.querySelector('meta[property="og:description"]');
+      if (ogDesc) ogDesc.setAttribute('content', 'Learn how to correctly create and format SRT files to generate perfect subtitles in your videos with Velo AI Studio. Complete guide with examples.');
+      document.querySelectorAll('.lang-es').forEach(function (e) { e.style.display = 'none'; });
+      document.querySelectorAll('.lang-en').forEach(function (e) { e.style.display = 'block'; });
+    }
+  })();
+  </script>
+</body>
+</html>

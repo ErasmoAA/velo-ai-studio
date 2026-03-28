@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(grep -r \"cookie\\\\|consent\\\\|gdpr\\\\|CookieBot\" /c/Users/alial/OneDrive/Documentos/VeloAIStudio --include=*.html --include=*.njk --include=*.md)",
+      "Bash(grep -r \"About\\\\|Acerca de\" /c/Users/alial/OneDrive/Documentos/VeloAIStudio --include=*.html --include=*.njk)",
+      "Bash(python -c \":*)",
+      "Bash(pip install:*)"
+    ]
+  }
+}
