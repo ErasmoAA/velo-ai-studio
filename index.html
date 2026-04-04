@@ -1322,14 +1322,51 @@
           <textarea id="scriptText" placeholder="Érase una vez..." style="min-height: 120px;"></textarea>
         </div>
         <div style="margin-bottom:16px;">
-          <label>Voz Narradora (IA de OpenAI)</label>
+          <label>Voz Narradora (34 voces IA)</label>
           <select id="voiceSelect">
-            <option value="alloy">Alloy (Andrógino)</option>
-            <option value="echo" selected>Echo (Masculino suave)</option>
-            <option value="fable">Fable (Masculino británico)</option>
-            <option value="onyx">Onyx (Masculino grave/locutor)</option>
-            <option value="nova">Nova (Femenina energética)</option>
-            <option value="shimmer">Shimmer (Femenina suave)</option>
+            <optgroup label="── OpenAI Estándar ──">
+              <option value="alloy">Alloy (Andrógino)</option>
+              <option value="echo" selected>Echo (Masculino suave)</option>
+              <option value="fable">Fable (Masculino británico)</option>
+              <option value="onyx">Onyx (Masculino grave/locutor)</option>
+              <option value="nova">Nova (Femenina energética)</option>
+              <option value="shimmer">Shimmer (Femenina suave)</option>
+            </optgroup>
+            <optgroup label="── OpenAI HD ──">
+              <option value="ash">Ash (Masculino claro)</option>
+              <option value="ballad">Ballad (Masculino cálido)</option>
+              <option value="coral">Coral (Femenina natural)</option>
+              <option value="sage">Sage (Femenina profesional)</option>
+              <option value="verse">Verse (Masculino versátil)</option>
+            </optgroup>
+            <optgroup label="── ElevenLabs Femeninas ──">
+              <option value="rachel">Rachel (Femenina conversacional)</option>
+              <option value="bella">Bella (Femenina suave)</option>
+              <option value="domi">Domi (Femenina fuerte)</option>
+              <option value="elli">Elli (Femenina joven)</option>
+              <option value="charlotte">Charlotte (Femenina elegante)</option>
+              <option value="dorothy">Dorothy (Femenina cálida)</option>
+              <option value="sarah">Sarah (Femenina amigable)</option>
+              <option value="emily">Emily (Femenina clara)</option>
+              <option value="lily">Lily (Femenina dulce)</option>
+              <option value="matilda">Matilda (Femenina madura)</option>
+            </optgroup>
+            <optgroup label="── ElevenLabs Masculinas ──">
+              <option value="adam">Adam (Masculino profundo)</option>
+              <option value="antoni">Antoni (Masculino cálido)</option>
+              <option value="arnold">Arnold (Masculino potente)</option>
+              <option value="josh">Josh (Masculino joven)</option>
+              <option value="sam">Sam (Masculino narrativo)</option>
+              <option value="daniel">Daniel (Masculino británico)</option>
+              <option value="charlie">Charlie (Masculino casual)</option>
+              <option value="james">James (Masculino formal)</option>
+              <option value="fin">Fin (Masculino irlandés)</option>
+              <option value="callum">Callum (Masculino escocés)</option>
+              <option value="liam">Liam (Masculino energético)</option>
+              <option value="george">George (Masculino clásico)</option>
+              <option value="brian">Brian (Masculino maduro)</option>
+              <option value="bill">Bill (Masculino documental)</option>
+            </optgroup>
           </select>
         </div>
         <button class="btn btn-auto full-btn" id="btnGenerateTTS" onclick="generateTTS()">
@@ -1362,6 +1399,14 @@
         <div style="margin-top:16px;">
           <label>Guion Base (Opcional - Ayuda a la IA con términos difíciles)</label>
           <textarea id="audioPrompt" placeholder="Ej: Dr. House, CogniVett, cardiología..."></textarea>
+        </div>
+
+        <div style="margin-top:12px;">
+          <label>Modelo de Transcripción</label>
+          <select id="transcriptionModelSelect">
+            <option value="scribe" selected>Scribe v2 (ElevenLabs — Recomendado, 90+ idiomas)</option>
+            <option value="whisper">Whisper Large V3 (OVHcloud — Alternativa)</option>
+          </select>
         </div>
 
         <button class="btn btn-secondary full-btn" id="btnTranscribe"
@@ -2086,7 +2131,7 @@
         labels.forEach(lbl => {
           const t = lbl.textContent.trim();
           if (t.includes('Guion') && t.includes('Historia')) lbl.textContent = 'Your Script / Story (AI will narrate it)';
-          if (t.includes('Voz Narradora')) lbl.textContent = 'Narrator Voice (OpenAI AI)';
+          if (t.includes('Voz Narradora')) lbl.textContent = 'Narrator Voice (34 AI Voices)';
         });
       }
 
@@ -2095,6 +2140,16 @@
         const labels = panelAudio.querySelectorAll('label');
         labels.forEach(lbl => {
           if (lbl.textContent.trim().includes('Guion Base')) lbl.textContent = 'Base Script (Optional — helps AI with difficult terms)';
+          if (lbl.textContent.trim().includes('Modelo de Transcripción')) lbl.textContent = 'Transcription Model';
+        });
+      }
+
+      // ── Transcription model select ──
+      const transcriptionModelSelect = document.getElementById('transcriptionModelSelect');
+      if (transcriptionModelSelect) {
+        Array.from(transcriptionModelSelect.options).forEach(opt => {
+          if (opt.value === 'scribe') opt.text = 'Scribe v2 (ElevenLabs — Recommended, 90+ languages)';
+          if (opt.value === 'whisper') opt.text = 'Whisper Large V3 (OVHcloud — Alternative)';
         });
       }
 
@@ -2102,14 +2157,28 @@
       const voiceSelect = document.getElementById('voiceSelect');
       if (voiceSelect) {
         const voiceMap = {
-          'alloy': 'Alloy (Androgynous)',
-          'echo': 'Echo (Soft Male)',
-          'fable': 'Fable (British Male)',
-          'onyx': 'Onyx (Deep Male / Narrator)',
-          'nova': 'Nova (Energetic Female)',
-          'shimmer': 'Shimmer (Soft Female)'
+          'alloy': 'Alloy (Androgynous)', 'echo': 'Echo (Soft Male)', 'fable': 'Fable (British Male)',
+          'onyx': 'Onyx (Deep Male / Narrator)', 'nova': 'Nova (Energetic Female)', 'shimmer': 'Shimmer (Soft Female)',
+          'ash': 'Ash (Clear Male)', 'ballad': 'Ballad (Warm Male)', 'coral': 'Coral (Natural Female)',
+          'sage': 'Sage (Professional Female)', 'verse': 'Verse (Versatile Male)',
+          'rachel': 'Rachel (Conversational Female)', 'bella': 'Bella (Soft Female)', 'domi': 'Domi (Strong Female)',
+          'elli': 'Elli (Young Female)', 'charlotte': 'Charlotte (Elegant Female)', 'dorothy': 'Dorothy (Warm Female)',
+          'sarah': 'Sarah (Friendly Female)', 'emily': 'Emily (Clear Female)', 'lily': 'Lily (Sweet Female)',
+          'matilda': 'Matilda (Mature Female)', 'adam': 'Adam (Deep Male)', 'antoni': 'Antoni (Warm Male)',
+          'arnold': 'Arnold (Powerful Male)', 'josh': 'Josh (Young Male)', 'sam': 'Sam (Narrative Male)',
+          'daniel': 'Daniel (British Male)', 'charlie': 'Charlie (Casual Male)', 'james': 'James (Formal Male)',
+          'fin': 'Fin (Irish Male)', 'callum': 'Callum (Scottish Male)', 'liam': 'Liam (Energetic Male)',
+          'george': 'George (Classic Male)', 'brian': 'Brian (Mature Male)', 'bill': 'Bill (Documentary Male)'
         };
         Array.from(voiceSelect.options).forEach(opt => { if (voiceMap[opt.value]) opt.text = voiceMap[opt.value]; });
+        // Translate optgroup labels
+        Array.from(voiceSelect.querySelectorAll('optgroup')).forEach(og => {
+          const l = og.label;
+          if (l.includes('Estándar')) og.label = '── OpenAI Standard ──';
+          if (l.includes('HD')) og.label = '── OpenAI HD ──';
+          if (l.includes('Femeninas')) og.label = '── ElevenLabs Female ──';
+          if (l.includes('Masculinas')) og.label = '── ElevenLabs Male ──';
+        });
       }
 
       const formatSelect = document.getElementById('formatSelect');
@@ -3169,13 +3238,20 @@
       btn.textContent = '⏳ Analizando audio... (Puede tardar 1-2 minutos)';
 
       if (!isFromTTS) document.getElementById('logBox').innerHTML = '';
-      log('Iniciando transcripción con modelo Whisper API...', 'info');
+      const transcriptionModel = document.getElementById('transcriptionModelSelect')?.value || 'scribe';
+      log(`Iniciando transcripción con modelo ${transcriptionModel}...`, 'info');
       document.getElementById('progressWrapper').style.display = 'block';
+
+      // Advertencia de archivo grande
+      const fileSizeMB = (audioFileObj.size / (1024 * 1024)).toFixed(1);
+      if (audioFileObj.size > 25 * 1024 * 1024) {
+        log(`⚠️ Archivo grande (${fileSizeMB} MB). La transcripción puede tardar más o fallar. Considera comprimir el audio.`, 'warn');
+      }
 
       try {
         const formData = new FormData();
         formData.append("file", audioFileObj);
-        formData.append("model", "scribe");
+        formData.append("model", transcriptionModel);
         // Pedimos JSON con tiempos detallados + timestamps por palabra
         formData.append("response_format", "verbose_json");
         formData.append("timestamp_granularities[]", "segment");
@@ -3184,11 +3260,17 @@
         const promptText = document.getElementById('audioPrompt').value.trim();
         if (promptText) formData.append("prompt", promptText);
 
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 300000); // 5 min timeout
+
         const response = await fetch("https://gen.pollinations.ai/v1/audio/transcriptions", {
           method: "POST",
           headers: { "Authorization": `Bearer ${apiKey}` },
-          body: formData
+          body: formData,
+          signal: controller.signal
         });
+
+        clearTimeout(timeoutId);
 
         if (!response.ok) {
           const errorBody = await response.text();
@@ -3221,7 +3303,13 @@
         showSuccessInfo(`✓ Audio Procesado y SRT Generado · ${formatTime(totalDuration)}`);
         btn.textContent = '✅ Subtítulos Generados Exitosamente';
       } catch (err) {
-        log(`✗ Falla en transcripción: ${err.message}`, 'err');
+        let errorMsg = err.message;
+        if (err.name === 'AbortError') {
+          errorMsg = 'Tiempo de espera agotado (5 min). El archivo puede ser muy grande. Intenta con un audio más corto o comprimido.';
+        } else if (err.message === 'Failed to fetch') {
+          errorMsg = 'Error de red: no se pudo conectar al servidor. Verifica tu conexión a internet e inténtalo de nuevo.';
+        }
+        log(`✗ Falla en transcripción: ${errorMsg}`, 'err');
         btn.textContent = originalText;
         btn.disabled = false;
         if (isFromTTS) throw err;
@@ -3327,7 +3415,7 @@
         const response = await fetch('https://gen.pollinations.ai/v1/audio/speech', {
           method: 'POST',
           headers: { 'Authorization': `Bearer ${apiKey}`, 'Content-Type': 'application/json' },
-          body: JSON.stringify({ model: 'openai', input: text, voice: voice, response_format: 'mp3' })
+          body: JSON.stringify({ model: 'elevenlabs', input: text, voice: voice, response_format: 'mp3' })
         });
 
         if (!response.ok) throw new Error(translateError(response.status.toString()));
@@ -4144,6 +4232,7 @@ Responde ÚNICAMENTE con JSON válido:
         setProgress(100, '✓ Video generado con éxito');
         log('✓ Pipeline completado exitosamente', 'ok');
         document.getElementById('outputSection').style.display = 'block';
+        if (composeBtn) { composeBtn.disabled = false; composeBtn.textContent = '🎬 Montar Video'; }
       } catch (err) {
         log(`✗ Error al montar video: ${err.message}`, 'err');
         if (composeBtn) { composeBtn.disabled = false; composeBtn.textContent = '🎬 Reintentar Montar Video'; }
