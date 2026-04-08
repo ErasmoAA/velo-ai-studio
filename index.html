@@ -107,6 +107,36 @@
     ]
   }
   </script>
+
+  <!-- ── SCHEMA: WEBSITE + ORGANIZATION (mejora indexación Google) ──── -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Velo AI Studio",
+    "url": "https://veloaistudio.online/",
+    "description": "Plataforma gratuita de creación de videos con inteligencia artificial. Convierte guiones y audios en videos profesionales con imágenes generadas por IA.",
+    "inLanguage": ["es", "en"],
+    "publisher": {
+      "@type": "Organization",
+      "name": "Velo AI Studio",
+      "url": "https://veloaistudio.online/",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://veloaistudio.online/og-image.png"
+      },
+      "sameAs": [
+        "https://veloaistudio.online/about.html",
+        "https://veloaistudio.online/blog/"
+      ]
+    },
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "https://veloaistudio.online/blog/?q={search_term_string}",
+      "query-input": "required name=search_term_string"
+    }
+  }
+  </script>
   <link rel="stylesheet" href="/theme.css">
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;800&display=swap');
@@ -1925,6 +1955,117 @@
         </button>
       </div>
     </div>
+  </section>
+
+  <!-- ── SECCIÓN EDITORIAL: CONTENIDO ORIGINAL (SEO + AdSense) ────── -->
+  <section id="editorialGuide"
+    style="max-width:820px; margin:60px auto 0; padding:0 24px; font-family:'Syne',sans-serif; color:var(--prose,#cdd6f4); line-height:1.85; font-size:0.95rem;">
+
+    <article>
+      <h2 style="font-size:1.6rem; font-weight:800; color:var(--text); margin-bottom:24px; line-height:1.3;">
+        Guia Completa: Como Crear Videos Profesionales con Inteligencia Artificial
+      </h2>
+
+      <p style="margin-bottom:16px;">
+        La inteligencia artificial ha revolucionado la creacion de contenido audiovisual. Lo que antes requeria semanas de trabajo con software profesional de edicion como Adobe Premiere, Final Cut Pro o DaVinci Resolve, ahora puede lograrse en minutos gracias a los avances en modelos generativos de imagenes, sintesis de voz y procesamiento de lenguaje natural.
+      </p>
+
+      <p style="margin-bottom:16px;">
+        Velo AI Studio es una plataforma web gratuita que automatiza el proceso completo de produccion de video: desde la escritura del guion hasta la exportacion final en MP4. Utilizando la API de Pollinations AI, genera imagenes cinematograficas para cada escena, sincroniza subtitulos con precision de milisegundos y ofrece 34 voces de inteligencia artificial para la narracion.
+      </p>
+
+      <h3 style="font-size:1.15rem; font-weight:700; color:var(--text); margin:28px 0 14px; border-left:3px solid var(--accent); padding-left:12px;">
+        Como funciona el proceso de creacion
+      </h3>
+
+      <ol style="padding-left:20px; margin-bottom:20px;">
+        <li style="margin-bottom:10px;"><strong>Escribe tu guion o sube un audio</strong> — Puedes escribir directamente tu historia en la plataforma o subir un archivo MP3/WAV con tu narracion grabada.</li>
+        <li style="margin-bottom:10px;"><strong>La IA genera los subtitulos</strong> — Si subes audio, Velo utiliza modelos de transcripcion como Scribe v2 de ElevenLabs o Whisper de OpenAI para generar subtitulos con timestamps precisos por palabra.</li>
+        <li style="margin-bottom:10px;"><strong>Se crean las imagenes de cada escena</strong> — Un modelo de lenguaje analiza cada bloque de subtitulos y genera prompts visuales descriptivos. Luego, modelos como Flux, ZImage o GPT Image crean imagenes de alta calidad para cada segmento.</li>
+        <li style="margin-bottom:10px;"><strong>Renderizado y exportacion</strong> — Todo se monta en un video final MP4 a 1080p usando las APIs de WebCodecs, directamente en tu navegador. Sin servidores, sin subidas a la nube: tu contenido permanece privado.</li>
+      </ol>
+
+      <h3 style="font-size:1.15rem; font-weight:700; color:var(--text); margin:28px 0 14px; border-left:3px solid var(--accent); padding-left:12px;">
+        Para quien es esta herramienta
+      </h3>
+
+      <ul style="padding-left:20px; margin-bottom:20px; list-style:disc;">
+        <li style="margin-bottom:8px;"><strong>Creadores de YouTube</strong> que quieren producir contenido visual sin camaras ni equipo de grabacion profesional.</li>
+        <li style="margin-bottom:8px;"><strong>Educadores y profesores</strong> que necesitan material didactico visual para sus clases o cursos online.</li>
+        <li style="margin-bottom:8px;"><strong>Emprendedores y marketers</strong> que requieren videos promocionales rapidos para redes sociales.</li>
+        <li style="margin-bottom:8px;"><strong>Narradores de historias</strong> que desean transformar sus relatos escritos en experiencias audiovisuales.</li>
+        <li style="margin-bottom:8px;"><strong>Periodistas y divulgadores</strong> que buscan ilustrar noticias o articulos con video de calidad.</li>
+      </ul>
+
+      <h3 style="font-size:1.15rem; font-weight:700; color:var(--text); margin:28px 0 14px; border-left:3px solid var(--accent); padding-left:12px;">
+        Preguntas Frecuentes
+      </h3>
+
+      <div style="margin-bottom:16px;">
+        <p style="font-weight:700; color:var(--text); margin-bottom:4px;">Es realmente gratuito?</p>
+        <p style="margin-bottom:14px;">Si. Velo AI Studio utiliza la API gratuita de Pollinations AI para la generacion de imagenes y texto. La unica inversion es una clave API gratuita que se obtiene en segundos desde el sitio de Pollinations.</p>
+      </div>
+
+      <div style="margin-bottom:16px;">
+        <p style="font-weight:700; color:var(--text); margin-bottom:4px;">Puedo crear videos largos de mas de una hora?</p>
+        <p style="margin-bottom:14px;">Si. La plataforma comprime y divide automaticamente los archivos de audio grandes para la transcripcion, y el renderizado se realiza directamente en tu navegador sin limites de duracion impuestos por un servidor.</p>
+      </div>
+
+      <div style="margin-bottom:16px;">
+        <p style="font-weight:700; color:var(--text); margin-bottom:4px;">En que formatos puedo exportar?</p>
+        <p style="margin-bottom:14px;">Los videos se exportan en MP4 (H.264) con calidad Full HD 1080p. Puedes elegir entre formato horizontal 16:9 (ideal para YouTube y presentaciones web) o vertical 9:16 (perfecto para TikTok, Instagram Reels y YouTube Shorts).</p>
+      </div>
+
+      <div style="margin-bottom:16px;">
+        <p style="font-weight:700; color:var(--text); margin-bottom:4px;">Puedo monetizar los videos en YouTube?</p>
+        <p style="margin-bottom:14px;">Si. Los videos que creas son completamente tuyos y puedes publicarlos en cualquier plataforma para generar ingresos mediante publicidad, membresías o colaboraciones. Te recomendamos agregar tu toque personal — locucion propia, edicion adicional, investigacion original — para maximizar el valor de tu contenido.</p>
+      </div>
+
+      <div style="margin-bottom:16px;">
+        <p style="font-weight:700; color:var(--text); margin-bottom:4px;">Necesito saber programar o disenar?</p>
+        <p style="margin-bottom:14px;">No. La interfaz esta diseñada para que cualquier persona pueda crear videos profesionales sin conocimientos tecnicos. Solo necesitas escribir un guion o subir un audio, y la plataforma se encarga del resto.</p>
+      </div>
+
+      <h3 style="font-size:1.15rem; font-weight:700; color:var(--text); margin:28px 0 14px; border-left:3px solid var(--accent); padding-left:12px;">
+        Articulos Recomendados
+      </h3>
+
+      <p style="margin-bottom:14px;">Explora nuestra guia completa de tutoriales para sacar el maximo provecho de la creacion de videos con IA:</p>
+
+      <ul style="padding-left:20px; margin-bottom:20px; list-style:none;">
+        <li style="margin-bottom:10px;">
+          <a href="/blog/02-como-crear-videos-con-ia.html" style="color:var(--accent); text-decoration:none; font-weight:600;">Como crear videos con IA paso a paso</a>
+          <span style="display:block; font-size:0.82rem; color:var(--muted); margin-top:2px;">Tutorial completo desde el guion hasta la exportacion final del video.</span>
+        </li>
+        <li style="margin-bottom:10px;">
+          <a href="/blog/03-guia-formatos-video.html" style="color:var(--accent); text-decoration:none; font-weight:600;">Guia de formatos: 16:9 vs 9:16</a>
+          <span style="display:block; font-size:0.82rem; color:var(--muted); margin-top:2px;">Elige el formato correcto segun la plataforma donde publicaras tu video.</span>
+        </li>
+        <li style="margin-bottom:10px;">
+          <a href="/blog/08-text-to-speech-videos-ia.html" style="color:var(--accent); text-decoration:none; font-weight:600;">Text-to-Speech: la voz de tu video</a>
+          <span style="display:block; font-size:0.82rem; color:var(--muted); margin-top:2px;">Aprende a usar las 34 voces de IA disponibles para narrar tus historias.</span>
+        </li>
+        <li style="margin-bottom:10px;">
+          <a href="/blog/06-monetizar-canal-youtube.html" style="color:var(--accent); text-decoration:none; font-weight:600;">Como monetizar tu canal de YouTube</a>
+          <span style="display:block; font-size:0.82rem; color:var(--muted); margin-top:2px;">Estrategias reales para generar ingresos con videos creados con inteligencia artificial.</span>
+        </li>
+        <li style="margin-bottom:10px;">
+          <a href="/blog/14-seo-youtube-videos-ia.html" style="color:var(--accent); text-decoration:none; font-weight:600;">SEO para YouTube: optimiza tus videos</a>
+          <span style="display:block; font-size:0.82rem; color:var(--muted); margin-top:2px;">Tecnicas avanzadas de posicionamiento para que tus videos aparezcan en busquedas.</span>
+        </li>
+        <li style="margin-bottom:10px;">
+          <a href="/blog/17-primeros-1000-suscriptores-youtube.html" style="color:var(--accent); text-decoration:none; font-weight:600;">Los primeros 1000 suscriptores</a>
+          <span style="display:block; font-size:0.82rem; color:var(--muted); margin-top:2px;">Plan de accion paso a paso para crecer tu canal desde cero con contenido de IA.</span>
+        </li>
+        <li style="margin-bottom:10px;">
+          <a href="/blog/16-guia-prompts-imagenes-ia.html" style="color:var(--accent); text-decoration:none; font-weight:600;">Guia de prompts para imagenes con IA</a>
+          <span style="display:block; font-size:0.82rem; color:var(--muted); margin-top:2px;">Domina el arte de escribir prompts que generan imagenes profesionales y llamativas.</span>
+        </li>
+        <li style="margin-bottom:10px;">
+          <a href="/blog/" style="color:var(--accent2); text-decoration:none; font-weight:700;">Ver todos los articulos del blog →</a>
+        </li>
+      </ul>
+    </article>
   </section>
 
   <!-- ── FOOTER LEGAL (requerido para AdSense) ─────────────────────── -->

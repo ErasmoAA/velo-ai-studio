@@ -4,7 +4,7 @@
   <!-- Página principal -->
   <url>
     <loc>https://veloaistudio.online/</loc>
-    <lastmod>2026-03-23</lastmod>
+    <lastmod>2026-04-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
@@ -42,12 +42,12 @@
   <!-- Blog índice -->
   <url>
     <loc>https://veloaistudio.online/blog/</loc>
-    <lastmod>2026-03-23</lastmod>
+    <lastmod>2026-04-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
 
-  <!-- Artículos del blog -->
+  <!-- Artículos del blog (01-10) -->
   <url>
     <loc>https://veloaistudio.online/blog/01-que-es-velo-ai-studio.html</loc>
     <lastmod>2026-03-23</lastmod>
@@ -105,6 +105,50 @@
   <url>
     <loc>https://veloaistudio.online/blog/10-canal-youtube-sin-mostrar-cara.html</loc>
     <lastmod>2026-03-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Artículos del blog (11-17) -->
+  <url>
+    <loc>https://veloaistudio.online/blog/como-elegir-voz-perfecta-videos-ia.html</loc>
+    <lastmod>2026-03-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://veloaistudio.online/blog/riesgos-canal-automatizado.html</loc>
+    <lastmod>2026-03-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://veloaistudio.online/blog/13-como-crear-miniaturas-youtube-ia.html</loc>
+    <lastmod>2026-03-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://veloaistudio.online/blog/14-seo-youtube-videos-ia.html</loc>
+    <lastmod>2026-03-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://veloaistudio.online/blog/15-modo-express-vs-revision.html</loc>
+    <lastmod>2026-03-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://veloaistudio.online/blog/16-guia-prompts-imagenes-ia.html</loc>
+    <lastmod>2026-03-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://veloaistudio.online/blog/17-primeros-1000-suscriptores-youtube.html</loc>
+    <lastmod>2026-03-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
