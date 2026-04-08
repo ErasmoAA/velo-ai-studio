@@ -9,6 +9,14 @@
     <priority>1.0</priority>
   </url>
 
+  <!-- Estudio de Video (herramienta) -->
+  <url>
+    <loc>https://veloaistudio.online/studio.html</loc>
+    <lastmod>2026-04-08</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
   <!-- Acerca de -->
   <url>
     <loc>https://veloaistudio.online/about.html</loc>

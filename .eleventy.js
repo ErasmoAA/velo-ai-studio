@@ -5,6 +5,7 @@ module.exports = function (eleventyConfig) {
   // ── Static passthrough copies ──────────────────────────────────────
   // Root static files
   eleventyConfig.addPassthroughCopy("index.html");
+  eleventyConfig.addPassthroughCopy("studio.html");
   eleventyConfig.addPassthroughCopy("theme.css");
   eleventyConfig.addPassthroughCopy("privacy.html");
   eleventyConfig.addPassthroughCopy("tos.html");
