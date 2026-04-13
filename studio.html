@@ -1689,6 +1689,10 @@
           </div>
           <div class="progress-text" id="progressText">Iniciando...</div>
         </div>
+        <button class="btn full-btn" id="cancelPipelineBtn" onclick="cancelPipeline()"
+          style="display:none; margin-top:12px; background:linear-gradient(135deg,#ef4444,#dc2626); color:white; border:none; font-weight:700;">
+          ✖ Cancelar Proceso
+        </button>
         <hr class="divider">
         <div class="log-box" id="logBox"></div>
       </div>
@@ -2098,6 +2102,9 @@
     let wordTimestamps = [];          // [{word, start, end}] – word-level Whisper/Scribe timestamps
     let pipelineErrorDetected = false;
     let lastFriendlyError = "";
+    let pipelineCancelled = false;       // Cancel flag — checked between images
+    let pipelineRunning = false;         // True while pipeline is active
+    let currentImageIndex = -1;          // Track which image is being generated
 
     // ──────────────────────────────────────────────────────────────────
     // 🌐 BILINGUAL SYSTEM (ES / EN)
@@ -2899,6 +2906,12 @@
 
       // Mejora 6: Solicitar permiso de notificaciones al cargar
       if ("Notification" in window) Notification.requestPermission();
+
+      // ── SESSION RECOVERY CHECK ──
+      const savedSession = getSavedSession();
+      if (savedSession && savedSession.images && savedSession.images.length > 0) {
+        showRecoveryModal(savedSession);
+      }
     });
 
     // ── HERO ONBOARDING (inline, replaces old welcome modal) ──────────
@@ -3755,6 +3768,209 @@
       document.getElementById('progressText').textContent = pct + '% - ' + msg;
     }
 
+    // ── CANCEL PIPELINE ──────────────────────────────────────────────
+    function cancelPipeline() {
+      pipelineCancelled = true;
+      const cancelBtn = document.getElementById('cancelPipelineBtn');
+      if (cancelBtn) { cancelBtn.disabled = true; cancelBtn.textContent = IS_SPANISH ? '⏳ Cancelando...' : '⏳ Cancelling...'; }
+      log(IS_SPANISH ? '🛑 Cancelación solicitada. Finalizando imagen actual...' : '🛑 Cancellation requested. Finishing current image...', 'warn');
+    }
+
+    function resetAfterCancel() {
+      pipelineRunning = false;
+      pipelineCancelled = false;
+      currentImageIndex = -1;
+      const cancelBtn = document.getElementById('cancelPipelineBtn');
+      if (cancelBtn) { cancelBtn.style.display = 'none'; cancelBtn.disabled = false; cancelBtn.textContent = IS_SPANISH ? '✖ Cancelar Proceso' : '✖ Cancel Process'; }
+      document.getElementById('runBtnReview').disabled = false;
+      document.getElementById('runBtnAuto').disabled = false;
+      // Show compose button if at least some images were generated
+      const hasImages = generatedImages.some(img => img !== null);
+      if (hasImages) {
+        document.getElementById('composeBtn').style.display = 'block';
+        setProgress(100, IS_SPANISH ? '🛑 Proceso cancelado. Puedes montar video con las imágenes generadas.' : '🛑 Process cancelled. You can compose video with the generated images.');
+        log(IS_SPANISH ? '🛑 Proceso cancelado. Tienes ' + generatedImages.filter(Boolean).length + '/' + generatedImages.length + ' imágenes generadas.' : '🛑 Process cancelled. You have ' + generatedImages.filter(Boolean).length + '/' + generatedImages.length + ' images generated.', 'warn');
+      } else {
+        setProgress(0, IS_SPANISH ? '🛑 Proceso cancelado.' : '🛑 Process cancelled.');
+        log(IS_SPANISH ? '🛑 Proceso cancelado. No se generaron imágenes.' : '🛑 Process cancelled. No images were generated.', 'warn');
+      }
+      // Save partial session if images exist
+      if (hasImages) saveSessionState('images_partial');
+    }
+
+    // ── SESSION RECOVERY (localStorage) ────────────────────────────────
+    const SESSION_KEY = 'velo_session_recovery';
+
+    // Warn user before closing tab while pipeline is active
+    window.addEventListener('beforeunload', function(e) {
+      if (pipelineRunning) {
+        e.preventDefault();
+        e.returnValue = '';
+      }
+    });
+
+    async function saveSessionState(phase) {
+      try {
+        // Convert generated image blobs to base64 for storage
+        const imagesData = [];
+        for (let i = 0; i < generatedImages.length; i++) {
+          const img = generatedImages[i];
+          if (img && img.blob) {
+            const reader = new FileReader();
+            const b64 = await new Promise((resolve) => {
+              reader.onload = () => resolve(reader.result);
+              reader.readAsDataURL(img.blob);
+            });
+            imagesData.push({ index: i, data: b64, isFallback: !!img.isFallback, segment: img.segment });
+          }
+        }
+        const state = {
+          phase: phase,
+          segments: segments,
+          images: imagesData,
+          srtContent: srtContent,
+          parsedSubtitles: parsedSubtitles,
+          wordTimestamps: wordTimestamps,
+          timestamp: Date.now(),
+          settings: {
+            imageModel: document.getElementById('imageModelSelect')?.value,
+            textModel: document.getElementById('textModelSelect')?.value,
+            format: document.getElementById('formatSelect')?.value,
+            style: document.getElementById('imageStyle')?.value,
+            fps: document.getElementById('fpsSelect')?.value,
+            burnSubs: document.getElementById('burnSubtitles')?.value
+          }
+        };
+        localStorage.setItem(SESSION_KEY, JSON.stringify(state));
+      } catch (e) {
+        // localStorage full or blob too large — silently skip
+        console.warn('Session save skipped:', e.message);
+      }
+    }
+
+    function clearSessionState() {
+      localStorage.removeItem(SESSION_KEY);
+    }
+
+    function getSavedSession() {
+      try {
+        const raw = localStorage.getItem(SESSION_KEY);
+        if (!raw) return null;
+        const state = JSON.parse(raw);
+        // Expire sessions older than 24 hours
+        if (Date.now() - state.timestamp > 24 * 60 * 60 * 1000) {
+          clearSessionState();
+          return null;
+        }
+        return state;
+      } catch (e) { return null; }
+    }
+
+    function showRecoveryModal(savedState) {
+      const modal = document.getElementById('sessionRecoveryModal');
+      const imgCount = savedState.images.length;
+      const totalSegs = savedState.segments.length;
+      const timeAgo = Math.round((Date.now() - savedState.timestamp) / 60000);
+
+      document.getElementById('recoveryTitle').textContent = IS_SPANISH
+        ? 'Sesión anterior encontrada' : 'Previous session found';
+      document.getElementById('recoveryDesc').textContent = IS_SPANISH
+        ? `Tienes un proyecto con ${imgCount} de ${totalSegs} imágenes generadas (hace ${timeAgo} min). ¿Deseas retomarlo donde lo dejaste?`
+        : `You have a project with ${imgCount} of ${totalSegs} images generated (${timeAgo} min ago). Resume where you left off?`;
+      document.getElementById('recoveryResumeBtn').textContent = IS_SPANISH ? '✓ Reanudar' : '✓ Resume';
+      document.getElementById('recoveryDiscardBtn').textContent = IS_SPANISH ? '✗ Empezar de nuevo' : '✗ Start fresh';
+
+      modal.style.display = 'flex';
+    }
+
+    async function resumeSession() {
+      document.getElementById('sessionRecoveryModal').style.display = 'none';
+      const saved = getSavedSession();
+      if (!saved) return;
+
+      try {
+        log(IS_SPANISH ? '🔄 Restaurando sesión anterior...' : '🔄 Restoring previous session...', 'info');
+
+        // Restore state
+        segments = saved.segments;
+        srtContent = saved.srtContent;
+        parsedSubtitles = saved.parsedSubtitles;
+        wordTimestamps = saved.wordTimestamps || [];
+        generatedImages = new Array(segments.length).fill(null);
+
+        // Restore settings
+        if (saved.settings) {
+          const s = saved.settings;
+          if (s.imageModel) { var el = document.getElementById('imageModelSelect'); if (el) el.value = s.imageModel; }
+          if (s.textModel) { var el2 = document.getElementById('textModelSelect'); if (el2) el2.value = s.textModel; }
+          if (s.format) { var el3 = document.getElementById('formatSelect'); if (el3) el3.value = s.format; }
+          if (s.style) { var el4 = document.getElementById('imageStyle'); if (el4) el4.value = s.style; }
+          if (s.fps) { var el5 = document.getElementById('fpsSelect'); if (el5) el5.value = s.fps; }
+          if (s.burnSubs) { var el6 = document.getElementById('burnSubtitles'); if (el6) el6.value = s.burnSubs; }
+        }
+
+        // Render segment cards in review mode
+        renderSegments(false);
+
+        // Restore images from base64
+        for (const imgData of saved.images) {
+          const resp = await fetch(imgData.data);
+          const blob = await resp.blob();
+          const objectUrl = URL.createObjectURL(blob);
+          const imgEl = await new Promise((resolve, reject) => {
+            const img = new Image();
+            img.onload = () => resolve(img);
+            img.onerror = () => reject(new Error('Failed to restore image'));
+            img.src = objectUrl;
+          });
+          generatedImages[imgData.index] = { imgElement: imgEl, blob: blob, objectUrl: objectUrl, segment: imgData.segment, isFallback: !!imgData.isFallback };
+
+          // Update UI card
+          const uiImg = document.getElementById('img-' + imgData.index);
+          const statusEl = document.getElementById('img-status-' + imgData.index);
+          if (uiImg) { uiImg.src = objectUrl; uiImg.style.display = 'block'; uiImg.onclick = () => openModal(objectUrl, imgData.segment.image_prompt); }
+          if (statusEl) statusEl.style.display = 'none';
+        }
+
+        // Mark missing images with waiting status
+        for (let i = 0; i < generatedImages.length; i++) {
+          if (!generatedImages[i]) {
+            const statusEl = document.getElementById('img-status-' + i);
+            if (statusEl) { statusEl.className = 'img-status'; statusEl.textContent = '⏳ pendiente'; statusEl.style.display = 'flex'; }
+          }
+        }
+
+        // Show progress area and compose button
+        document.getElementById('progressWrapper').style.display = 'block';
+        document.getElementById('segmentsContainer').style.display = 'block';
+        updateRetryBtnVisibility();
+
+        const allDone = generatedImages.every(img => img !== null);
+        if (allDone) {
+          document.getElementById('composeBtn').style.display = 'block';
+          setProgress(100, IS_SPANISH ? '✓ Sesión restaurada. Todas las imágenes listas.' : '✓ Session restored. All images ready.');
+          log(IS_SPANISH ? '✓ Sesión restaurada completamente. Puedes montar el video.' : '✓ Session fully restored. You can compose the video.', 'ok');
+        } else {
+          const remaining = generatedImages.filter(img => img === null).length;
+          document.getElementById('composeBtn').style.display = 'block';
+          setProgress(Math.round(((segments.length - remaining) / segments.length) * 100),
+            IS_SPANISH ? `Sesión restaurada. ${remaining} imágenes pendientes.` : `Session restored. ${remaining} images pending.`);
+          log(IS_SPANISH
+            ? `✓ Sesión restaurada. ${saved.images.length} imágenes recuperadas, ${remaining} pendientes. Puedes regenerar las faltantes o montar con lo que tienes.`
+            : `✓ Session restored. ${saved.images.length} images recovered, ${remaining} pending. You can regenerate missing ones or compose with what you have.`, 'ok');
+        }
+
+      } catch (e) {
+        log(IS_SPANISH ? '✗ Error al restaurar sesión: ' + e.message : '✗ Error restoring session: ' + e.message, 'err');
+        clearSessionState();
+      }
+    }
+
+    function discardSession() {
+      document.getElementById('sessionRecoveryModal').style.display = 'none';
+      clearSessionState();
+    }
+
     // Pre-acquired file handle for Express mode (obtained during user gesture)
     let _preAcquiredFileHandle = null;
 
@@ -3783,6 +3999,10 @@
       if (!srtContent) return alert('Falta el guion SRT o transcribir el audio.');
 
       pipelineErrorDetected = false;
+      pipelineCancelled = false;
+      pipelineRunning = true;
+      currentImageIndex = -1;
+      clearSessionState();
       wordTimestamps = [];            // reset: no stale word data from previous run
       if (document.getElementById('rescueWarningBox')) document.getElementById('rescueWarningBox').style.display = 'none';
       document.getElementById('runBtnReview').disabled = true;
@@ -3790,6 +4010,8 @@
       document.getElementById('progressWrapper').style.display = 'block';
       document.getElementById('composeBtn').style.display = 'none';
       document.getElementById('outputSection').style.display = 'none';
+      var cancelBtn = document.getElementById('cancelPipelineBtn');
+      if (cancelBtn) { cancelBtn.style.display = 'block'; cancelBtn.disabled = false; cancelBtn.textContent = IS_SPANISH ? '✖ Cancelar Proceso' : '✖ Cancel Process'; }
 
       if (isAutoMode) {
         document.getElementById('reviewHelperText').innerHTML = IS_SPANISH
@@ -3806,6 +4028,7 @@
         log(`Dividiendo guion usando el modelo [${textModel}]...`, 'info');
         setProgress(5, 'Analizando guion y extrayendo prompts...');
         segments = await semanticSegmentation(apiKey, textModel);
+        if (pipelineCancelled) { resetAfterCancel(); return; }
         log(`✓ ${segments.length} segmentos semánticos preparados`, 'ok');
 
         generatedImages = new Array(segments.length).fill(null);
@@ -3813,6 +4036,8 @@
 
         setProgress(20, `Iniciando generación de ${segments.length} imágenes...`);
         await generateAllImages(apiKey, isAutoMode);
+
+        if (pipelineCancelled) { resetAfterCancel(); return; }
 
         if (pipelineErrorDetected) {
           log('⚠️ Se detectaron fallos críticos. Cancelando montaje automático para evitar un video corrupto.', 'warn');
@@ -3830,11 +4055,17 @@
           log('👀 Modo Revisión: Esperando aprobación del usuario para montar video.', 'ok');
           document.getElementById('composeBtn').style.display = 'block';
         }
+        // Hide cancel button on completion & save session for recovery
+        pipelineRunning = false;
+        var _cb = document.getElementById('cancelPipelineBtn'); if (_cb) _cb.style.display = 'none';
+        saveSessionState('images_complete');
       } catch (err) {
         log(`✗ Error: ${err.message}`, 'err');
         setProgress(0, 'Error en el pipeline');
         document.getElementById('runBtnReview').disabled = false;
         document.getElementById('runBtnAuto').disabled = false;
+        pipelineRunning = false;
+        var _cb2 = document.getElementById('cancelPipelineBtn'); if (_cb2) _cb2.style.display = 'none';
       }
     }
 
@@ -4262,9 +4493,14 @@ Responde ÚNICAMENTE con JSON válido:
 
     async function generateAllImages(apiKey, isAutoMode) {
       for (let i = 0; i < segments.length; i++) {
+        if (pipelineCancelled) break;
+        currentImageIndex = i;
         setProgress(20 + Math.round((i / segments.length) * 80), `Procesando: ${segments[i].title}`);
         await fetchSingleImageCascade(i, apiKey, isAutoMode);
+        // Save progress after each successful image
+        if (generatedImages[i] && !pipelineCancelled) saveSessionState('generating_images');
       }
+      currentImageIndex = -1;
       updateRetryBtnVisibility();
     }
 
@@ -4929,6 +5165,7 @@ Responde ÚNICAMENTE con JSON válido:
           body: `MP4 listo: ${sizeMB}MB`
         });
       }
+      clearSessionState();
     }
 
     async function composeVideoLegacy(isAutoMode) {
@@ -6687,6 +6924,21 @@ CRITICAL LAYOUT INSTRUCTION: The text MUST be placed perfectly in the frame with
     </p>
     <div class="timer" id="penaltyTimer">0</div>
     <button id="penaltyCloseBtn" disabled>Esperando...</button>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════════════════
+       SESSION RECOVERY MODAL
+       ════════════════════════════════════════════════════════════════ -->
+  <div id="sessionRecoveryModal" style="display:none; position:fixed; inset:0; z-index:100000; background:rgba(0,0,0,0.75); backdrop-filter:blur(6px); display:none; align-items:center; justify-content:center; font-family:'Syne',sans-serif;">
+    <div style="background:var(--surface); border:1px solid var(--border); border-radius:16px; padding:32px; max-width:460px; width:90%; text-align:center; box-shadow:0 8px 32px rgba(0,0,0,0.5);">
+      <div style="font-size:2.5rem; margin-bottom:12px;">💾</div>
+      <h2 id="recoveryTitle" style="font-size:1.2rem; font-weight:800; margin-bottom:8px; color:var(--text);"></h2>
+      <p id="recoveryDesc" style="font-size:0.85rem; color:var(--muted); line-height:1.6; margin-bottom:24px;"></p>
+      <div style="display:flex; gap:12px; justify-content:center; flex-wrap:wrap;">
+        <button onclick="resumeSession()" style="padding:12px 28px; background:linear-gradient(135deg,var(--accent),var(--accent2)); border:none; border-radius:8px; color:white; font-family:'Syne',sans-serif; font-weight:700; font-size:0.9rem; cursor:pointer;" id="recoveryResumeBtn"></button>
+        <button onclick="discardSession()" style="padding:12px 28px; background:var(--surface2); border:1px solid var(--border); border-radius:8px; color:var(--muted); font-family:'Syne',sans-serif; font-weight:600; font-size:0.9rem; cursor:pointer;" id="recoveryDiscardBtn"></button>
+      </div>
+    </div>
   </div>
 
   <!-- ══════════════════════════════════════════════════════════════════
