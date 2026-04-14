@@ -1905,6 +1905,9 @@
     <div class="card" style="margin-top:0;">
       <div class="card-title" style="margin-bottom:20px;">
         <span class="step-num">⭐</span> Reseñas de Usuarios
+        <span id="creator-admin-badge" onclick="logoutAdmin()"
+          style="display:none; margin-left:12px; padding:4px 10px; background:linear-gradient(135deg,var(--accent),var(--accent2)); color:white; border-radius:12px; font-family:'Space Mono',monospace; font-size:0.65rem; font-weight:700; cursor:pointer; align-items:center; gap:4px;"
+          title="Clic para salir">✦ MODO CREADOR</span>
         <span id="reviews-aggregate"
           style="margin-left:auto; font-family:'Space Mono',monospace; font-size:0.75rem; color:var(--accent3);"></span>
       </div>
@@ -6494,6 +6497,36 @@ CRITICAL LAYOUT INSTRUCTION: The text MUST be placed perfectly in the frame with
     const REVIEWS_API_KEY = '$2a$10$w3WeV3oZ9obbhRMDjkAKhe4zwADxGQNhokYpXIGH1iQlJKUB5ageC';
     const REVIEWS_PER_PAGE = 5;
 
+    // ── MODO CREADOR ── Activar visitando /studio.html#creator=velo2026 ──
+    // Solo se activa una vez; queda guardado en localStorage del navegador.
+    // Para cambiar el código, edita ADMIN_CODE abajo.
+    const ADMIN_CODE = 'velo2026';
+    const ADMIN_KEY = 'velo_creator_admin';
+
+    function isAdminMode() {
+      return localStorage.getItem(ADMIN_KEY) === 'true';
+    }
+
+    function checkAdminActivation() {
+      const hashParams = new URLSearchParams(window.location.hash.slice(1));
+      const code = hashParams.get('creator');
+      if (code === ADMIN_CODE) {
+        localStorage.setItem(ADMIN_KEY, 'true');
+        history.replaceState(null, '', window.location.pathname + window.location.search);
+        setTimeout(() => {
+          alert(IS_SPANISH ? '✓ Modo creador activado. Ahora puedes responder reseñas.' : '✓ Creator mode enabled. You can now reply to reviews.');
+          if (typeof loadReviews === 'function') loadReviews();
+        }, 300);
+      }
+    }
+
+    function logoutAdmin() {
+      if (confirm(IS_SPANISH ? '¿Cerrar modo creador?' : 'Exit creator mode?')) {
+        localStorage.removeItem(ADMIN_KEY);
+        location.reload();
+      }
+    }
+
     let reviewsCache = [];
     let selectedStars = 0;
     let reviewsPage = 1;
@@ -6501,6 +6534,7 @@ CRITICAL LAYOUT INSTRUCTION: The text MUST be placed perfectly in the frame with
 
     // ── ESTRELLAS INTERACTIVAS ──────────────────────────────────────────
     document.addEventListener('DOMContentLoaded', () => {
+      checkAdminActivation();
       const stars = document.querySelectorAll('#star-input span');
       stars.forEach(s => {
         s.addEventListener('mouseover', () => paintStars(parseInt(s.dataset.val)));
@@ -6511,6 +6545,11 @@ CRITICAL LAYOUT INSTRUCTION: The text MUST be placed perfectly in the frame with
         });
       });
       loadReviews();
+      // Show admin badge if active
+      if (isAdminMode()) {
+        const badge = document.getElementById('creator-admin-badge');
+        if (badge) badge.style.display = 'inline-flex';
+      }
     });
 
     function paintStars(n) {
@@ -6586,6 +6625,48 @@ CRITICAL LAYOUT INSTRUCTION: The text MUST be placed perfectly in the frame with
       div.style.cssText = 'background:var(--surface2); border:1px solid var(--border); border-radius:10px; padding:16px; display:flex; flex-direction:column; gap:6px;';
       const stars = '★'.repeat(r.rating) + '☆'.repeat(5 - r.rating);
       const date = new Date(r.ts).toLocaleDateString('es-ES', { year: 'numeric', month: 'short', day: 'numeric' });
+      const locale = IS_SPANISH ? 'es-ES' : 'en-US';
+
+      // Render existing reply (visible to everyone)
+      let replyHtml = '';
+      if (r.reply && r.reply.text) {
+        const replyDate = new Date(r.reply.ts).toLocaleDateString(locale, { year: 'numeric', month: 'short', day: 'numeric' });
+        const replyBadge = IS_SPANISH ? '✦ Respuesta del creador' : '✦ Reply from the creator';
+        replyHtml = `
+          <div style="margin-top:12px; margin-left:16px; padding:12px 14px; background:linear-gradient(135deg, rgba(139,92,246,0.12), rgba(6,182,212,0.08)); border-left:3px solid var(--accent); border-radius:8px;">
+            <div style="display:flex; align-items:center; gap:8px; margin-bottom:6px; flex-wrap:wrap;">
+              <span style="font-size:0.62rem; background:linear-gradient(135deg,var(--accent),var(--accent2)); color:white; padding:3px 10px; border-radius:12px; font-weight:700; letter-spacing:0.3px; font-family:'Syne',sans-serif;">${replyBadge}</span>
+              <span style="font-size:0.62rem; color:var(--muted); font-family:'Space Mono',monospace;">${replyDate}</span>
+            </div>
+            <p style="font-size:0.8rem; color:var(--text); line-height:1.6; margin:0;">${escapeHTML(r.reply.text)}</p>
+          </div>
+        `;
+      }
+
+      // Admin controls (only visible in creator mode)
+      let adminHtml = '';
+      if (isAdminMode()) {
+        const replyBtnLabel = r.reply ? (IS_SPANISH ? '✎ Editar respuesta' : '✎ Edit reply') : (IS_SPANISH ? '💬 Responder' : '💬 Reply');
+        const deleteBtn = r.reply
+          ? `<button onclick="deleteReply(${r.id})" style="padding:6px 12px; background:transparent; border:1px solid var(--error); border-radius:6px; color:var(--error); font-size:0.7rem; cursor:pointer; font-family:'Space Mono',monospace;">🗑 ${IS_SPANISH ? 'Eliminar respuesta' : 'Delete reply'}</button>`
+          : '';
+        const existingText = r.reply ? escapeHTML(r.reply.text) : '';
+        adminHtml = `
+          <div style="margin-top:10px; padding-top:10px; border-top:1px dashed var(--border); display:flex; gap:8px; flex-wrap:wrap;">
+            <button onclick="toggleReplyForm(${r.id})" style="padding:6px 12px; background:var(--surface); border:1px solid var(--accent); border-radius:6px; color:var(--accent2); font-size:0.7rem; cursor:pointer; font-family:'Space Mono',monospace; font-weight:700;">${replyBtnLabel}</button>
+            ${deleteBtn}
+          </div>
+          <div id="reply-form-${r.id}" style="display:none; margin-top:10px;">
+            <textarea id="reply-text-${r.id}" placeholder="${IS_SPANISH ? 'Tu respuesta...' : 'Your reply...'}" style="width:100%; min-height:70px; padding:10px; background:var(--surface); border:1px solid var(--border); border-radius:6px; color:var(--text); font-size:0.8rem; font-family:'Space Mono',monospace; resize:vertical; box-sizing:border-box;">${existingText}</textarea>
+            <div style="display:flex; gap:8px; margin-top:8px;">
+              <button onclick="submitReply(${r.id})" id="reply-submit-${r.id}" style="padding:8px 16px; background:linear-gradient(135deg,var(--accent),var(--accent2)); border:none; border-radius:6px; color:white; font-size:0.72rem; cursor:pointer; font-weight:700; font-family:'Syne',sans-serif;">✓ ${IS_SPANISH ? 'Publicar' : 'Post'}</button>
+              <button onclick="document.getElementById('reply-form-${r.id}').style.display='none'" style="padding:8px 16px; background:transparent; border:1px solid var(--border); border-radius:6px; color:var(--muted); font-size:0.72rem; cursor:pointer; font-family:'Space Mono',monospace;">${IS_SPANISH ? 'Cancelar' : 'Cancel'}</button>
+            </div>
+            <p id="reply-msg-${r.id}" style="font-size:0.7rem; margin-top:6px; font-family:'Space Mono',monospace;"></p>
+          </div>
+        `;
+      }
+
       div.innerHTML = `
         <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:6px;">
           <div style="display:flex; align-items:center; gap:10px;">
@@ -6601,8 +6682,91 @@ CRITICAL LAYOUT INSTRUCTION: The text MUST be placed perfectly in the frame with
           </div>
         </div>
         <p style="font-size:0.82rem; color:var(--muted); line-height:1.6; margin-top:4px;">${escapeHTML(r.text || '')}</p>
+        ${replyHtml}
+        ${adminHtml}
       `;
       return div;
+    }
+
+    function toggleReplyForm(reviewId) {
+      const form = document.getElementById('reply-form-' + reviewId);
+      if (form) form.style.display = form.style.display === 'none' ? 'block' : 'none';
+    }
+
+    async function submitReply(reviewId) {
+      if (!isAdminMode()) return;
+      const textEl = document.getElementById('reply-text-' + reviewId);
+      const msgEl = document.getElementById('reply-msg-' + reviewId);
+      const btnEl = document.getElementById('reply-submit-' + reviewId);
+      const text = textEl.value.trim();
+
+      if (text.length < 5) {
+        msgEl.style.color = 'var(--error)';
+        msgEl.textContent = IS_SPANISH ? '⚠ La respuesta debe tener al menos 5 caracteres.' : '⚠ Reply must be at least 5 characters.';
+        return;
+      }
+
+      btnEl.disabled = true;
+      btnEl.textContent = '⏳...';
+
+      try {
+        const getRes = await fetch(`https://api.jsonbin.io/v3/b/${REVIEWS_BIN_ID}/latest`, {
+          headers: { 'X-Master-Key': REVIEWS_API_KEY }
+        });
+        if (!getRes.ok) throw new Error('Error al leer datos');
+        const data = await getRes.json();
+        const reviews = data.record?.reviews || [];
+
+        const review = reviews.find(r => r.id === reviewId);
+        if (!review) throw new Error('Reseña no encontrada');
+
+        review.reply = {
+          text: text.substring(0, 500),
+          ts: new Date().toISOString()
+        };
+
+        const putRes = await fetch(`https://api.jsonbin.io/v3/b/${REVIEWS_BIN_ID}`, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json', 'X-Master-Key': REVIEWS_API_KEY },
+          body: JSON.stringify({ reviews })
+        });
+        if (!putRes.ok) throw new Error('Error al guardar');
+
+        msgEl.style.color = 'var(--success)';
+        msgEl.textContent = IS_SPANISH ? '✓ Respuesta publicada.' : '✓ Reply posted.';
+        await loadReviews();
+      } catch (e) {
+        msgEl.style.color = 'var(--error)';
+        msgEl.textContent = (IS_SPANISH ? '✗ Error: ' : '✗ Error: ') + e.message;
+      } finally {
+        btnEl.disabled = false;
+        btnEl.textContent = IS_SPANISH ? '✓ Publicar' : '✓ Post';
+      }
+    }
+
+    async function deleteReply(reviewId) {
+      if (!isAdminMode()) return;
+      if (!confirm(IS_SPANISH ? '¿Eliminar esta respuesta?' : 'Delete this reply?')) return;
+
+      try {
+        const getRes = await fetch(`https://api.jsonbin.io/v3/b/${REVIEWS_BIN_ID}/latest`, {
+          headers: { 'X-Master-Key': REVIEWS_API_KEY }
+        });
+        const data = await getRes.json();
+        const reviews = data.record?.reviews || [];
+        const review = reviews.find(r => r.id === reviewId);
+        if (!review) throw new Error('Reseña no encontrada');
+        delete review.reply;
+        const putRes = await fetch(`https://api.jsonbin.io/v3/b/${REVIEWS_BIN_ID}`, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json', 'X-Master-Key': REVIEWS_API_KEY },
+          body: JSON.stringify({ reviews })
+        });
+        if (!putRes.ok) throw new Error('Error al guardar');
+        await loadReviews();
+      } catch (e) {
+        alert((IS_SPANISH ? '✗ Error: ' : '✗ Error: ') + e.message);
+      }
     }
 
     function loadMoreReviews() {
