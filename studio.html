@@ -1358,6 +1358,32 @@
         </div>
         <p id="apikey-saved-msg" style="font-size:0.75rem; color:var(--success); margin-top:4px; display:none;">✓ Llave
           conectada y guardada</p>
+
+        <!-- ── Pollen balance chip (live balance from /account/balance) ── -->
+        <div id="pollenBalance" style="display:none; margin-top:10px; padding:12px 16px; border-radius:10px;
+             background:linear-gradient(135deg,rgba(245,158,11,0.12),rgba(6,182,212,0.08));
+             border:1px solid rgba(245,158,11,0.35); font-family:'Space Mono',monospace;
+             transition: background 0.35s ease, border-color 0.35s ease;">
+          <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:8px;">
+            <div style="display:flex; align-items:center; gap:8px;">
+              <span id="pollenBalanceIcon" style="font-size:1.1rem;">🪙</span>
+              <span id="pollenBalanceLabel" style="font-size:0.72rem; color:var(--muted); text-transform:uppercase; letter-spacing:1px;">Saldo Pollen</span>
+            </div>
+            <div style="display:flex; align-items:baseline; gap:6px;">
+              <strong id="pollenBalanceValue" style="color:var(--accent3); font-size:1.1rem; font-weight:700;">—</strong>
+              <span id="pollenBalanceUnit" style="color:var(--muted); font-size:0.7rem;">Pollen</span>
+              <span id="pollenBalanceDelta" style="display:none; font-size:0.7rem; font-weight:700; margin-left:4px;"></span>
+            </div>
+          </div>
+          <div id="pollenBalanceFooter" style="display:flex; align-items:center; justify-content:space-between; margin-top:6px; gap:8px;">
+            <span id="pollenBalanceUpdated" style="font-size:0.6rem; color:var(--muted);">—</span>
+            <button id="pollenBalanceRefreshBtn" type="button" title="Actualizar saldo ahora"
+              style="background:transparent; border:1px solid var(--border); color:var(--muted); font-family:'Space Mono',monospace;
+              font-size:0.58rem; padding:3px 9px; border-radius:6px; cursor:pointer; text-transform:uppercase; letter-spacing:1px;">
+              ↻ Refrescar
+            </button>
+          </div>
+        </div>
       </div>
 
       <div class="input-tabs">
@@ -2570,6 +2596,15 @@
         if (keyHint) keyHint.textContent = 'Get free usage by connecting your account or paste your key manually.';
       }
 
+      // ── Pollen balance chip ──
+      const pollenLabel = document.getElementById('pollenBalanceLabel');
+      if (pollenLabel) pollenLabel.textContent = 'Pollen Balance';
+      const pollenRefreshBtn = document.getElementById('pollenBalanceRefreshBtn');
+      if (pollenRefreshBtn) {
+        pollenRefreshBtn.textContent = '↻ Refresh';
+        pollenRefreshBtn.title = 'Refresh balance now';
+      }
+
       // ── Privacy modal ──
       const modalPriv = document.getElementById('modalPrivacidad');
       if (modalPriv) {
@@ -2643,8 +2678,154 @@
       return "Error desconocido en la matriz de IA.";
     }
 
-    // 🛡️ BÓVEDA SECRETA PARA LA API KEY 
+    // 🛡️ BÓVEDA SECRETA PARA LA API KEY
     let secureApiKey = '';
+
+    // ── LIVE POLLEN BALANCE ─────────────────────────────────────────────
+    // Shows the user's remaining Pollinations balance (from /account/balance)
+    // and refreshes it automatically after every pollen-spending API call via
+    // a non-invasive window.fetch interceptor. Endpoint confirmed:
+    //   GET https://gen.pollinations.ai/account/balance
+    //   Authorization: Bearer <key>
+    //   Response: { "balance": <number> }
+    let _lastPollenBalance = null;
+    let _pollenRefreshTimer = null;
+    let _pollenFetchInFlight = false;
+
+    function schedulePollenRefresh(delay) {
+      if (delay == null) delay = 500;
+      if (_pollenRefreshTimer) clearTimeout(_pollenRefreshTimer);
+      _pollenRefreshTimer = setTimeout(function () {
+        _pollenRefreshTimer = null;
+        fetchPollinationsBalance().catch(function () { });
+      }, delay);
+    }
+
+    async function fetchPollinationsBalance() {
+      if (_pollenFetchInFlight) return;
+      const key = secureApiKey || localStorage.getItem('pollinations_byop_key') || '';
+      if (!key) {
+        const chip = document.getElementById('pollenBalance');
+        if (chip) chip.style.display = 'none';
+        return;
+      }
+
+      _pollenFetchInFlight = true;
+      try {
+        const resp = await fetch('https://gen.pollinations.ai/account/balance', {
+          method: 'GET',
+          headers: { 'Authorization': 'Bearer ' + key }
+        });
+
+        if (resp.status === 401 || resp.status === 403) {
+          renderPollenBalance(null, 'invalid');
+          return;
+        }
+        if (!resp.ok) {
+          renderPollenBalance(null, 'error');
+          return;
+        }
+        const data = await resp.json();
+        const newBalance = (data && typeof data.balance === 'number') ? data.balance : null;
+        renderPollenBalance(newBalance, 'ok');
+      } catch (e) {
+        renderPollenBalance(null, 'error');
+      } finally {
+        _pollenFetchInFlight = false;
+      }
+    }
+
+    function renderPollenBalance(balance, state) {
+      const chip = document.getElementById('pollenBalance');
+      const valueEl = document.getElementById('pollenBalanceValue');
+      const unitEl = document.getElementById('pollenBalanceUnit');
+      const deltaEl = document.getElementById('pollenBalanceDelta');
+      const updatedEl = document.getElementById('pollenBalanceUpdated');
+      const iconEl = document.getElementById('pollenBalanceIcon');
+      if (!chip || !valueEl) return;
+
+      chip.style.display = 'block';
+      const esp = (typeof IS_SPANISH !== 'undefined') ? IS_SPANISH : true;
+
+      if (state === 'invalid') {
+        iconEl.textContent = '⚠️';
+        valueEl.textContent = '—';
+        unitEl.textContent = esp ? 'Key inválida' : 'Invalid key';
+        deltaEl.style.display = 'none';
+        updatedEl.textContent = esp ? 'Revisa tu API Key' : 'Check your API Key';
+        chip.style.borderColor = 'rgba(239,68,68,0.45)';
+        chip.style.background = 'linear-gradient(135deg,rgba(239,68,68,0.14),rgba(245,158,11,0.08))';
+        return;
+      }
+      if (state === 'error' || balance == null) {
+        iconEl.textContent = '🪙';
+        valueEl.textContent = '—';
+        unitEl.textContent = 'Pollen';
+        deltaEl.style.display = 'none';
+        updatedEl.textContent = esp ? 'Error de red — reintentando automático' : 'Network error — will auto-retry';
+        chip.style.borderColor = 'rgba(245,158,11,0.35)';
+        chip.style.background = 'linear-gradient(135deg,rgba(245,158,11,0.12),rgba(6,182,212,0.08))';
+        return;
+      }
+
+      iconEl.textContent = '🪙';
+      // Format: sub-unit precision for small balances, 3 decimals otherwise
+      const formatted = balance < 1 ? balance.toFixed(4) : balance.toFixed(3);
+      valueEl.textContent = formatted;
+      unitEl.textContent = 'Pollen';
+
+      // Delta vs previous known value
+      if (_lastPollenBalance != null && Math.abs(balance - _lastPollenBalance) > 1e-6) {
+        const delta = balance - _lastPollenBalance;
+        const sign = delta >= 0 ? '+' : '';
+        const deltaStr = Math.abs(delta) < 0.001 ? delta.toExponential(1) : delta.toFixed(4);
+        deltaEl.textContent = sign + deltaStr;
+        deltaEl.style.color = delta >= 0 ? 'var(--success)' : '#ef4444';
+        deltaEl.style.display = 'inline';
+        // Flash chip background to indicate change
+        chip.style.background = delta < 0
+          ? 'linear-gradient(135deg,rgba(239,68,68,0.22),rgba(245,158,11,0.10))'
+          : 'linear-gradient(135deg,rgba(16,185,129,0.22),rgba(6,182,212,0.10))';
+        setTimeout(function () {
+          chip.style.background = 'linear-gradient(135deg,rgba(245,158,11,0.12),rgba(6,182,212,0.08))';
+        }, 600);
+      }
+
+      _lastPollenBalance = balance;
+      const now = new Date();
+      const timeStr = now.toLocaleTimeString(esp ? 'es' : 'en', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+      updatedEl.textContent = (esp ? 'Actualizado ' : 'Updated ') + timeStr;
+      chip.style.borderColor = 'rgba(245,158,11,0.35)';
+    }
+
+    // ── Fetch interceptor: auto-refresh balance after any pollen-spending call ──
+    // Non-invasive: wraps window.fetch ONCE at script load. Only triggers on
+    // Pollinations generation endpoints. Excludes /account/* (would recurse)
+    // and /models endpoints (listings don't spend pollen).
+    (function installPollenRefreshHook() {
+      if (window.__pollenHookInstalled) return;
+      window.__pollenHookInstalled = true;
+      const originalFetch = window.fetch.bind(window);
+      window.fetch = function (input, init) {
+        const result = originalFetch(input, init);
+        try {
+          const url = typeof input === 'string' ? input : (input && input.url) || '';
+          const isPollinationsGen =
+            url.indexOf('gen.pollinations.ai') !== -1 &&
+            url.indexOf('/account/') === -1 &&
+            url.indexOf('/models') === -1 &&
+            (url.indexOf('/v1/chat/completions') !== -1 ||
+              url.indexOf('/v1/audio/') !== -1 ||
+              url.indexOf('/v1/images/') !== -1 ||
+              url.indexOf('/image/') !== -1 ||
+              url.indexOf('/text/') !== -1);
+          if (isPollinationsGen) {
+            result.then(function () { schedulePollenRefresh(500); }).catch(function () { });
+          }
+        } catch (_) { }
+        return result;
+      };
+    })();
 
     // BASE DE DATOS DE RESPALDO
     // ── DICCIONARIO DE NOMBRES LEGIBLES ──────────────────────────────────────
@@ -2875,10 +3056,40 @@
         }
       }
 
+      // Initial balance fetch if we already have a key (from BYOP or localStorage)
+      if (localStorage.getItem('pollinations_byop_key')) {
+        fetchPollinationsBalance().catch(function () { });
+      }
+
       // Ocultar hint cuando el usuario escribe manualmente
       keyInput.addEventListener('input', () => {
         if (keyInput.value.trim().length > 5) hideApiHint();
       });
+
+      // Fetch balance when user finishes typing a key (on blur)
+      keyInput.addEventListener('blur', function () {
+        const typed = keyInput.value.trim();
+        if (typed.length > 20 && typed !== localStorage.getItem('pollinations_byop_key')) {
+          localStorage.setItem('pollinations_byop_key', typed);
+          secureApiKey = typed;
+          fetchPollinationsBalance().catch(function () { });
+        }
+      });
+
+      // Manual refresh button on the balance chip
+      const refreshBtn = document.getElementById('pollenBalanceRefreshBtn');
+      if (refreshBtn) {
+        refreshBtn.addEventListener('click', function () {
+          refreshBtn.disabled = true;
+          refreshBtn.textContent = IS_SPANISH ? '⏳ ...' : '⏳ ...';
+          fetchPollinationsBalance().finally(function () {
+            setTimeout(function () {
+              refreshBtn.disabled = false;
+              refreshBtn.textContent = IS_SPANISH ? '↻ Refrescar' : '↻ Refresh';
+            }, 300);
+          });
+        });
+      }
 
       document.getElementById('byopBtn').addEventListener('click', () => {
         const params = new URLSearchParams({
