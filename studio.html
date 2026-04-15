@@ -4073,6 +4073,101 @@
       }
     }
 
+    // ── JSON repair helpers for LLM responses ──────────────────────────
+    // LLMs sometimes return JSON with minor syntax errors (missing commas
+    // between adjacent objects in arrays, trailing commas, smart quotes,
+    // raw newlines inside strings). These helpers repair such issues so
+    // the semantic segmentation doesn't fall back to the math parachute
+    // for easily-recoverable LLM glitches.
+    //
+    // Strategy: try vanilla JSON.parse first (zero cost on the happy path).
+    // Only on failure do we apply structural repair and retry. This keeps
+    // the existing behavior intact for well-formed responses.
+    function repairLLMJson(text) {
+      // 1. Normalize smart quotes (common LLM artifact, invalid in JSON)
+      let t = String(text)
+        .replace(/[\u201C\u201D]/g, '"')
+        .replace(/[\u2018\u2019]/g, "'");
+
+      // 2. State-machine pass: walks the string tracking whether we're
+      //    inside a string literal. We only modify structural tokens
+      //    (never content inside user strings).
+      let out = '';
+      let inString = false;
+      let escapeNext = false;
+      let prevNonWs = ''; // last non-whitespace char we emitted (outside strings)
+
+      for (let i = 0; i < t.length; i++) {
+        const ch = t[i];
+
+        if (escapeNext) {
+          out += ch;
+          escapeNext = false;
+          continue;
+        }
+
+        if (inString) {
+          if (ch === '\\') { out += ch; escapeNext = true; continue; }
+          if (ch === '"')  { out += ch; inString = false; prevNonWs = '"'; continue; }
+          // Escape raw control characters (invalid inside JSON strings)
+          if (ch === '\n') { out += '\\n'; continue; }
+          if (ch === '\r') { out += '\\r'; continue; }
+          if (ch === '\t') { out += '\\t'; continue; }
+          out += ch;
+          continue;
+        }
+
+        // ── Outside a string literal ──
+        // Missing-comma repair: before `{`, `[`, or `"`, if the previous
+        // token ended with a value terminator (`}`, `]`, or closing `"`),
+        // insert the missing comma.
+        if (ch === '{' || ch === '[' || ch === '"') {
+          if (prevNonWs === '}' || prevNonWs === ']' || prevNonWs === '"') {
+            out += ',';
+            prevNonWs = ',';
+          }
+        }
+
+        // Trailing-comma removal: skip `,` if the next non-whitespace char
+        // is `}` or `]` (invalid trailing comma before container close).
+        if (ch === ',') {
+          let j = i + 1;
+          while (j < t.length && /\s/.test(t[j])) j++;
+          if (j < t.length && (t[j] === '}' || t[j] === ']')) continue;
+        }
+
+        if (ch === '"') inString = true;
+        out += ch;
+        if (!/\s/.test(ch)) prevNonWs = ch;
+      }
+
+      return out;
+    }
+
+    function parseRobustLLMJson(rawContent) {
+      if (rawContent == null) throw new Error('Respuesta vacía del modelo');
+      const cleaned = String(rawContent)
+        .replace(/```json/gi, '')
+        .replace(/```/g, '')
+        .trim();
+
+      const match = cleaned.match(/\{[\s\S]*\}/);
+      if (!match) throw new Error('No se encontró objeto JSON en la respuesta');
+      const jsonStr = match[0];
+
+      // Fast path — already-valid JSON (original behavior)
+      try { return JSON.parse(jsonStr); } catch (firstErr) {
+        // Slow path — apply structural repair and retry once
+        try {
+          const repaired = repairLLMJson(jsonStr);
+          return JSON.parse(repaired);
+        } catch (_secondErr) {
+          // Throw the ORIGINAL parse error so logs stay informative
+          throw firstErr;
+        }
+      }
+    }
+
     async function semanticSegmentation(apiKey, textModel) {
       const context = document.getElementById('contextHint').value.trim();
       const requestedSegments = parseInt(document.getElementById('numSegments').value, 10) || 5;
@@ -4132,25 +4227,42 @@ Responde ÚNICAMENTE con JSON válido:
 
           const userMsgFull = (context ? `Contexto: ${context}\n\n` : '') + `GUION COMPLETO:\n${fullScript}`;
 
-          const respFull = await fetch('https://gen.pollinations.ai/v1/chat/completions', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${apiKey}` },
-            body: JSON.stringify({
-              model: textModel,
-              messages: [{ role: 'system', content: systemPromptFull }, { role: 'user', content: userMsgFull }],
-              response_format: { type: 'json_object' }
-            })
-          });
+          const requestBodyFull = {
+            model: textModel,
+            messages: [{ role: 'system', content: systemPromptFull }, { role: 'user', content: userMsgFull }],
+            response_format: { type: 'json_object' }
+          };
 
-          if (!respFull.ok) throw new Error(`HTTP ${respFull.status} en modo guion completo`);
+          // Fetch + robust parse with 1 retry on JSON failure (LLM non-determinism).
+          // HTTP errors still throw to the outer catch (Paracaídas Matemático).
+          let parsedFull = null;
+          let fullError = null;
+          for (let fullAttempt = 0; fullAttempt < 2; fullAttempt++) {
+            try {
+              const respFull = await fetch('https://gen.pollinations.ai/v1/chat/completions', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${apiKey}` },
+                body: JSON.stringify(requestBodyFull)
+              });
 
-          const dataFull = await respFull.json();
-          const cleanFull = dataFull.choices[0].message.content.replace(/```json/gi, '').replace(/```/g, '').trim();
-          const parsedFull = JSON.parse(cleanFull.match(/\{[\s\S]*\}/)[0]);
+              if (!respFull.ok) throw new Error(`HTTP ${respFull.status} en modo guion completo`);
 
-          if (!parsedFull.segments || parsedFull.segments.length !== numSegments) {
-            throw new Error(`La IA devolvió ${parsedFull.segments?.length ?? 0} segmentos, se esperaban ${numSegments}`);
+              const dataFull = await respFull.json();
+              parsedFull = parseRobustLLMJson(dataFull.choices[0].message.content);
+
+              if (!parsedFull.segments || parsedFull.segments.length !== numSegments) {
+                throw new Error(`La IA devolvió ${parsedFull.segments?.length ?? 0} segmentos, se esperaban ${numSegments}`);
+              }
+              break; // success
+            } catch (fullErr) {
+              fullError = fullErr;
+              parsedFull = null;
+              if (fullAttempt === 0) {
+                log(`  ⟳ Reintentando modo guion completo tras error: ${fullErr.message}`, 'warn');
+              }
+            }
           }
+          if (!parsedFull) throw fullError;
 
           // normalizeSegmentCoverage detectará n > subCount y usará distribución proporcional
           // pero preservará los title/summary/image_prompt de la IA
@@ -4256,37 +4368,52 @@ Responde ÚNICAMENTE con JSON válido:
           const userMsg = (context ? `Contexto: ${context}\n\n` : '') +
             (useWordMode ? `PALABRAS CON ÍNDICE:\n${numberedScript}` : `PARTE DEL GUION:\n${numberedScript}`);
 
-          const resp = await fetch('https://gen.pollinations.ai/v1/chat/completions', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              'Authorization': `Bearer ${apiKey}`
-            },
-            body: JSON.stringify({
-              model: textModel,
-              messages: [
-                { role: 'system', content: systemPrompt },
-                { role: 'user', content: userMsg }
-              ],
-              response_format: { type: "json_object" }
-            })
-          });
+          const requestBodyBatch = {
+            model: textModel,
+            messages: [
+              { role: 'system', content: systemPrompt },
+              { role: 'user', content: userMsg }
+            ],
+            response_format: { type: "json_object" }
+          };
 
-          if (!resp.ok) {
-            throw new Error(`HTTP ${resp.status} en Lote ${Math.floor(i / BATCH_SIZE) + 1}`);
+          // Fetch + robust parse with 1 retry on JSON failure (LLM non-determinism).
+          // Covers the scenario where a batch returns malformed JSON (missing
+          // comma between objects, trailing comma, raw newline in a string).
+          // HTTP errors still throw to the outer catch (Paracaídas Matemático).
+          let parsed = null;
+          let batchError = null;
+          for (let batchAttempt = 0; batchAttempt < 2; batchAttempt++) {
+            try {
+              const resp = await fetch('https://gen.pollinations.ai/v1/chat/completions', {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': `Bearer ${apiKey}`
+                },
+                body: JSON.stringify(requestBodyBatch)
+              });
+
+              if (!resp.ok) {
+                throw new Error(`HTTP ${resp.status} en Lote ${Math.floor(i / BATCH_SIZE) + 1}`);
+              }
+
+              const data = await resp.json();
+              parsed = parseRobustLLMJson(data.choices[0].message.content);
+
+              if (!parsed.segments || parsed.segments.length !== batchSegCount) {
+                throw new Error(`La IA devolvió ${parsed.segments?.length ?? 0} segmentos, se esperaban ${batchSegCount}`);
+              }
+              break; // success
+            } catch (batchErr) {
+              batchError = batchErr;
+              parsed = null;
+              if (batchAttempt === 0) {
+                log(`  ⟳ Reintentando Lote ${Math.floor(i / BATCH_SIZE) + 1} tras error: ${batchErr.message}`, 'warn');
+              }
+            }
           }
-
-          const data = await resp.json();
-          const cleanText = data.choices[0].message.content
-            .replace(/```json/gi, '')
-            .replace(/```/g, '')
-            .trim();
-
-          const parsed = JSON.parse(cleanText.match(/\{[\s\S]*\}/)[0]);
-
-          if (!parsed.segments || parsed.segments.length !== batchSegCount) {
-            throw new Error("Fallo en cantidad de segmentos del JSON");
-          }
+          if (!parsed) throw batchError;
 
           if (useWordMode) {
             // Word-mode: push segments with word indices clamped to valid range
