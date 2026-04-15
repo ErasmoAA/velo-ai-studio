@@ -1183,6 +1183,210 @@
       opacity: 0.4;
       cursor: not-allowed;
     }
+
+    /* ── Pollen balance chip ─────────────────────────────────────────── */
+    .pollen-chip {
+      position: relative;
+      margin-top: 10px;
+      padding: 14px 14px 14px 20px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, rgba(6, 182, 212, 0.06), rgba(124, 58, 237, 0.04) 60%, rgba(0, 0, 0, 0));
+      border: 1px solid rgba(6, 182, 212, 0.22);
+      font-family: 'Space Mono', monospace;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      transition: border-color 0.35s ease, box-shadow 0.35s ease, background 0.35s ease;
+      overflow: hidden;
+    }
+    .pollen-chip::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      width: 3px;
+      background: linear-gradient(180deg, var(--accent2), var(--accent));
+      opacity: 0.8;
+      transition: background 0.35s ease, opacity 0.35s ease;
+    }
+    .pollen-chip-main {
+      flex: 1 1 auto;
+      min-width: 0;
+    }
+    .pollen-chip-head {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.6rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      margin-bottom: 4px;
+    }
+    .pollen-chip-icon {
+      font-size: 1rem;
+    }
+    .pollen-chip-live {
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--success);
+      box-shadow: 0 0 6px rgba(16, 185, 129, 0.7);
+      animation: pollenLivePulse 2.2s ease-in-out infinite;
+    }
+    @keyframes pollenLivePulse {
+      0%, 100% { opacity: 0.4; transform: scale(0.85); }
+      50%      { opacity: 1;   transform: scale(1.15); }
+    }
+    .pollen-chip-value-row {
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+      flex-wrap: wrap;
+      line-height: 1;
+    }
+    .pollen-chip-value-row strong {
+      font-size: 1.95rem;
+      font-weight: 700;
+      color: var(--accent2);
+      line-height: 1;
+      letter-spacing: 0.5px;
+      text-shadow: 0 0 14px rgba(6, 182, 212, 0.28);
+      transition: color 0.35s ease, text-shadow 0.35s ease, transform 0.35s ease;
+    }
+    .pollen-chip .pollen-unit {
+      font-size: 0.72rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+      font-weight: 700;
+    }
+    .pollen-chip .pollen-delta {
+      font-size: 0.72rem;
+      font-weight: 700;
+      margin-left: 4px;
+      font-family: 'Space Mono', monospace;
+      opacity: 0;
+      transform: translateY(-2px);
+      transition: opacity 0.35s ease, transform 0.35s ease;
+    }
+    .pollen-chip .pollen-delta.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .pollen-chip-sub {
+      margin-top: 6px;
+      font-size: 0.6rem;
+      color: var(--muted);
+      letter-spacing: 0.5px;
+    }
+    .pollen-chip-side {
+      display: flex;
+      align-items: center;
+      flex-shrink: 0;
+    }
+    .pollen-chip-side button {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--muted);
+      font-family: 'Space Mono', monospace;
+      font-size: 1rem;
+      width: 34px;
+      height: 34px;
+      border-radius: 10px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: border-color 0.2s, color 0.2s, background 0.2s, transform 0.4s;
+    }
+    .pollen-chip-side button:hover:not(:disabled) {
+      border-color: var(--accent2);
+      color: var(--accent2);
+      background: rgba(6, 182, 212, 0.08);
+    }
+    .pollen-chip-side button:disabled {
+      opacity: 0.5;
+      cursor: wait;
+    }
+    .pollen-chip-side button.spinning span {
+      display: inline-block;
+      animation: pollenSpin 0.8s linear infinite;
+    }
+    @keyframes pollenSpin {
+      from { transform: rotate(0deg); }
+      to   { transform: rotate(360deg); }
+    }
+
+    /* ── Flash states (fire briefly on balance change) ── */
+    .pollen-chip.flash-down {
+      border-color: rgba(239, 68, 68, 0.6);
+      box-shadow: 0 0 22px rgba(239, 68, 68, 0.18);
+      background: linear-gradient(135deg, rgba(239, 68, 68, 0.12), rgba(6, 182, 212, 0.04));
+    }
+    .pollen-chip.flash-down::before {
+      background: linear-gradient(180deg, var(--error), #b91c1c);
+    }
+    .pollen-chip.flash-down .pollen-chip-value-row strong {
+      color: #ffb4b4;
+      text-shadow: 0 0 16px rgba(239, 68, 68, 0.55);
+      transform: scale(1.02);
+    }
+    .pollen-chip.flash-up {
+      border-color: rgba(16, 185, 129, 0.6);
+      box-shadow: 0 0 22px rgba(16, 185, 129, 0.18);
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.12), rgba(6, 182, 212, 0.04));
+    }
+    .pollen-chip.flash-up::before {
+      background: linear-gradient(180deg, var(--success), #059669);
+    }
+    .pollen-chip.flash-up .pollen-chip-value-row strong {
+      color: #86efac;
+      text-shadow: 0 0 16px rgba(16, 185, 129, 0.55);
+      transform: scale(1.02);
+    }
+
+    /* ── No-scope / invalid / error states ── */
+    .pollen-chip.state-no-scope {
+      border-color: rgba(107, 107, 128, 0.4);
+      background: linear-gradient(135deg, rgba(28, 28, 40, 0.6), rgba(0, 0, 0, 0));
+    }
+    .pollen-chip.state-no-scope::before {
+      background: var(--muted);
+      opacity: 0.5;
+    }
+    .pollen-chip.state-no-scope .pollen-chip-value-row strong {
+      color: var(--muted);
+      text-shadow: none;
+    }
+    .pollen-chip.state-no-scope #pollenBalanceLiveDot {
+      background: var(--muted);
+      box-shadow: none;
+      animation: none;
+    }
+    .pollen-chip.state-invalid {
+      border-color: rgba(239, 68, 68, 0.5);
+      background: linear-gradient(135deg, rgba(239, 68, 68, 0.08), rgba(0, 0, 0, 0));
+    }
+    .pollen-chip.state-invalid::before {
+      background: var(--error);
+    }
+    .pollen-chip.state-invalid .pollen-chip-value-row strong {
+      color: var(--error);
+      text-shadow: none;
+    }
+    .pollen-chip.state-invalid #pollenBalanceLiveDot {
+      background: var(--error);
+      box-shadow: 0 0 6px rgba(239, 68, 68, 0.6);
+      animation: none;
+    }
+    .pollen-chip.state-error #pollenBalanceLiveDot {
+      background: var(--accent3);
+      box-shadow: 0 0 6px rgba(245, 158, 11, 0.6);
+      animation: none;
+    }
   </style>
 
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3377827647746361"
@@ -1359,28 +1563,27 @@
         <p id="apikey-saved-msg" style="font-size:0.75rem; color:var(--success); margin-top:4px; display:none;">✓ Llave
           conectada y guardada</p>
 
-        <!-- ── Pollen balance chip (live balance from /account/balance) ── -->
-        <div id="pollenBalance" style="display:none; margin-top:10px; padding:12px 16px; border-radius:10px;
-             background:linear-gradient(135deg,rgba(245,158,11,0.12),rgba(6,182,212,0.08));
-             border:1px solid rgba(245,158,11,0.35); font-family:'Space Mono',monospace;
-             transition: background 0.35s ease, border-color 0.35s ease;">
-          <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:8px;">
-            <div style="display:flex; align-items:center; gap:8px;">
-              <span id="pollenBalanceIcon" style="font-size:1.1rem;">🪙</span>
-              <span id="pollenBalanceLabel" style="font-size:0.72rem; color:var(--muted); text-transform:uppercase; letter-spacing:1px;">Saldo Pollen</span>
+        <!-- ── Pollen balance chip (live balance, refreshes after every API call) ── -->
+        <div id="pollenBalance" class="pollen-chip" style="display:none;">
+          <div class="pollen-chip-main">
+            <div class="pollen-chip-head">
+              <span id="pollenBalanceIcon" class="pollen-chip-icon">🪙</span>
+              <span id="pollenBalanceLabel">Saldo Pollen</span>
+              <span id="pollenBalanceLiveDot" class="pollen-chip-live" title="Actualización en vivo"></span>
             </div>
-            <div style="display:flex; align-items:baseline; gap:6px;">
-              <strong id="pollenBalanceValue" style="color:var(--accent3); font-size:1.1rem; font-weight:700;">—</strong>
-              <span id="pollenBalanceUnit" style="color:var(--muted); font-size:0.7rem;">Pollen</span>
-              <span id="pollenBalanceDelta" style="display:none; font-size:0.7rem; font-weight:700; margin-left:4px;"></span>
+            <div class="pollen-chip-value-row">
+              <strong id="pollenBalanceValue">—</strong>
+              <span id="pollenBalanceUnit" class="pollen-unit">Pollen</span>
+              <span id="pollenBalanceDelta" class="pollen-delta" style="display:none;"></span>
+            </div>
+            <div class="pollen-chip-sub">
+              <span id="pollenBalanceUpdated">—</span>
             </div>
           </div>
-          <div id="pollenBalanceFooter" style="display:flex; align-items:center; justify-content:space-between; margin-top:6px; gap:8px;">
-            <span id="pollenBalanceUpdated" style="font-size:0.6rem; color:var(--muted);">—</span>
+          <div class="pollen-chip-side">
             <button id="pollenBalanceRefreshBtn" type="button" title="Actualizar saldo ahora"
-              style="background:transparent; border:1px solid var(--border); color:var(--muted); font-family:'Space Mono',monospace;
-              font-size:0.58rem; padding:3px 9px; border-radius:6px; cursor:pointer; text-transform:uppercase; letter-spacing:1px;">
-              ↻ Refrescar
+              aria-label="Actualizar saldo">
+              <span id="pollenBalanceRefreshIcon">↻</span>
             </button>
           </div>
         </div>
@@ -2806,17 +3009,19 @@
       const iconEl = document.getElementById('pollenBalanceIcon');
       if (!chip || !valueEl) return;
 
-      chip.style.display = 'block';
+      chip.style.display = 'flex';
+      // Always clear state modifiers — only flash-* are handled separately via timers
+      chip.classList.remove('state-no-scope', 'state-invalid', 'state-error');
       const esp = (typeof IS_SPANISH !== 'undefined') ? IS_SPANISH : true;
 
       if (state === 'invalid') {
         iconEl.textContent = '⚠️';
         valueEl.textContent = '—';
         unitEl.textContent = esp ? 'Key inválida' : 'Invalid key';
+        deltaEl.classList.remove('visible');
         deltaEl.style.display = 'none';
         updatedEl.textContent = esp ? 'Revisa tu API Key' : 'Check your API Key';
-        chip.style.borderColor = 'rgba(239,68,68,0.45)';
-        chip.style.background = 'linear-gradient(135deg,rgba(239,68,68,0.14),rgba(245,158,11,0.08))';
+        chip.classList.add('state-invalid');
         return;
       }
 
@@ -2824,12 +3029,12 @@
         iconEl.textContent = '🔒';
         valueEl.textContent = '✓';
         unitEl.textContent = esp ? 'Conectado' : 'Connected';
+        deltaEl.classList.remove('visible');
         deltaEl.style.display = 'none';
         updatedEl.textContent = esp
-          ? 'Tu key no expone el saldo (scope account:balance)'
-          : 'Your key does not expose the balance (account:balance scope)';
-        chip.style.borderColor = 'rgba(245,158,11,0.45)';
-        chip.style.background = 'linear-gradient(135deg,rgba(245,158,11,0.18),rgba(6,182,212,0.08))';
+          ? 'Key válida pero sin scope account:balance'
+          : 'Valid key but no account:balance scope';
+        chip.classList.add('state-no-scope');
         return;
       }
 
@@ -2837,43 +3042,47 @@
         iconEl.textContent = '🪙';
         valueEl.textContent = '—';
         unitEl.textContent = 'Pollen';
+        deltaEl.classList.remove('visible');
         deltaEl.style.display = 'none';
-        updatedEl.textContent = esp ? 'Error de red — reintentando automático' : 'Network error — will auto-retry';
-        chip.style.borderColor = 'rgba(245,158,11,0.35)';
-        chip.style.background = 'linear-gradient(135deg,rgba(245,158,11,0.12),rgba(6,182,212,0.08))';
+        updatedEl.textContent = esp ? 'Error de red — reintentando' : 'Network error — retrying';
+        chip.classList.add('state-error');
         return;
       }
 
       // 'ok' or 'ok-budget' — both show a numeric balance
       iconEl.textContent = state === 'ok-budget' ? '🎫' : '🪙';
+      // Format: sub-unit precision for small balances, 3 decimals otherwise
       const formatted = balance < 1 ? balance.toFixed(4) : balance.toFixed(3);
       valueEl.textContent = formatted;
       unitEl.textContent = state === 'ok-budget'
         ? (esp ? 'Pollen (key)' : 'Pollen (key)')
         : 'Pollen';
 
-      // Delta vs previous known value
+      // Delta vs previous known value — animated flash
       if (_lastPollenBalance != null && Math.abs(balance - _lastPollenBalance) > 1e-6) {
         const delta = balance - _lastPollenBalance;
         const sign = delta >= 0 ? '+' : '';
         const deltaStr = Math.abs(delta) < 0.001 ? delta.toExponential(1) : delta.toFixed(4);
         deltaEl.textContent = sign + deltaStr;
-        deltaEl.style.color = delta >= 0 ? 'var(--success)' : '#ef4444';
+        deltaEl.style.color = delta >= 0 ? 'var(--success)' : 'var(--error)';
         deltaEl.style.display = 'inline';
-        // Flash chip background to indicate change
-        chip.style.background = delta < 0
-          ? 'linear-gradient(135deg,rgba(239,68,68,0.22),rgba(245,158,11,0.10))'
-          : 'linear-gradient(135deg,rgba(16,185,129,0.22),rgba(6,182,212,0.10))';
+        // Trigger slide-in via the .visible class
+        requestAnimationFrame(function () { deltaEl.classList.add('visible'); });
+
+        // Flash the whole chip once
+        chip.classList.remove('flash-up', 'flash-down');
+        // Force reflow so the class removal is flushed before re-adding
+        void chip.offsetWidth;
+        chip.classList.add(delta < 0 ? 'flash-down' : 'flash-up');
         setTimeout(function () {
-          chip.style.background = 'linear-gradient(135deg,rgba(245,158,11,0.12),rgba(6,182,212,0.08))';
-        }, 600);
+          chip.classList.remove('flash-up', 'flash-down');
+        }, 900);
       }
 
       _lastPollenBalance = balance;
       const now = new Date();
       const timeStr = now.toLocaleTimeString(esp ? 'es' : 'en', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
       updatedEl.textContent = (esp ? 'Actualizado ' : 'Updated ') + timeStr;
-      chip.style.borderColor = 'rgba(245,158,11,0.35)';
     }
 
     // ── Fetch interceptor: auto-refresh balance after any pollen-spending call ──
@@ -3161,12 +3370,12 @@
       if (refreshBtn) {
         refreshBtn.addEventListener('click', function () {
           refreshBtn.disabled = true;
-          refreshBtn.textContent = IS_SPANISH ? '⏳ ...' : '⏳ ...';
+          refreshBtn.classList.add('spinning');
           resetPollenBalanceLock();
           fetchPollinationsBalance({ force: true }).finally(function () {
             setTimeout(function () {
               refreshBtn.disabled = false;
-              refreshBtn.textContent = IS_SPANISH ? '↻ Refrescar' : '↻ Refresh';
+              refreshBtn.classList.remove('spinning');
             }, 300);
           });
         });
@@ -3274,12 +3483,93 @@
     let healthIntervalId = null;
     let lastHealthUpdate = null;
 
-    // ── TINYBIRD: fuente real del model-monitor.pollinations.ai ──
-    // Token público extraído del JS compilado del monitor oficial
-    // Actualizado 2026-04-14: Pollinations rotó el token; el anterior devolvía 403
-    const TB_BASE = 'https://api.europe-west2.gcp.tinybird.co';
-    const TB_TOKEN = 'p.eyJ1IjogImFjYTYzZjc5LThjNTYtNDhlNC05NWJjLWEyYmFjMTY0NmJkMyIsICJpZCI6ICI5ZWZmMGM3Ni1kOTZkLTQwYjgtYWQwOC1mNDFlMmRiYjBmYTIiLCAiaG9zdCI6ICJnY3AtZXVyb3BlLXdlc3QyIn0.6VnVkAQ5h_fkcDZVDUoU38dzTxaw0xo3DnmKkhECbA8';
-    const TB_PIPE = 'model_health_60m'; // misma pipe que usa el monitor en modo 60m
+    // ── TINYBIRD: fuente real del model-monitor.pollinations.ai ──────────
+    //
+    // Pollinations rota periódicamente el nombre del pipe y/o el token sin
+    // aviso. En lugar de hard-codear un set que eventualmente rompe, el
+    // cliente SE AUTOREPARA:
+    //
+    //   1. Arranca con los defaults que observamos en el bundle upstream.
+    //   2. Si el fetch funciona, cachea el config en localStorage con
+    //      timestamp (TTL 24 h).
+    //   3. Si el fetch falla (404/403/network), fetcha la HTML del monitor
+    //      oficial, extrae el bundle hash actual, baja el JS (CORS: *),
+    //      regex-extrae base/token/pipe, reintenta con eso.
+    //   4. Si sigue fallando → modo degradado silencioso (app funciona,
+    //      el badge de health queda neutro).
+    //
+    // Ventaja: si Pollinations vuelve a renombrar, la próxima visita a la
+    // app se autorecupera — nadie tiene que tocar el código.
+    const TB_FALLBACK_BASE  = 'https://api.europe-west2.gcp.tinybird.co';
+    const TB_FALLBACK_TOKEN = 'p.eyJ1IjogImFjYTYzZjc5LThjNTYtNDhlNC05NWJjLWEyYmFjMTY0NmJkMyIsICJpZCI6ICI5ZWZmMGM3Ni1kOTZkLTQwYjgtYWQwOC1mNDFlMmRiYjBmYTIiLCAiaG9zdCI6ICJnY3AtZXVyb3BlLXdlc3QyIn0.6VnVkAQ5h_fkcDZVDUoU38dzTxaw0xo3DnmKkhECbA8';
+    const TB_FALLBACK_PIPE  = 'model_health';            // renombrado 2026-04-15 (antes: model_health_60m)
+    const TB_FALLBACK_WINDOW_MINUTES = 60;
+    const TB_CONFIG_CACHE_KEY = 'veloaistudio_tb_cfg_v2';
+    const TB_CONFIG_CACHE_MAX_AGE_MS = 24 * 60 * 60 * 1000; // 24 h
+    const TB_MONITOR_HTML_URL = 'https://model-monitor.pollinations.ai/';
+    const TB_MONITOR_HOST     = 'https://model-monitor.pollinations.ai';
+
+    function getCachedTinybirdConfig() {
+      try {
+        const raw = localStorage.getItem(TB_CONFIG_CACHE_KEY);
+        if (!raw) return null;
+        const c = JSON.parse(raw);
+        if (!c || !c.base || !c.token || !c.pipe) return null;
+        if ((Date.now() - (c.at || 0)) > TB_CONFIG_CACHE_MAX_AGE_MS) return null;
+        return { base: c.base, token: c.token, pipe: c.pipe };
+      } catch (_) { return null; }
+    }
+
+    function saveTinybirdConfig(cfg) {
+      try {
+        localStorage.setItem(TB_CONFIG_CACHE_KEY, JSON.stringify({
+          base: cfg.base, token: cfg.token, pipe: cfg.pipe, at: Date.now()
+        }));
+      } catch (_) { /* localStorage full / privacy mode — ignore */ }
+    }
+
+    function getDefaultTinybirdConfig() {
+      return getCachedTinybirdConfig() || {
+        base: TB_FALLBACK_BASE, token: TB_FALLBACK_TOKEN, pipe: TB_FALLBACK_PIPE
+      };
+    }
+
+    /**
+     * Fetches the live model-monitor bundle and regex-extracts the current
+     * Tinybird base URL, token, and pipe name. Returns null on any failure.
+     */
+    async function discoverTinybirdConfig() {
+      try {
+        const htmlRes = await fetch(TB_MONITOR_HTML_URL, {
+          signal: AbortSignal.timeout(6000),
+          mode: 'cors',
+          cache: 'no-cache'
+        });
+        if (!htmlRes.ok) return null;
+        const html = await htmlRes.text();
+        // Find the hashed bundle path: <script src="/assets/index-XXXX.js">
+        const bundleMatch = html.match(/src="(\/assets\/index-[A-Za-z0-9_-]+\.js)"/);
+        if (!bundleMatch) return null;
+        const bundleUrl = TB_MONITOR_HOST + bundleMatch[1];
+
+        const jsRes = await fetch(bundleUrl, {
+          signal: AbortSignal.timeout(10000),
+          mode: 'cors',
+          cache: 'force-cache'
+        });
+        if (!jsRes.ok) return null;
+        const js = await jsRes.text();
+
+        const baseMatch  = js.match(/https:\/\/api\.[a-z0-9.-]+\.tinybird\.co/);
+        const tokenMatch = js.match(/p\.ey[A-Za-z0-9._-]+/);
+        const pipeMatch  = js.match(/\/v0\/pipes\/([a-z0-9_]+)\.json/);
+        if (!baseMatch || !tokenMatch || !pipeMatch) return null;
+
+        return { base: baseMatch[0], token: tokenMatch[0], pipe: pipeMatch[1] };
+      } catch (_) {
+        return null;
+      }
+    }
 
     /**
      * Calcula el estado de un modelo a partir de sus stats de Tinybird.
@@ -3299,9 +3589,8 @@
 
     /**
      * Convierte stats crudas de Tinybird en { pct, online, status }.
-     * - pct: porcentaje de éxito (status_2xx / (status_2xx + total_5xx) * 100)
-     * - online: true si status !== 'off'
-     * - status: 'on' | 'degraded' | 'off'
+     * Acepta tanto el schema antiguo (errors_500/502/503/504/5xx_other)
+     * como el nuevo schema unificado (errors_5xx).
      */
     function statsToHealth(stats) {
       const status = calcModelStatus(stats);
@@ -3309,59 +3598,99 @@
         return { pct: null, online: true, status: 'on' }; // sin tráfico = sin dato real
       }
       const ok = stats.status_2xx || 0;
-      const err5 = (stats.errors_500 || 0) + (stats.errors_502 || 0) + (stats.errors_503 || 0)
-        + (stats.errors_504 || 0) + (stats.errors_5xx_other || 0);
+      const err5 = stats.total_5xx || 0;
       const total = ok + err5;
       const pct = total > 0 ? Math.min(100, Math.round(ok / total * 100)) : null;
       return { pct, online: status !== 'off', status };
     }
 
     /**
-     * Obtiene salud REAL desde Tinybird (mismo backend que model-monitor.pollinations.ai).
-     * Devuelve { modelName: { pct, online, status } } o {} si falla.
+     * Agrupa las filas crudas de Tinybird por nombre de modelo y calcula
+     * salud. Soporta ambos schemas (viejo con buckets 500/502/503/504/otro,
+     * nuevo con errors_5xx unificado).
+     */
+    function processTinybirdRows(rows) {
+      if (!rows || !rows.length) return {};
+      const byModel = {};
+      rows.forEach(row => {
+        const name = row.model;
+        if (!name || name === 'undefined') return;
+        if (!byModel[name]) byModel[name] = { total_requests: 0, status_2xx: 0, total_5xx: 0 };
+        const s = byModel[name];
+        s.total_requests += row.total_requests || 0;
+        s.status_2xx     += row.status_2xx     || 0;
+        // New schema: single errors_5xx field
+        if (typeof row.errors_5xx === 'number') {
+          s.total_5xx += row.errors_5xx;
+        } else {
+          // Old schema: sum individual buckets
+          s.total_5xx += (row.errors_500 || 0) + (row.errors_502 || 0)
+            + (row.errors_503 || 0) + (row.errors_504 || 0)
+            + (row.errors_5xx_other || 0);
+        }
+      });
+      const result = {};
+      Object.entries(byModel).forEach(([name, aggStats]) => {
+        result[name] = statsToHealth(aggStats);
+      });
+      return result;
+    }
+
+    /**
+     * Construye la URL de Tinybird para un config dado. Incluye el
+     * parámetro `minutes` que el pipe nuevo requiere.
+     */
+    function buildTinybirdUrl(cfg) {
+      return `${cfg.base}/v0/pipes/${cfg.pipe}.json?token=${cfg.token}&minutes=${TB_FALLBACK_WINDOW_MINUTES}`;
+    }
+
+    /**
+     * Fetches health with self-healing: tries cached config first, then
+     * auto-rediscovers from the live monitor bundle on any non-OK response.
+     * Always returns {} on total failure (never throws).
      */
     async function fetchModelHealth() {
-      const url = `${TB_BASE}/v0/pipes/${TB_PIPE}.json?token=${TB_TOKEN}`;
-      try {
-        const res = await fetch(url, { signal: AbortSignal.timeout(8000) });
-        if (!res.ok) throw new Error(`Tinybird HTTP ${res.status}`);
-        const json = await res.json();
-        const rows = json.data || [];
-        if (rows.length === 0) return {};
+      let cfg = getDefaultTinybirdConfig();
 
-        // Cada fila tiene: model, event_type, total_requests, status_2xx,
-        // errors_500..5xx_other, avg_latency_ms, latency_p50_ms, latency_p95_ms
-        // Agrupamos por nombre de modelo (un modelo puede tener varias filas por event_type)
-        const byModel = {};
-        rows.forEach(row => {
-          const name = row.model;
-          if (!name || name === 'undefined') return;
-          if (!byModel[name]) byModel[name] = {
-            total_requests: 0, status_2xx: 0,
-            errors_500: 0, errors_502: 0, errors_503: 0,
-            errors_504: 0, errors_5xx_other: 0
-          };
-          const s = byModel[name];
-          s.total_requests += row.total_requests || 0;
-          s.status_2xx += row.status_2xx || 0;
-          s.errors_500 += row.errors_500 || 0;
-          s.errors_502 += row.errors_502 || 0;
-          s.errors_503 += row.errors_503 || 0;
-          s.errors_504 += row.errors_504 || 0;
-          s.errors_5xx_other += row.errors_5xx_other || 0;
-        });
-
-        const result = {};
-        Object.entries(byModel).forEach(([name, aggStats]) => {
-          aggStats.total_5xx = aggStats.errors_500 + aggStats.errors_502
-            + aggStats.errors_503 + aggStats.errors_504 + aggStats.errors_5xx_other;
-          result[name] = statsToHealth(aggStats);
-        });
-        return result;
-      } catch (err) {
-        console.warn('[HealthMonitor] Tinybird falló:', err.message);
-        return {};
+      for (let attempt = 1; attempt <= 2; attempt++) {
+        try {
+          const res = await fetch(buildTinybirdUrl(cfg), {
+            signal: AbortSignal.timeout(8000)
+          });
+          if (res.ok) {
+            const json = await res.json();
+            const rows = json.data || [];
+            if (rows.length === 0) return {};
+            saveTinybirdConfig(cfg); // remember the config that worked
+            return processTinybirdRows(rows);
+          }
+          // Non-OK on attempt 1 → try discovery (pipe may have been renamed)
+          if (attempt === 1) {
+            console.warn(`[HealthMonitor] Tinybird HTTP ${res.status} con pipe "${cfg.pipe}", re-descubriendo…`);
+            const fresh = await discoverTinybirdConfig();
+            if (fresh && (fresh.base !== cfg.base || fresh.token !== cfg.token || fresh.pipe !== cfg.pipe)) {
+              console.info(`[HealthMonitor] Nuevo config descubierto: pipe="${fresh.pipe}"`);
+              cfg = fresh;
+              continue; // retry
+            }
+            // Discovery failed or returned the same (already-broken) config
+            console.warn('[HealthMonitor] Re-descubrimiento no encontró un config distinto.');
+            return {};
+          }
+          console.warn(`[HealthMonitor] Tinybird falló tras re-descubrimiento: HTTP ${res.status}`);
+          return {};
+        } catch (err) {
+          if (attempt === 1) {
+            // Network / CORS / timeout — try discovery once before giving up
+            console.warn('[HealthMonitor] Tinybird error de red:', err.message, '— intentando descubrir config nuevo…');
+            const fresh = await discoverTinybirdConfig();
+            if (fresh) { cfg = fresh; continue; }
+          }
+          console.warn('[HealthMonitor] Tinybird falló definitivamente:', err.message);
+          return {};
+        }
       }
+      return {};
     }
 
     /** Determina el emoji según el estado real del modelo */
