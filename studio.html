@@ -1739,7 +1739,7 @@
 
         <div>
           <label>Cantidad de Imágenes (Segmentos)</label>
-          <input type="number" id="numSegments" min="1" max="100" value="10" onchange="updateCostEstimate()" />
+          <input type="number" id="numSegments" min="1" max="200" value="80" onchange="updateCostEstimate()" />
         </div>
 
         <div>
@@ -1794,8 +1794,8 @@
         <div>
           <label>Subtítulos incrustados</label>
           <select id="burnSubtitles">
-            <option value="yes" selected>Sí, mostrar subtítulos</option>
-            <option value="no">No, video limpio</option>
+            <option value="yes">Sí, mostrar subtítulos</option>
+            <option value="no" selected>No, video limpio</option>
           </select>
         </div>
 
@@ -2912,6 +2912,28 @@
     let _pollenRefreshTimer = null;
     let _pollenFetchInFlight = false;
     let _pollenBalanceLocked = false;
+    // ── Self-heal: exponential backoff on transient pollen errors ──
+    let _pollenRetryCount = 0;
+    let _pollenRetryTimer = null;
+    const POLLEN_RETRY_DELAYS = [3000, 9000, 27000, 60000, 60000]; // 3s → 9s → 27s → 60s → 60s
+
+    function schedulePollenSelfHeal() {
+      if (_pollenBalanceLocked) return; // permanent failures (401/no-scope) don't retry
+      if (_pollenRetryCount >= POLLEN_RETRY_DELAYS.length) return; // give up
+      const delay = POLLEN_RETRY_DELAYS[_pollenRetryCount];
+      _pollenRetryCount++;
+      clearTimeout(_pollenRetryTimer);
+      _pollenRetryTimer = setTimeout(function () {
+        _pollenRetryTimer = null;
+        fetchPollinationsBalance().catch(function () { });
+      }, delay);
+    }
+
+    function clearPollenSelfHeal() {
+      _pollenRetryCount = 0;
+      clearTimeout(_pollenRetryTimer);
+      _pollenRetryTimer = null;
+    }
 
     function schedulePollenRefresh(delay) {
       if (delay == null) delay = 500;
@@ -2926,13 +2948,14 @@
     function resetPollenBalanceLock() {
       _pollenBalanceLocked = false;
       _lastPollenBalance = null;
+      clearPollenSelfHeal();
     }
 
     async function fetchPollinationsBalance(opts) {
       if (_pollenFetchInFlight) return;
       const force = !!(opts && opts.force);
       if (_pollenBalanceLocked && !force) return;
-      if (force) _pollenBalanceLocked = false;
+      if (force) { _pollenBalanceLocked = false; clearPollenSelfHeal(); }
 
       const key = secureApiKey || localStorage.getItem('pollinations_byop_key') || '';
       if (!key) {
@@ -2959,8 +2982,10 @@
           const newBalance = (data && typeof data.balance === 'number') ? data.balance : null;
           if (newBalance == null) {
             renderPollenBalance(null, 'error');
+            schedulePollenSelfHeal(); // transient: bad JSON
             return;
           }
+          clearPollenSelfHeal(); // success → reset backoff
           renderPollenBalance(newBalance, 'ok');
           return;
         }
@@ -2979,6 +3004,7 @@
           if (keyResp.ok) {
             const keyData = await keyResp.json().catch(function () { return null; });
             if (keyData && typeof keyData.pollenBudget === 'number') {
+              clearPollenSelfHeal(); // success
               renderPollenBalance(keyData.pollenBudget, 'ok-budget');
               return;
             }
@@ -2987,14 +3013,19 @@
             _pollenBalanceLocked = true;
             return;
           }
+          // /account/key also failed with transient error
           renderPollenBalance(null, 'error');
+          schedulePollenSelfHeal();
           return;
         }
 
-        // Any other non-ok status — transient error
+        // Any other non-ok status — transient error → self-heal
         renderPollenBalance(null, 'error');
+        schedulePollenSelfHeal();
       } catch (e) {
+        // Network error → self-heal
         renderPollenBalance(null, 'error');
+        schedulePollenSelfHeal();
       } finally {
         _pollenFetchInFlight = false;
       }
@@ -3228,37 +3259,62 @@
         || PRICING_DB[type]?.[mId]?.paid === true;
 
       if (type === 'text') {
-        // Intentar leer desde la API primero
         let inP = 0, outP = 0;
         const p = m.pricing;
         if (p && typeof p === 'object') {
-          inP = Number(p.prompt ?? p.input ?? p.in ?? 0) || 0;
-          outP = Number(p.completion ?? p.output ?? p.out ?? 0) || 0;
+          // ── New Pollinations schema: per-token strings → × 1e6 for "per 1M" display ──
+          if (p.promptTextTokens != null || p.completionTextTokens != null) {
+            const rawIn  = Number(p.promptTextTokens) || 0;
+            const rawOut = Number(p.completionTextTokens) || 0;
+            inP  = +(rawIn  * 1e6).toFixed(4);
+            outP = +(rawOut * 1e6).toFixed(4);
+          } else {
+            // Legacy field names (already per-1M)
+            inP  = Number(p.prompt ?? p.input ?? p.in ?? 0) || 0;
+            outP = Number(p.completion ?? p.output ?? p.out ?? 0) || 0;
+          }
         } else if (typeof p === 'number' && p > 0) {
           outP = p;
         }
-        // Si la API no devolvió precios, usar tabla de referencia
+        // Fallback: tabla de referencia local
         if (inP === 0 && outP === 0 && PRICING_DB.text[mId]) {
-          inP = PRICING_DB.text[mId].in || 0;
+          inP  = PRICING_DB.text[mId].in  || 0;
           outP = PRICING_DB.text[mId].out || 0;
         }
         return { inP, outP, isPaid };
       }
 
-      // image
+      // ── IMAGE ──
       let cost = 0, isTokenBased = false;
       const p = m.pricing;
       if (p && typeof p === 'object') {
-        if (typeof p.image === 'number') { cost = p.image; }
+        // ── New Pollinations schema: completionImageTokens ──
+        if (p.completionImageTokens != null) {
+          const rawCIT = Number(p.completionImageTokens) || 0;
+          if (rawCIT > 0) {
+            // Token-based models (gptimage, nanobanana) have tiny per-token values
+            // AND usually include promptTextTokens / promptImageTokens.
+            // Per-image models (flux, kontext, klein) have larger values (>= 0.001).
+            const hasPromptTokenPricing = !!(p.promptTextTokens || p.promptImageTokens);
+            if (hasPromptTokenPricing || rawCIT < 0.001) {
+              cost = +(rawCIT * 1e6).toFixed(2);
+              isTokenBased = true;
+            } else {
+              cost = rawCIT;
+            }
+          }
+        }
+        // Legacy field names
+        else if (typeof p.image === 'number')     { cost = p.image; }
         else if (typeof p.per_image === 'number') { cost = p.per_image; }
-        else if (typeof p.output === 'number') { cost = p.output; isTokenBased = true; }
-        else if (typeof p.cost === 'number') { cost = p.cost; }
+        else if (typeof p.output === 'number')    { cost = p.output; isTokenBased = true; }
+        else if (typeof p.cost === 'number')      { cost = p.cost; }
       } else if (typeof p === 'number' && p > 0) {
         cost = p;
       } else if (typeof m.cost === 'number' && m.cost > 0) {
         cost = m.cost;
       }
-      // Si la API no devolvió precio, usar tabla de referencia
+      // Fallback: tabla de referencia local
       if (cost === 0 && PRICING_DB.image[mId]) {
         cost = PRICING_DB.image[mId].cost || 0;
         isTokenBased = PRICING_DB.image[mId].isTokenBased || false;
@@ -3268,15 +3324,20 @@
 
     /** Etiqueta de costo para mostrar en el selector */
     function costLabel(type, pricing) {
+      // Formatea un número sin ceros finales innecesarios
+      function fmtNum(n) {
+        if (n >= 1) return n % 1 === 0 ? String(n) : n.toFixed(2).replace(/0+$/, '').replace(/\.$/, '');
+        return n.toFixed(4).replace(/0+$/, '').replace(/\.$/, '');
+      }
       if (type === 'text') {
         const { inP, outP } = pricing;
-        if (outP > 0) return `🪙 ${outP}/1M tok`;
-        if (inP > 0) return `🪙 ${inP}/1M tok`;
-        return '?'; // modelo nuevo sin precio conocido
+        if (outP > 0) return `🪙 ${fmtNum(outP)}/1M tok`;
+        if (inP > 0) return `🪙 ${fmtNum(inP)}/1M tok`;
+        return '?';
       }
       const { cost, isTokenBased } = pricing;
-      if (cost > 0) return isTokenBased ? `🪙 ${cost}/1M` : `🪙 ${cost}/img`;
-      return '?'; // modelo nuevo sin precio conocido
+      if (cost > 0) return isTokenBased ? `🪙 ${fmtNum(cost)}/1M` : `🪙 ${fmtNum(cost)}/img`;
+      return '?';
     }
 
     /** Nombre legible: prioridad → dict local → description de la API → id */
