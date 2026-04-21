@@ -2,7 +2,7 @@
 num: "10"
 slug: 10-canal-youtube-sin-mostrar-cara
 emoji: 🎭
-date: 2026-03-23
+date: 2026-03-19
 tag_es: Estrategia
 tag_en: Strategy
 title_es: Cómo crear un canal de YouTube sin mostrar tu cara con IA

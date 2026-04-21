@@ -2,7 +2,7 @@
 num: "06"
 slug: 06-monetizar-canal-youtube
 emoji: 💰
-date: 2026-03-23
+date: 2026-02-19
 tag_es: Estrategia
 tag_en: Strategy
 title_es: Cómo monetizar un canal de YouTube con videos de IA

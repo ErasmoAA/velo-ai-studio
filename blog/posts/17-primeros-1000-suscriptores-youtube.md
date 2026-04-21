@@ -2,7 +2,7 @@
 num: "17"
 slug: 17-primeros-1000-suscriptores-youtube
 emoji: 🚀
-date: 2026-03-24
+date: 2026-04-17
 tag_es: Estrategia
 tag_en: Strategy
 title_es: Cómo llegar a los primeros 1.000 suscriptores en YouTube con videos de IA

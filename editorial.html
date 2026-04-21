@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Metodología editorial — Cómo se escribe y verifica el contenido de Velo AI Studio</title>
+  <meta name="description" content="Protocolo editorial completo de Velo AI Studio: cómo se eligen los temas, cómo se verifica cada dato técnico, política de uso de IA, proceso de corrección de errores y canales de contacto.">
+  <link rel="icon" type="image/png" href="/favicon.png">
+  <link rel="shortcut icon" href="/favicon.png">
+  <meta name="robots" content="index, follow">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3377827647746361"
+    crossorigin="anonymous"></script>
+  <link rel="canonical" href="https://veloaistudio.online/editorial.html">
+  <link rel="alternate" hreflang="es" href="https://veloaistudio.online/editorial.html" />
+  <link rel="alternate" hreflang="en" href="https://veloaistudio.online/editorial.html" />
+  <link rel="alternate" hreflang="x-default" href="https://veloaistudio.online/editorial.html" />
+
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://veloaistudio.online/editorial.html">
+  <meta property="og:title" content="Metodología editorial — Velo AI Studio">
+  <meta property="og:description" content="Cómo se escribe, verifica y publica el contenido de Velo AI Studio: protocolo completo, política de IA y proceso de corrección.">
+  <meta property="og:image" content="https://veloaistudio.online/og-image.png">
+
+  <!-- Schema.org: AboutPage + Author Person reference -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "AboutPage",
+    "name": "Metodología editorial de Velo AI Studio",
+    "url": "https://veloaistudio.online/editorial.html",
+    "inLanguage": ["es", "en"],
+    "description": "Protocolo editorial completo, política de uso de IA, proceso de verificación y corrección.",
+    "author": {
+      "@type": "Person",
+      "@id": "https://veloaistudio.online/about.html#person",
+      "name": "Ali A.",
+      "url": "https://veloaistudio.online/about.html"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "@id": "https://veloaistudio.online/#organization",
+      "name": "Velo AI Studio",
+      "url": "https://veloaistudio.online/"
+    }
+  }
+  </script>
+
+  <link rel="stylesheet" href="/theme.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;800&display=swap');
+    *{margin:0;padding:0;box-sizing:border-box;}
+    body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;min-height:100vh;line-height:1.7;}
+    body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;background:radial-gradient(ellipse 80% 50% at 20% 10%,rgba(124,58,237,0.1) 0%,transparent 60%),radial-gradient(ellipse 50% 40% at 80% 80%,rgba(6,182,212,0.07) 0%,transparent 60%);}
+    .container{max-width:780px;margin:0 auto;padding:40px 24px;position:relative;z-index:1;}
+    .nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:48px;}
+    .nav a{color:var(--accent2);text-decoration:none;font-family:'Space Mono',monospace;font-size:0.78rem;}
+    .nav a:hover{text-decoration:underline;}
+    h1{font-size:clamp(1.8rem,4.5vw,2.4rem);font-weight:800;line-height:1.2;margin-bottom:12px;}
+    .subtitle{font-family:'Space Mono',monospace;font-size:0.78rem;color:var(--muted);margin-bottom:36px;}
+    h2{font-size:1.15rem;font-weight:700;margin:36px 0 12px;color:var(--accent2);border-left:3px solid var(--accent);padding-left:12px;}
+    h3{font-size:1.02rem;font-weight:700;margin:24px 0 10px;color:var(--text);}
+    p{color:var(--prose);margin-bottom:16px;font-size:0.95rem;}
+    ul,ol{color:var(--prose);font-size:0.95rem;padding-left:24px;margin-bottom:18px;}
+    li{margin-bottom:7px;}
+    a{color:var(--accent2);text-decoration:none;}
+    a:hover{text-decoration:underline;}
+    strong{color:var(--text);}
+    code{font-family:'Space Mono',monospace;font-size:0.85em;background:var(--surface);padding:1px 6px;border-radius:4px;color:var(--accent3);}
+
+    .callout{background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--accent2);border-radius:0 10px 10px 0;padding:18px 22px;margin:24px 0;}
+    .callout h3{margin-top:0;font-size:0.98rem;color:var(--accent2);}
+    .callout p{font-size:0.88rem;margin-bottom:8px;}
+    .callout p:last-child{margin-bottom:0;}
+
+    .warn{background:rgba(245,158,11,0.06);border-left:3px solid var(--accent3);border-radius:0 10px 10px 0;padding:18px 22px;margin:28px 0;}
+    .warn h3{margin-top:0;color:var(--accent3);font-size:0.98rem;}
+    .warn p{font-size:0.88rem;margin-bottom:8px;}
+    .warn p:last-child{margin-bottom:0;}
+
+    /* Flow pipeline */
+    .pipeline{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin:20px 0 28px;}
+    .step{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:14px 12px;text-align:center;position:relative;}
+    .step .num{display:inline-flex;width:26px;height:26px;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--accent),var(--accent2));color:white;border-radius:50%;font-family:'Space Mono',monospace;font-size:0.72rem;font-weight:700;margin-bottom:8px;}
+    .step strong{display:block;font-size:0.85rem;margin-bottom:3px;color:var(--text);}
+    .step span{font-family:'Space Mono',monospace;font-size:0.66rem;color:var(--muted);}
+
+    /* Checklist table */
+    .checklist{list-style:none;padding:0;margin:18px 0 24px;}
+    .checklist li{display:flex;gap:10px;padding:10px 12px;background:var(--surface);border:1px solid var(--border);border-radius:8px;margin-bottom:8px;font-size:0.88rem;}
+    .checklist li::before{content:'✓';color:var(--success);font-weight:800;flex-shrink:0;}
+
+    /* Contact row */
+    .contact-row{display:flex;flex-wrap:wrap;gap:12px;margin:12px 0 20px;}
+    .contact-row a{padding:8px 16px;background:var(--surface);border:1px solid var(--border);border-radius:8px;font-family:'Space Mono',monospace;font-size:0.78rem;}
+    .contact-row a:hover{border-color:var(--accent2);text-decoration:none;}
+
+    footer{margin-top:56px;padding-top:24px;border-top:1px solid var(--border);text-align:center;font-family:'Space Mono',monospace;font-size:0.68rem;color:var(--muted);}
+    footer a{color:var(--muted);text-decoration:none;margin:0 8px;}
+    footer a:hover{color:var(--accent2);}
+    .lang-en{display:none;}
+
+    .last-updated{display:inline-block;font-family:'Space Mono',monospace;font-size:0.7rem;color:var(--muted);background:var(--surface);border:1px solid var(--border);padding:4px 10px;border-radius:20px;margin-bottom:20px;}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav">
+      <a href="/about.html">← Acerca de</a>
+      <a href="/blog/">Blog</a>
+    </nav>
+
+    <!-- ═══════════════ SPANISH ═══════════════ -->
+    <div class="lang-es">
+      <h1>Metodología editorial</h1>
+      <p class="subtitle">// Cómo se escribe, verifica y corrige el contenido de este sitio //</p>
+      <span class="last-updated">Última revisión: 19 de abril de 2026</span>
+
+      <p>Esta página explica, paso a paso y sin rodeos, cómo se produce el contenido publicado en Velo AI Studio. No es un texto de marketing: es el protocolo real que sigo como único responsable editorial del sitio. Si detectas que algo del contenido no cumple con lo que aquí se promete, <a href="#correcciones">avísame</a> y lo corrijo.</p>
+
+      <!-- ─── Pipeline visual ─── -->
+      <h2>Ciclo de vida de un artículo</h2>
+      <p>Cada entrada del blog pasa por las siguientes cinco fases antes de estar pública:</p>
+      <div class="pipeline">
+        <div class="step"><span class="num">1</span><strong>Selección</strong><span>Tema útil y verificable</span></div>
+        <div class="step"><span class="num">2</span><strong>Investigación</strong><span>Fuentes primarias</span></div>
+        <div class="step"><span class="num">3</span><strong>Borrador</strong><span>Esqueleto con IA</span></div>
+        <div class="step"><span class="num">4</span><strong>Verificación</strong><span>Pruebas reales</span></div>
+        <div class="step"><span class="num">5</span><strong>Edición</strong><span>Revisión manual</span></div>
+      </div>
+
+      <h3>1. Selección del tema</h3>
+      <p>Un tema entra en la lista si cumple <strong>los tres criterios</strong> a la vez:</p>
+      <ul>
+        <li>Tiene búsqueda real (lo consulto en Google Keyword Planner o en tendencias públicas).</li>
+        <li>Es algo que he hecho, usado o investigado de primera mano.</li>
+        <li>Puedo aportar al menos una pieza de información que no esté ya en los primeros 10 resultados de Google.</li>
+      </ul>
+      <p>Si un tema solo cumple dos de los tres, no se publica. Esto descarta automáticamente los "artículos de relleno" que repiten contenido ajeno.</p>
+
+      <h3>2. Investigación</h3>
+      <p>Antes de escribir, busco fuentes primarias:</p>
+      <ul>
+        <li><strong>Documentación oficial</strong> (por ejemplo, la API pública de Pollinations en <code>pollinations.ai/models</code>).</li>
+        <li><strong>Repositorios de código abiertos</strong> cuando existe — GitHub, Hugging Face.</li>
+        <li><strong>Pruebas empíricas</strong> ejecutadas por mí en la propia app.</li>
+        <li><strong>Comunicados oficiales</strong> de YouTube, Google, ElevenLabs, OpenAI, etc.</li>
+      </ul>
+      <p>Los foros de Reddit o comentarios de YouTube se usan como pista, <strong>nunca como fuente citable</strong>.</p>
+
+      <h3>3. Borrador asistido por IA</h3>
+      <p>Uso modelos de lenguaje (GPT-5, Claude Opus 4.7) para generar el esqueleto del artículo: estructura de secciones, primer borrador de párrafos de transición, y variaciones de tono. El prompt que uso incluye siempre estas tres instrucciones de seguridad:</p>
+      <ol>
+        <li>"No inventes cifras, APIs ni características que no te haya proporcionado yo explícitamente."</li>
+        <li>"Si dudas, escribe TK en lugar de inventar. Yo lo completaré."</li>
+        <li>"Evita lenguaje promocional, superlativos vacíos y frases genéricas."</li>
+      </ol>
+      <p>El resultado <strong>nunca</strong> se publica tal cual.</p>
+
+      <h3>4. Verificación técnica (la fase más larga)</h3>
+      <p>Aquí es donde se invierten la mayoría de las horas. Cada afirmación numérica o técnica se comprueba contra la fuente real. Ejemplos concretos del protocolo:</p>
+      <ul>
+        <li>"Flux es gratis" → se verifica con una llamada en vivo a <code>GET pollinations.ai/models</code> y se comprueba que <code>tier:anonymous</code> esté en la respuesta.</li>
+        <li>"El video sale en 1080p" → se exporta un video real en la app, se abre el archivo MP4 en VLC y se lee la resolución del contenedor.</li>
+        <li>"YouTube paga aproximadamente X RPM en nicho Y" → se cita un rango de fuentes públicas (informes de Social Blade, estudios de FastCompany) y se marca como "estimación, no garantía".</li>
+        <li>"El guion se transcribe con Scribe v2" → se revisa el código real del <code>studio.html</code> y el endpoint que se está usando.</li>
+      </ul>
+
+      <h3>5. Edición manual</h3>
+      <p>Reescribo personalmente cada sección, elimino las frases de IA reconocibles ("en conclusión", "en el mundo actual", "es crucial"), añado ejemplos de mi experiencia directa y ajusto el tono. En promedio el borrador inicial pierde entre un 30 % y un 50 % de su volumen en esta fase.</p>
+
+      <!-- ─── Política IA detallada ─── -->
+      <h2>Política de uso de IA</h2>
+      <div class="warn">
+        <h3>⚠ Declaración obligatoria</h3>
+        <p><strong>Este sitio utiliza modelos de lenguaje como asistente de redacción.</strong> No oculto este hecho — de hecho, dada la naturaleza del proyecto (un editor de video con IA), sería incoherente negarlo.</p>
+        <p>Lo que <strong>sí</strong> hago: verificar cada dato técnico, reescribir el borrador con mi voz, añadir experiencia real de primera mano y mantener responsabilidad editorial total.</p>
+        <p>Lo que <strong>no</strong> hago: publicar texto generado sin revisar, inventar cifras, usar IA para generar reseñas falsas de productos, o dejar que el modelo "alucine" datos técnicos.</p>
+      </div>
+
+      <p>Concretamente, así se divide el trabajo entre IA y humano:</p>
+      <ul>
+        <li><strong>IA hace:</strong> esqueleto, párrafos de transición, sugerencias de títulos, variaciones de tono, revisión gramatical.</li>
+        <li><strong>Humano (Ali) hace:</strong> selección del tema, pruebas técnicas reales, datos numéricos, decisiones editoriales, respuesta a lectores, correcciones, publicación.</li>
+      </ul>
+
+      <!-- ─── Imágenes ─── -->
+      <h2>Imágenes del sitio</h2>
+      <p>Las imágenes de fondo y las ilustraciones decorativas del sitio se generan con Pollinations AI o son composiciones puramente CSS. Cuando un artículo incluye una captura de pantalla de la propia app, es una captura real sin retoque. Si una imagen es representativa y no una captura directa, se indica con la etiqueta "Ilustración" debajo.</p>
+
+      <!-- ─── Fuentes y referencias ─── -->
+      <h2>Fuentes recurrentes</h2>
+      <ul>
+        <li><a href="https://pollinations.ai" target="_blank" rel="noopener">Pollinations AI</a> — proveedor principal de generación de imágenes y texto.</li>
+        <li><a href="https://developer.mozilla.org/docs/Web/API/WebCodecs_API" target="_blank" rel="noopener">MDN — WebCodecs API</a> — documentación de la API del navegador usada para la exportación de video.</li>
+        <li><a href="https://elevenlabs.io/docs" target="_blank" rel="noopener">ElevenLabs Docs</a> — documentación oficial del motor TTS y Scribe v2.</li>
+        <li><a href="https://platform.openai.com/docs" target="_blank" rel="noopener">OpenAI Platform</a> — documentación de Whisper y modelos de voz.</li>
+        <li><a href="https://support.google.com/youtube" target="_blank" rel="noopener">Centro de ayuda de YouTube</a> — políticas de monetización y requisitos del Programa de Socios.</li>
+      </ul>
+
+      <!-- ─── Correcciones ─── -->
+      <h2 id="correcciones">Política de corrección de errores</h2>
+      <p>Los errores ocurren. Mi compromiso:</p>
+      <ul class="checklist">
+        <li>Si un lector detecta un error factual verificable, lo corrijo en un plazo máximo de 72 horas.</li>
+        <li>La corrección se añade al final del artículo con la fecha y una descripción breve ("El X día se corrigió Y; antes decía Z").</li>
+        <li>Si el error cambia la conclusión del artículo, se actualiza también el título o el encabezado afectado.</li>
+        <li>Nunca se borra silenciosamente el texto original — se sustituye con nota visible.</li>
+      </ul>
+      <p>Para reportar un error o sugerir una actualización:</p>
+      <div class="contact-row">
+        <a href="mailto:contacto@veloaistudio.online?subject=Correcci%C3%B3n%20de%20art%C3%ADculo">✉ Reportar corrección</a>
+        <a href="/contact.html">📝 Formulario</a>
+      </div>
+
+      <!-- ─── Independencia ─── -->
+      <h2>Independencia y conflictos de interés</h2>
+      <p>Velo AI Studio es un proyecto personal autofinanciado. Declaraciones relevantes:</p>
+      <ul>
+        <li>No recibo comisión, afiliación ni acuerdo comercial con Pollinations, ElevenLabs, OpenAI, Google ni ninguna herramienta mencionada en el blog.</li>
+        <li>No acepto publicaciones patrocinadas ni artículos pagados.</li>
+        <li>La única fuente de ingresos prevista es publicidad contextual de Google AdSense y donaciones voluntarias, ambas claramente diferenciables del contenido editorial.</li>
+        <li>Los anuncios de AdSense aparecen en contenedores marcados como tales y separados visualmente del texto del artículo.</li>
+      </ul>
+
+      <!-- ─── Privacidad del contenido ─── -->
+      <h2>Privacidad y procesamiento</h2>
+      <p>Los archivos (guiones SRT, audios MP3) que los usuarios suben a la app <strong>no se almacenan en ningún servidor de Velo AI Studio</strong>. Se procesan en memoria del navegador del usuario. Las únicas peticiones que salen del navegador son a las APIs de terceros declaradas (Pollinations, ElevenLabs, OpenAI, según el modelo elegido), y esas peticiones se rigen por las políticas de privacidad de esos proveedores. Detalles técnicos completos en la <a href="/privacy.html">política de privacidad</a>.</p>
+
+      <!-- ─── Cómo contactarme ─── -->
+      <h2>Canales de contacto editoriales</h2>
+      <p>Si tu mensaje es sobre el contenido de un artículo, una corrección, una colaboración o una sugerencia de tema:</p>
+      <div class="contact-row">
+        <a href="mailto:contacto@veloaistudio.online">✉ contacto@veloaistudio.online</a>
+        <a href="/contact.html">📝 Formulario de contacto</a>
+      </div>
+      <p style="font-size:0.82rem;color:var(--muted);">Las peticiones de corrección se priorizan sobre otras categorías de mensaje. Respuesta típica en 24–48 horas hábiles.</p>
+
+      <footer>
+        <p style="margin-bottom:10px;">© 2026 <strong>Velo AI Studio</strong>. Todos los derechos reservados.</p>
+        <div>
+          <a href="/">Inicio</a> |
+          <a href="/studio.html">Estudio</a> |
+          <a href="/about.html">Acerca de</a> |
+          <a href="/blog/">Blog</a> |
+          <a href="/contact.html">Contacto</a> |
+          <a href="/privacy.html">Privacidad</a> |
+          <a href="/tos.html">Términos</a>
+        </div>
+      </footer>
+    </div>
+
+    <!-- ═══════════════ ENGLISH ═══════════════ -->
+    <div class="lang-en">
+      <h1>Editorial methodology</h1>
+      <p class="subtitle">// How the content on this site is written, verified and corrected //</p>
+      <span class="last-updated">Last revised: April 19, 2026</span>
+
+      <p>This page explains, step by step and without fluff, how the content published on Velo AI Studio is produced. This isn't marketing text: it's the actual protocol I follow as the sole editorial lead of the site. If you find that something in the content doesn't match what's promised here, <a href="#corrections">let me know</a> and I'll fix it.</p>
+
+      <h2>Article lifecycle</h2>
+      <p>Every blog post goes through these five phases before going live:</p>
+      <div class="pipeline">
+        <div class="step"><span class="num">1</span><strong>Selection</strong><span>Useful, verifiable topic</span></div>
+        <div class="step"><span class="num">2</span><strong>Research</strong><span>Primary sources</span></div>
+        <div class="step"><span class="num">3</span><strong>Draft</strong><span>AI-assisted skeleton</span></div>
+        <div class="step"><span class="num">4</span><strong>Verification</strong><span>Real-world testing</span></div>
+        <div class="step"><span class="num">5</span><strong>Editing</strong><span>Manual rewrite</span></div>
+      </div>
+
+      <h3>1. Topic selection</h3>
+      <p>A topic makes the list only if it meets <strong>all three criteria</strong> at once:</p>
+      <ul>
+        <li>It has real search volume (I check Google Keyword Planner or public trend data).</li>
+        <li>It's something I've personally done, used or researched firsthand.</li>
+        <li>I can bring at least one piece of information that isn't already in the top 10 Google results.</li>
+      </ul>
+      <p>If a topic only meets two out of three, it doesn't get published. This automatically filters out "filler articles" that repeat existing content.</p>
+
+      <h3>2. Research</h3>
+      <p>Before writing, I look for primary sources:</p>
+      <ul>
+        <li><strong>Official documentation</strong> (e.g., the Pollinations public API at <code>pollinations.ai/models</code>).</li>
+        <li><strong>Open-source repositories</strong> where available — GitHub, Hugging Face.</li>
+        <li><strong>Hands-on empirical tests</strong> I run in the app myself.</li>
+        <li><strong>Official announcements</strong> from YouTube, Google, ElevenLabs, OpenAI, etc.</li>
+      </ul>
+      <p>Reddit threads or YouTube comments are used as leads, <strong>never as citable sources</strong>.</p>
+
+      <h3>3. AI-assisted drafting</h3>
+      <p>I use language models (GPT-5, Claude Opus 4.7) to generate the skeleton: section structure, first-pass transition paragraphs, and tone variations. My prompt always includes these three safety instructions:</p>
+      <ol>
+        <li>"Do not invent numbers, APIs, or features I haven't explicitly provided."</li>
+        <li>"If in doubt, write TK instead of making something up. I'll fill it in."</li>
+        <li>"Avoid promotional language, empty superlatives, and generic filler sentences."</li>
+      </ol>
+      <p>The output is <strong>never</strong> published as-is.</p>
+
+      <h3>4. Technical verification (the longest phase)</h3>
+      <p>This is where most of the hours go. Every numerical or technical claim is checked against a real source. Concrete examples from my protocol:</p>
+      <ul>
+        <li>"Flux is free" → verified with a live call to <code>GET pollinations.ai/models</code> confirming <code>tier:anonymous</code> is in the response.</li>
+        <li>"The video comes out at 1080p" → I export a real video in the app, open the MP4 in VLC and read the container resolution.</li>
+        <li>"YouTube pays roughly X RPM in niche Y" → I cite a range from public sources (Social Blade reports, FastCompany studies) and mark it as "estimate, not guarantee".</li>
+        <li>"The script is transcribed with Scribe v2" → I check the actual <code>studio.html</code> code and the endpoint being used.</li>
+      </ul>
+
+      <h3>5. Manual editing</h3>
+      <p>I personally rewrite every section, strip out recognizable AI phrases ("in conclusion", "in today's world", "it is crucial"), add examples from my direct experience, and adjust tone. On average the initial draft loses 30–50% of its volume in this phase.</p>
+
+      <h2>AI use policy</h2>
+      <div class="warn">
+        <h3>⚠ Mandatory disclosure</h3>
+        <p><strong>This site uses language models as a writing assistant.</strong> I don't hide this — in fact, given the nature of the project (an AI video editor), denying it would be incoherent.</p>
+        <p>What I <strong>do</strong>: verify every technical data point, rewrite drafts in my own voice, add real firsthand experience, and keep full editorial responsibility.</p>
+        <p>What I <strong>do not</strong> do: publish unreviewed machine-generated text, invent numbers, use AI to create fake product reviews, or let models "hallucinate" technical data.</p>
+      </div>
+
+      <p>Concrete division of work:</p>
+      <ul>
+        <li><strong>AI does:</strong> skeleton, transition paragraphs, title suggestions, tone variations, grammar checking.</li>
+        <li><strong>Human (Ali) does:</strong> topic selection, real technical tests, numerical data, editorial decisions, reader responses, corrections, publishing.</li>
+      </ul>
+
+      <h2>Images on the site</h2>
+      <p>Background images and decorative illustrations are generated with Pollinations AI or are pure CSS compositions. When an article includes a screenshot of the app itself, it's a real, unretouched capture. If an image is representative rather than a direct capture, it's tagged "Illustration" underneath.</p>
+
+      <h2>Recurring sources</h2>
+      <ul>
+        <li><a href="https://pollinations.ai" target="_blank" rel="noopener">Pollinations AI</a> — main image and text generation provider.</li>
+        <li><a href="https://developer.mozilla.org/docs/Web/API/WebCodecs_API" target="_blank" rel="noopener">MDN — WebCodecs API</a> — docs for the browser API used for video export.</li>
+        <li><a href="https://elevenlabs.io/docs" target="_blank" rel="noopener">ElevenLabs Docs</a> — official docs for the TTS engine and Scribe v2.</li>
+        <li><a href="https://platform.openai.com/docs" target="_blank" rel="noopener">OpenAI Platform</a> — Whisper and voice model documentation.</li>
+        <li><a href="https://support.google.com/youtube" target="_blank" rel="noopener">YouTube Help Center</a> — monetization policies and Partner Program requirements.</li>
+      </ul>
+
+      <h2 id="corrections">Correction policy</h2>
+      <p>Errors happen. My commitment:</p>
+      <ul class="checklist">
+        <li>If a reader flags a verifiable factual error, I fix it within 72 hours maximum.</li>
+        <li>The correction is appended at the end of the article with date and a brief description ("On X date, Y was corrected; previously said Z").</li>
+        <li>If the error changes the article's conclusion, the title or affected heading is updated too.</li>
+        <li>Original text is never silently deleted — it's replaced with a visible note.</li>
+      </ul>
+      <p>To report an error or suggest an update:</p>
+      <div class="contact-row">
+        <a href="mailto:contacto@veloaistudio.online?subject=Article%20correction">✉ Report correction</a>
+        <a href="/contact.html">📝 Form</a>
+      </div>
+
+      <h2>Independence and conflicts of interest</h2>
+      <p>Velo AI Studio is a self-funded personal project. Relevant disclosures:</p>
+      <ul>
+        <li>I receive no commission, affiliation or commercial agreement from Pollinations, ElevenLabs, OpenAI, Google, or any tool mentioned on the blog.</li>
+        <li>I do not accept sponsored posts or paid articles.</li>
+        <li>The only planned income sources are Google AdSense contextual ads and voluntary donations, both clearly distinguishable from editorial content.</li>
+        <li>AdSense ads appear in containers marked as such and visually separated from article text.</li>
+      </ul>
+
+      <h2>Content privacy and processing</h2>
+      <p>Files (SRT scripts, MP3 audio) that users upload to the app <strong>are not stored on any Velo AI Studio server</strong>. They are processed in the user's browser memory. The only requests that leave the browser go to declared third-party APIs (Pollinations, ElevenLabs, OpenAI, depending on the selected model), and those requests follow the privacy policies of each provider. Full technical detail in the <a href="/privacy.html">privacy policy</a>.</p>
+
+      <h2>Editorial contact channels</h2>
+      <p>If your message is about article content, a correction, a collaboration, or a topic suggestion:</p>
+      <div class="contact-row">
+        <a href="mailto:contacto@veloaistudio.online">✉ contacto@veloaistudio.online</a>
+        <a href="/contact.html">📝 Contact form</a>
+      </div>
+      <p style="font-size:0.82rem;color:var(--muted);">Correction requests are prioritized over other message categories. Typical response in 24–48 business hours.</p>
+
+      <footer>
+        <p style="margin-bottom:10px;">© 2026 <strong>Velo AI Studio</strong>. All rights reserved.</p>
+        <div>
+          <a href="/">Home</a> |
+          <a href="/studio.html">Studio</a> |
+          <a href="/about.html">About</a> |
+          <a href="/blog/">Blog</a> |
+          <a href="/contact.html">Contact</a> |
+          <a href="/privacy.html">Privacy</a> |
+          <a href="/tos.html">Terms</a>
+        </div>
+      </footer>
+    </div>
+
+  </div>
+
+  <script>
+  (function(){
+    var isEN = !navigator.language.toLowerCase().startsWith('es');
+    if (isEN) {
+      document.documentElement.lang = 'en';
+      document.title = 'Editorial methodology — How Velo AI Studio content is written and verified';
+      var md = document.querySelector('meta[name="description"]');
+      if (md) md.setAttribute('content', 'Full editorial protocol of Velo AI Studio: topic selection, technical verification, AI use policy, correction process, and contact channels.');
+      document.querySelectorAll('.lang-es').forEach(function(e){ e.style.display = 'none'; });
+      document.querySelectorAll('.lang-en').forEach(function(e){ e.style.display = 'block'; });
+    }
+  })();
+  </script>
+
+</body>
+</html>

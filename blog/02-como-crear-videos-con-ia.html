@@ -17,7 +17,7 @@
     "@type": "HowTo",
     "name": "How to create your first AI video step by step in Velo AI Studio",
     "description": "Complete tutorial to create professional videos with artificial intelligence using Velo AI Studio.",
-    "datePublished": "2026-03-23",
+    "datePublished": "2026-01-22",
     "inLanguage": ["es", "en"],
     "step": [
       { "@type": "HowToStep", "position": 1, "name": "Prepare your SRT script", "text": "Create a .srt file with timestamps and text for your narration." },
@@ -53,6 +53,19 @@
     .tip{background:rgba(245,158,11,0.08);border-left:3px solid var(--accent3);border-radius:0 8px 8px 0;padding:14px 18px;margin:20px 0;font-size:0.88rem;color:var(--prose);}
     .tip strong{color:var(--accent3);}
     .cta{display:inline-block;margin-top:32px;padding:13px 28px;background:linear-gradient(135deg,var(--accent),var(--accent2));border-radius:8px;color:white;text-decoration:none;font-weight:700;font-size:0.9rem;}
+    .author-box{display:flex;align-items:center;gap:18px;background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:20px;margin:48px 0 24px;}
+    .author-avatar{width:64px;height:64px;border-radius:50%;flex-shrink:0;background:linear-gradient(135deg,var(--accent),var(--accent2));display:flex;align-items:center;justify-content:center;color:#fff;font-family:'Syne',sans-serif;font-weight:800;font-size:1.6rem;box-shadow:0 4px 16px rgba(124,58,237,0.25);}
+    .author-meta{flex:1;}
+    .author-meta .author-role{font-family:'Space Mono',monospace;font-size:0.62rem;color:var(--accent2);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:3px;}
+    .author-meta .author-name{font-size:1rem;font-weight:700;color:var(--text);margin-bottom:6px;}
+    .author-meta .author-bio{font-size:0.82rem;color:var(--muted);line-height:1.55;margin-bottom:8px;}
+    .author-meta .author-links a{font-family:'Space Mono',monospace;font-size:0.7rem;color:var(--accent2);text-decoration:none;margin-right:14px;}
+    .author-meta .author-links a:hover{text-decoration:underline;}
+    .ai-disclosure{background:rgba(245,158,11,0.06);border-left:3px solid var(--accent3);border-radius:0 8px 8px 0;padding:12px 16px;margin:0 0 24px;font-family:'Space Mono',monospace;font-size:0.7rem;color:var(--muted);line-height:1.55;}
+    .ai-disclosure strong{color:var(--accent3);}
+    .ai-disclosure a{color:var(--accent2);}
+    @media(max-width:540px){.author-box{flex-direction:column;text-align:center;}}
+
     footer{margin-top:64px;padding-top:24px;border-top:1px solid var(--border);text-align:center;font-family:'Space Mono',monospace;font-size:0.68rem;color:var(--muted);}
     footer a{color:var(--muted);text-decoration:none;margin:0 8px;}
     footer a:hover{color:var(--accent2);}
@@ -70,7 +83,7 @@
     <div class="lang-es">
       <span class="tag">Tutorial</span>
       <h1>Cómo crear tu primer video con IA paso a paso</h1>
-      <p class="meta">23 de marzo de 2026 · 8 min lectura · Velo AI Studio</p>
+      <p class="meta">22 de enero de 2026 · 8 min lectura · Por <a href="../about.html" style="color:var(--accent2);text-decoration:none;">Ali A.</a></p>
 
       <p>Este tutorial te guiará desde cero hasta tener tu primer video exportado en MP4 usando Velo AI Studio. No necesitas conocimientos técnicos previos ni software instalado. Solo necesitas un guion escrito o tu voz grabada.</p>
 
@@ -155,6 +168,26 @@ Esto equivale a más de 2.500 millones de latidos a lo largo de una vida.
       <p>Puedes hacer clic en cualquier imagen generada para verla ampliada. Desde ahí tienes la opción de regenerarla con un modelo diferente o incluso subir tu propia imagen para sustituirla. Velo AI Studio te da control total sobre el resultado final antes de exportar.</p>
 
       <a href="../studio.html" class="cta">→ Crear mi primer video ahora</a>
+      <!-- Author box -->
+      <div class="author-box">
+        <div class="author-avatar" aria-hidden="true">A</div>
+        <div class="author-meta">
+          <p class="author-role">Autor del artículo</p>
+          <p class="author-name">Ali A.</p>
+          <p class="author-bio">Desarrollador web con más de 6 años de experiencia en JavaScript, WebCodecs y APIs de IA generativa. Creador y editor principal de Velo AI Studio. Verifico técnicamente cada artículo antes de publicarlo.</p>
+          <div class="author-links">
+            <a href="../about.html">Biografía →</a>
+            <a href="../editorial.html">Metodología editorial</a>
+            <a href="mailto:contacto@veloaistudio.online">Contacto</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- AI disclosure -->
+      <p class="ai-disclosure">
+        <strong>Transparencia:</strong> este artículo fue redactado con asistencia de modelos de lenguaje (GPT-5 / Claude) para su estructura inicial, y posteriormente revisado, verificado técnicamente y editado manualmente por el autor antes de publicarse. Lee el <a href="../editorial.html">protocolo editorial completo</a>.
+      </p>
+
 
       <footer>
         <p style="margin-bottom:10px;">© 2026 Velo AI Studio</p>
@@ -166,7 +199,7 @@ Esto equivale a más de 2.500 millones de latidos a lo largo de una vida.
     <div class="lang-en">
       <span class="tag">Tutorial</span>
       <h1>How to create your first AI video step by step</h1>
-      <p class="meta">March 23, 2026 · 8 min read · Velo AI Studio</p>
+      <p class="meta">January 22, 2026 · 8 min read · By <a href="../about.html" style="color:var(--accent2);text-decoration:none;">Ali A.</a></p>
 
       <p>This tutorial will guide you from scratch to having your first video exported in MP4 using Velo AI Studio. You don't need any prior technical knowledge or installed software. All you need is a written script or your recorded voice.</p>
 
@@ -251,6 +284,26 @@ This equals more than 2.5 billion heartbeats over a lifetime.
       <p>You can click on any generated image to view it enlarged. From there you have the option to regenerate it with a different model or even upload your own image to replace it. Velo AI Studio gives you full control over the final result before exporting.</p>
 
       <a href="../studio.html" class="cta">→ Create my first video now</a>
+      <!-- Author box -->
+      <div class="author-box">
+        <div class="author-avatar" aria-hidden="true">A</div>
+        <div class="author-meta">
+          <p class="author-role">Article author</p>
+          <p class="author-name">Ali A.</p>
+          <p class="author-bio">Web developer with 6+ years building applications with JavaScript, WebCodecs, and generative AI APIs. Creator and editor-in-chief of Velo AI Studio. I technically verify every article before publishing.</p>
+          <div class="author-links">
+            <a href="../about.html">Bio →</a>
+            <a href="../editorial.html">Editorial methodology</a>
+            <a href="mailto:contacto@veloaistudio.online">Contact</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- AI disclosure -->
+      <p class="ai-disclosure">
+        <strong>Transparency:</strong> this article was drafted with assistance from language models (GPT-5 / Claude) for its initial structure, then reviewed, technically verified, and manually edited by the author before publishing. Read the <a href="../editorial.html">full editorial protocol</a>.
+      </p>
+
 
       <footer>
         <p style="margin-bottom:10px;">© 2026 Velo AI Studio</p>

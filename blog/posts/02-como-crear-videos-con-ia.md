@@ -2,7 +2,7 @@
 num: "02"
 slug: 02-como-crear-videos-con-ia
 emoji: 🎥
-date: 2026-03-23
+date: 2026-01-22
 tag_es: Tutorial
 tag_en: Tutorial
 title_es: Cómo crear tu primer video con IA paso a paso

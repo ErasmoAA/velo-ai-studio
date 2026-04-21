@@ -11,6 +11,7 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy("tos.html");
   eleventyConfig.addPassthroughCopy("contact.html");
   eleventyConfig.addPassthroughCopy("about.html");
+  eleventyConfig.addPassthroughCopy("editorial.html");
   eleventyConfig.addPassthroughCopy("sitemap.xml");
   eleventyConfig.addPassthroughCopy("robots.txt");
   eleventyConfig.addPassthroughCopy("ads.txt");
@@ -36,13 +37,17 @@ module.exports = function (eleventyConfig) {
   );
 
   // ── Date filters ───────────────────────────────────────────────────
+  // Use UTC to avoid off-by-one-day when the build host is in a negative
+  // UTC offset (e.g., Americas). Eleventy parses frontmatter YAML dates as
+  // Date objects at 00:00:00 UTC, and toLocaleDateString defaults to the
+  // host timezone, which can shift the displayed day backwards.
   eleventyConfig.addFilter("dateEs", (date) => {
     const d = date instanceof Date ? date : new Date(date + "T12:00:00Z");
-    return d.toLocaleDateString("es", { day: "numeric", month: "long", year: "numeric" });
+    return d.toLocaleDateString("es", { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" });
   });
   eleventyConfig.addFilter("dateEn", (date) => {
     const d = date instanceof Date ? date : new Date(date + "T12:00:00Z");
-    return d.toLocaleDateString("en", { month: "long", day: "numeric", year: "numeric" });
+    return d.toLocaleDateString("en", { month: "long", day: "numeric", year: "numeric", timeZone: "UTC" });
   });
   eleventyConfig.addFilter("isoDate", (date) => {
     const d = date instanceof Date ? date : new Date(date + "T12:00:00Z");

@@ -2,7 +2,7 @@
 num: "09"
 slug: 09-errores-comunes-videos-ia
 emoji: ⚠️
-date: 2026-03-23
+date: 2026-03-12
 tag_es: Consejos
 tag_en: Tips
 title_es: "7 errores comunes al crear videos con IA (y cómo evitarlos)"

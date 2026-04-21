@@ -2,7 +2,7 @@
 num: "07"
 slug: 07-estilos-visuales-ia
 emoji: 🎨
-date: 2026-03-23
+date: 2026-02-26
 tag_es: Guía Visual
 tag_en: Visual Guide
 title_es: "Estilos visuales de IA: cuál elegir para tu tipo de canal"

@@ -2,7 +2,7 @@
 num: "12"
 slug: riesgos-canal-automatizado
 emoji: ⚠️
-date: 2026-03-24
+date: 2026-04-02
 tag_es: Tutorial
 tag_en: Tutorial
 title_es: Riesgos de un canal 100% automatizado en YouTube

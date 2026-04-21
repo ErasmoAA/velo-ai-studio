@@ -2,7 +2,7 @@
 num: "04"
 slug: 04-pollinations-ai-gratis
 emoji: 🤖
-date: 2026-03-23
+date: 2026-02-05
 tag_es: Tecnología
 tag_en: Technology
 title_es: "Pollinations AI: la IA gratuita detrás de Velo"

@@ -2,7 +2,7 @@
 num: "11"
 slug: como-elegir-voz-perfecta-videos-ia
 emoji: 🎙️
-date: 2026-03-23
+date: 2026-03-26
 tag_es: Tutorial
 tag_en: Tutorial
 title_es: Cómo elegir la voz perfecta para narrar tus videos con IA

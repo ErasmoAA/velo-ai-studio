@@ -23,8 +23,20 @@
     "description": "{{ desc_en }}",
     "datePublished": "{{ date | isoDate }}",
     "dateModified": "{{ date | isoDate }}",
-    "author": { "@type": "Organization", "name": "Velo AI Studio" },
-    "publisher": { "@type": "Organization", "name": "Velo AI Studio", "url": "https://veloaistudio.online" },
+    "author": {
+      "@type": "Person",
+      "@id": "https://veloaistudio.online/about.html#person",
+      "name": "Ali A.",
+      "url": "https://veloaistudio.online/about.html",
+      "jobTitle": "Desarrollador y editor principal de Velo AI Studio"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "@id": "https://veloaistudio.online/#organization",
+      "name": "Velo AI Studio",
+      "url": "https://veloaistudio.online",
+      "logo": { "@type": "ImageObject", "url": "https://veloaistudio.online/og-image.png" }
+    },
     "mainEntityOfPage": { "@type": "WebPage", "@id": "https://veloaistudio.online/blog/{{ slug }}.html" },
     "inLanguage": ["es", "en"]
   }
@@ -135,6 +147,41 @@
     .end-cta-note{display:block;margin-top:12px;font-family:'Space Mono',monospace;
       font-size:0.65rem;color:var(--muted);}
 
+    /* ── Author box ── */
+    .author-box{
+      display:flex;align-items:center;gap:18px;
+      background:var(--surface);border:1px solid var(--border);border-radius:14px;
+      padding:20px;margin:48px 0 32px;
+    }
+    .author-avatar{
+      width:64px;height:64px;border-radius:50%;flex-shrink:0;
+      background:linear-gradient(135deg,var(--accent),var(--accent2));
+      display:flex;align-items:center;justify-content:center;
+      color:#fff;font-family:'Syne',sans-serif;font-weight:800;font-size:1.6rem;
+      box-shadow:0 4px 16px rgba(124,58,237,0.25);
+    }
+    .author-meta{flex:1;}
+    .author-meta .author-role{
+      font-family:'Space Mono',monospace;font-size:0.62rem;color:var(--accent2);
+      text-transform:uppercase;letter-spacing:1.5px;margin-bottom:3px;
+    }
+    .author-meta .author-name{font-size:1rem;font-weight:700;color:var(--text);margin-bottom:6px;}
+    .author-meta .author-bio{font-size:0.82rem;color:var(--muted);line-height:1.55;margin-bottom:8px;}
+    .author-meta .author-links a{
+      font-family:'Space Mono',monospace;font-size:0.7rem;
+      color:var(--accent2);text-decoration:none;margin-right:14px;
+    }
+    .author-meta .author-links a:hover{text-decoration:underline;}
+    .ai-disclosure{
+      background:rgba(245,158,11,0.06);border-left:3px solid var(--accent3);
+      border-radius:0 8px 8px 0;padding:12px 16px;margin:0 0 32px;
+      font-family:'Space Mono',monospace;font-size:0.7rem;color:var(--muted);line-height:1.55;
+    }
+    .ai-disclosure strong{color:var(--accent3);}
+    @media(max-width:540px){
+      .author-box{flex-direction:column;text-align:center;}
+    }
+
     /* ── Related posts ── */
     .related{margin-top:56px;}
     .related-title{
@@ -201,7 +248,7 @@
 
       <span class="tag">{{ tag_es }}</span>
       <h1>{{ title_es }}</h1>
-      <p class="meta">{{ date | dateEs }} · {{ read_es }} · Velo AI Studio</p>
+      <p class="meta">{{ date | dateEs }} · {{ read_es }} · Por <a href="/about.html" style="color:var(--accent2);text-decoration:none;">Ali A.</a></p>
 
       {# Ad — top of article #}
       <div class="ad-unit">
@@ -263,6 +310,26 @@
         <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
       </div>
 
+      {# Author box #}
+      <div class="author-box">
+        <div class="author-avatar" aria-hidden="true">A</div>
+        <div class="author-meta">
+          <p class="author-role">Autor del artículo</p>
+          <p class="author-name">Ali A.</p>
+          <p class="author-bio">Desarrollador web con más de 6 años de experiencia en JavaScript, WebCodecs y APIs de IA generativa. Creador y editor principal de Velo AI Studio. Verifico técnicamente cada artículo antes de publicarlo.</p>
+          <div class="author-links">
+            <a href="/about.html">Biografía →</a>
+            <a href="/editorial.html">Metodología editorial</a>
+            <a href="mailto:contacto@veloaistudio.online">Contacto</a>
+          </div>
+        </div>
+      </div>
+
+      {# AI disclosure #}
+      <p class="ai-disclosure">
+        <strong>Transparencia:</strong> este artículo fue redactado con asistencia de modelos de lenguaje (GPT-5 / Claude) para su estructura inicial, y posteriormente revisado, verificado técnicamente y editado manualmente por el autor antes de publicarse. Lee el <a href="/editorial.html" style="color:var(--accent2);">protocolo editorial completo</a>.
+      </p>
+
       {# Related posts #}
       {% if relatedNew.length > 0 or relatedOld.length > 0 %}
       <div class="related">
@@ -306,10 +373,11 @@
           <a href="/">Inicio</a> |
           <a href="/studio.html">Estudio</a> |
           <a href="/blog/">Blog</a> |
-          <a href="/privacy.html">Privacidad</a> |
-          <a href="/tos.html">Términos</a> |
+          <a href="/about.html">Acerca de</a> |
+          <a href="/editorial.html">Metodología</a> |
           <a href="/contact.html">Contacto</a> |
-          <a href="/about.html">Acerca de</a>
+          <a href="/privacy.html">Privacidad</a> |
+          <a href="/tos.html">Términos</a>
         </div>
       </footer>
     </div>
@@ -325,7 +393,7 @@
 
       <span class="tag">{{ tag_en }}</span>
       <h1>{{ title_en }}</h1>
-      <p class="meta">{{ date | dateEn }} · {{ read_en }} · Velo AI Studio</p>
+      <p class="meta">{{ date | dateEn }} · {{ read_en }} · By <a href="/about.html" style="color:var(--accent2);text-decoration:none;">Ali A.</a></p>
 
       {# Ad — top of article #}
       <div class="ad-unit">
@@ -387,6 +455,26 @@
         <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
       </div>
 
+      {# Author box #}
+      <div class="author-box">
+        <div class="author-avatar" aria-hidden="true">A</div>
+        <div class="author-meta">
+          <p class="author-role">Article author</p>
+          <p class="author-name">Ali A.</p>
+          <p class="author-bio">Web developer with 6+ years building applications with JavaScript, WebCodecs, and generative AI APIs. Creator and editor-in-chief of Velo AI Studio. I technically verify every article before publishing.</p>
+          <div class="author-links">
+            <a href="/about.html">Bio →</a>
+            <a href="/editorial.html">Editorial methodology</a>
+            <a href="mailto:contacto@veloaistudio.online">Contact</a>
+          </div>
+        </div>
+      </div>
+
+      {# AI disclosure #}
+      <p class="ai-disclosure">
+        <strong>Transparency:</strong> this article was drafted with assistance from language models (GPT-5 / Claude) for its initial structure, then reviewed, technically verified, and manually edited by the author before publishing. Read the <a href="/editorial.html" style="color:var(--accent2);">full editorial protocol</a>.
+      </p>
+
       {# Related posts #}
       {% if relatedNew.length > 0 or relatedOld.length > 0 %}
       <div class="related">
@@ -430,10 +518,11 @@
           <a href="/">Home</a> |
           <a href="/studio.html">Studio</a> |
           <a href="/blog/">Blog</a> |
-          <a href="/privacy.html">Privacy</a> |
-          <a href="/tos.html">Terms</a> |
+          <a href="/about.html">About</a> |
+          <a href="/editorial.html">Methodology</a> |
           <a href="/contact.html">Contact</a> |
-          <a href="/about.html">About</a>
+          <a href="/privacy.html">Privacy</a> |
+          <a href="/tos.html">Terms</a>
         </div>
       </footer>
     </div>

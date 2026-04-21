@@ -2,7 +2,7 @@
 num: "03"
 slug: 03-guia-formatos-video
 emoji: 📐
-date: 2026-03-23
+date: 2026-01-29
 tag_es: Referencia
 tag_en: Reference
 title_es: "Formatos de video: 16:9 vs 9:16 — ¿cuál elegir?"

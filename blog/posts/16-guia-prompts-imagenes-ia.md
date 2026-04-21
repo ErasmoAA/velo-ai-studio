@@ -2,7 +2,7 @@
 num: "16"
 slug: 16-guia-prompts-imagenes-ia
 emoji: ✍️
-date: 2026-03-24
+date: 2026-04-14
 tag_es: Tutorial
 tag_en: Tutorial
 title_es: Guía de prompts para generar imágenes con IA en tus videos

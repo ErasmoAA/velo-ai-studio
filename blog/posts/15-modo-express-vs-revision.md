@@ -2,7 +2,7 @@
 num: "15"
 slug: 15-modo-express-vs-revision
 emoji: ⚡
-date: 2026-03-24
+date: 2026-04-11
 tag_es: Función
 tag_en: Feature
 title_es: Modo Express vs Modo Revisión — ¿cuándo usar cada uno?

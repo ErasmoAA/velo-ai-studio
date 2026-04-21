@@ -12,6 +12,32 @@
   <link rel="alternate" hreflang="es" href="https://veloaistudio.online/contact.html" />
   <link rel="alternate" hreflang="en" href="https://veloaistudio.online/contact.html" />
   <link rel="alternate" hreflang="x-default" href="https://veloaistudio.online/contact.html" />
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3377827647746361"
+    crossorigin="anonymous"></script>
+
+  <!-- Schema.org ContactPage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ContactPage",
+    "url": "https://veloaistudio.online/contact.html",
+    "name": "Contacto — Velo AI Studio",
+    "inLanguage": ["es", "en"],
+    "mainEntity": {
+      "@type": "Organization",
+      "@id": "https://veloaistudio.online/#organization",
+      "name": "Velo AI Studio",
+      "url": "https://veloaistudio.online/",
+      "contactPoint": [{
+        "@type": "ContactPoint",
+        "email": "contacto@veloaistudio.online",
+        "contactType": "customer support",
+        "availableLanguage": ["Spanish", "English"]
+      }]
+    }
+  }
+  </script>
+
   <link rel="stylesheet" href="/theme.css">
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;800&display=swap');
@@ -24,6 +50,14 @@
     .nav a:hover{text-decoration:underline;}
     h1{font-size:clamp(1.6rem,4vw,2.2rem);font-weight:800;line-height:1.2;margin-bottom:10px;}
     .subtitle{font-family:'Space Mono',monospace;font-size:0.75rem;color:var(--muted);margin-bottom:36px;}
+    .direct-contact{background:linear-gradient(135deg,var(--surface),var(--surface2));border:1px solid var(--border);border-radius:16px;padding:24px 28px;margin-bottom:20px;}
+    .direct-contact h2{font-size:0.82rem;color:var(--accent2);font-family:'Space Mono',monospace;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:12px;font-weight:700;}
+    .direct-contact p{font-size:0.88rem;color:var(--prose);margin-bottom:12px;line-height:1.55;}
+    .direct-contact .email-link{display:inline-flex;align-items:center;gap:8px;padding:10px 18px;background:var(--surface2);border:1px solid var(--border);border-radius:10px;color:var(--accent2);text-decoration:none;font-family:'Space Mono',monospace;font-size:0.85rem;font-weight:700;transition:border-color 0.2s;}
+    .direct-contact .email-link:hover{border-color:var(--accent2);}
+    .direct-contact .meta-links{margin-top:12px;font-size:0.72rem;color:var(--muted);font-family:'Space Mono',monospace;}
+    .direct-contact .meta-links a{color:var(--muted);text-decoration:underline;margin:0 4px;}
+    .direct-contact .meta-links a:hover{color:var(--accent2);}
     .form-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:32px;}
     .form-group{display:flex;flex-direction:column;gap:4px;margin-bottom:16px;}
     label{font-size:0.7rem;color:var(--muted);text-transform:uppercase;letter-spacing:1px;font-family:'Space Mono',monospace;}
@@ -53,6 +87,13 @@
     <div class="lang-es">
       <h1>✉️ Contacto</h1>
       <p class="subtitle">// Escríbenos · Te respondemos en 24–48 horas //</p>
+
+      <div class="direct-contact">
+        <h2>Contacto directo</h2>
+        <p>Para reportar un error, sugerir un tema o proponer una colaboración, puedes escribirnos directamente al siguiente correo electrónico o usar el formulario de abajo. Ambos llegan a la misma bandeja de entrada.</p>
+        <a class="email-link" href="mailto:contacto@veloaistudio.online">✉ contacto@veloaistudio.online</a>
+        <p class="meta-links">Responsable editorial: <a href="/about.html">Ali A.</a> · Consulta también la <a href="/editorial.html">metodología editorial</a> y la <a href="/privacy.html">política de privacidad</a>.</p>
+      </div>
 
       <div class="form-card">
         <div class="form-group">
@@ -87,9 +128,10 @@
           <a href="/">Inicio</a> |
           <a href="/studio.html">Estudio</a> |
           <a href="/blog/">Blog</a> |
+          <a href="/about.html">Acerca de</a> |
+          <a href="/editorial.html">Metodología</a> |
           <a href="/privacy.html">Privacidad</a> |
-          <a href="/tos.html">Términos</a> |
-          <a href="/about.html">Acerca de</a>
+          <a href="/tos.html">Términos</a>
         </div>
       </footer>
     </div>
@@ -98,6 +140,13 @@
     <div class="lang-en">
       <h1>✉️ Contact</h1>
       <p class="subtitle">// Write to us · We reply within 24–48 hours //</p>
+
+      <div class="direct-contact">
+        <h2>Direct contact</h2>
+        <p>To report a bug, suggest a topic, or propose a collaboration, you can email us directly at the address below or use the form. Both reach the same inbox.</p>
+        <a class="email-link" href="mailto:contacto@veloaistudio.online">✉ contacto@veloaistudio.online</a>
+        <p class="meta-links">Editor in charge: <a href="/about.html">Ali A.</a> · See also our <a href="/editorial.html">editorial methodology</a> and <a href="/privacy.html">privacy policy</a>.</p>
+      </div>
 
       <div class="form-card">
         <div class="form-group">
@@ -132,9 +181,10 @@
           <a href="/">Home</a> |
           <a href="/studio.html">Studio</a> |
           <a href="/blog/">Blog</a> |
+          <a href="/about.html">About</a> |
+          <a href="/editorial.html">Methodology</a> |
           <a href="/privacy.html">Privacy</a> |
-          <a href="/tos.html">Terms</a> |
-          <a href="/about.html">About</a>
+          <a href="/tos.html">Terms</a>
         </div>
       </footer>
     </div>

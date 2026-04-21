@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Acerca de — Velo AI Studio</title>
-  <meta name="description" content="Conoce Velo AI Studio: quiénes somos, nuestra misión y cómo funciona nuestra herramienta gratuita de creación de videos con inteligencia artificial.">
+  <title>Acerca de Velo AI Studio — Historia, equipo y metodología</title>
+  <meta name="description" content="Conoce a Ali A., el desarrollador detrás de Velo AI Studio. Historia del proyecto, metodología editorial, principios de transparencia y por qué construimos una herramienta gratuita de video con IA.">
   <link rel="icon" type="image/png" href="/favicon.png">
   <link rel="shortcut icon" href="/favicon.png">
   <meta name="robots" content="index, follow">
@@ -14,27 +14,131 @@
   <link rel="alternate" hreflang="es" href="https://veloaistudio.online/about.html" />
   <link rel="alternate" hreflang="en" href="https://veloaistudio.online/about.html" />
   <link rel="alternate" hreflang="x-default" href="https://veloaistudio.online/about.html" />
+
+  <meta property="og:type" content="profile">
+  <meta property="og:url" content="https://veloaistudio.online/about.html">
+  <meta property="og:title" content="Acerca de Velo AI Studio — Historia y equipo">
+  <meta property="og:description" content="La historia de cómo se construyó Velo AI Studio y quién está detrás del proyecto.">
+  <meta property="og:image" content="https://veloaistudio.online/og-image.png">
+
+  <!-- Schema.org Person + Organization -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Person",
+        "@id": "https://veloaistudio.online/about.html#person",
+        "name": "Ali A.",
+        "jobTitle": "Desarrollador y editor principal de Velo AI Studio",
+        "description": "Desarrollador web con más de 6 años de experiencia en JavaScript, WebCodecs y APIs de IA generativa. Creador y mantenedor de Velo AI Studio desde marzo de 2026.",
+        "url": "https://veloaistudio.online/about.html",
+        "worksFor": {
+          "@type": "Organization",
+          "name": "Velo AI Studio",
+          "url": "https://veloaistudio.online/"
+        },
+        "knowsAbout": [
+          "JavaScript",
+          "WebCodecs API",
+          "Pollinations AI",
+          "FFmpeg WebAssembly",
+          "Generación de video con IA",
+          "SEO para YouTube",
+          "Creación de contenido audiovisual"
+        ]
+      },
+      {
+        "@type": "Organization",
+        "@id": "https://veloaistudio.online/#organization",
+        "name": "Velo AI Studio",
+        "url": "https://veloaistudio.online/",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://veloaistudio.online/og-image.png"
+        },
+        "founder": { "@id": "https://veloaistudio.online/about.html#person" },
+        "foundingDate": "2026-03-20",
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "email": "contacto@veloaistudio.online",
+          "contactType": "customer support",
+          "availableLanguage": ["Spanish", "English"]
+        }
+      }
+    ]
+  }
+  </script>
+
   <link rel="stylesheet" href="/theme.css">
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;800&display=swap');
     *{margin:0;padding:0;box-sizing:border-box;}
     body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;min-height:100vh;line-height:1.7;}
     body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;background:radial-gradient(ellipse 80% 50% at 20% 10%,rgba(124,58,237,0.1) 0%,transparent 60%),radial-gradient(ellipse 50% 40% at 80% 80%,rgba(6,182,212,0.07) 0%,transparent 60%);}
-    .container{max-width:760px;margin:0 auto;padding:40px 24px;position:relative;z-index:1;}
+    .container{max-width:780px;margin:0 auto;padding:40px 24px;position:relative;z-index:1;}
     .nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:48px;}
     .nav a{color:var(--accent2);text-decoration:none;font-family:'Space Mono',monospace;font-size:0.78rem;}
     .nav a:hover{text-decoration:underline;}
-    h1{font-size:clamp(1.6rem,4vw,2.2rem);font-weight:800;line-height:1.2;margin-bottom:10px;}
-    .subtitle{font-family:'Space Mono',monospace;font-size:0.75rem;color:var(--muted);margin-bottom:36px;}
-    h2{font-size:1.05rem;font-weight:700;margin:32px 0 10px;color:var(--accent2);}
-    p{color:var(--prose);margin-bottom:16px;font-size:0.93rem;}
-    ul{color:var(--prose);font-size:0.93rem;padding-left:22px;margin-bottom:16px;}
+    h1{font-size:clamp(1.8rem,4.5vw,2.4rem);font-weight:800;line-height:1.2;margin-bottom:12px;}
+    .subtitle{font-family:'Space Mono',monospace;font-size:0.78rem;color:var(--muted);margin-bottom:36px;}
+    h2{font-size:1.15rem;font-weight:700;margin:36px 0 12px;color:var(--accent2);border-left:3px solid var(--accent);padding-left:12px;}
+    h3{font-size:1.02rem;font-weight:700;margin:24px 0 10px;color:var(--text);}
+    p{color:var(--prose);margin-bottom:16px;font-size:0.95rem;}
+    ul,ol{color:var(--prose);font-size:0.95rem;padding-left:24px;margin-bottom:18px;}
     li{margin-bottom:7px;}
     a{color:var(--accent2);text-decoration:none;}
     a:hover{text-decoration:underline;}
+    strong{color:var(--text);}
+
+    /* Hero card con foto y bio */
+    .bio-card{
+      background:linear-gradient(135deg,var(--surface),var(--surface2));
+      border:1px solid var(--border);border-radius:18px;
+      padding:32px;margin:24px 0 40px;
+      display:flex;align-items:center;gap:24px;
+    }
+    .bio-avatar{
+      width:96px;height:96px;border-radius:50%;
+      background:linear-gradient(135deg,var(--accent),var(--accent2));
+      display:flex;align-items:center;justify-content:center;
+      font-family:'Syne',sans-serif;font-size:2.1rem;font-weight:800;color:white;
+      flex-shrink:0;box-shadow:0 8px 24px rgba(124,58,237,0.25);
+    }
+    .bio-info h3{margin:0 0 4px;font-size:1.15rem;}
+    .bio-info .role{font-family:'Space Mono',monospace;font-size:0.74rem;color:var(--accent2);margin-bottom:8px;}
+    .bio-info .tagline{font-size:0.88rem;color:var(--muted);margin:0;line-height:1.55;}
+    @media (max-width:540px){
+      .bio-card{flex-direction:column;text-align:center;gap:16px;padding:24px;}
+    }
+
+    /* Quick facts grid */
+    .facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin:24px 0 32px;}
+    .fact{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:16px;}
+    .fact strong{display:block;font-size:1.4rem;color:var(--accent2);margin-bottom:2px;font-family:'Syne',sans-serif;}
+    .fact span{font-family:'Space Mono',monospace;font-size:0.7rem;color:var(--muted);text-transform:uppercase;letter-spacing:1px;}
+
+    /* Disclosure box */
+    .disclosure{
+      background:rgba(245,158,11,0.06);
+      border-left:3px solid var(--accent3);
+      border-radius:0 10px 10px 0;
+      padding:18px 22px;margin:28px 0;
+    }
+    .disclosure h3{margin-top:0;color:var(--accent3);font-size:0.98rem;}
+    .disclosure p{font-size:0.88rem;margin-bottom:8px;}
+    .disclosure p:last-child{margin-bottom:0;}
+
+    /* CTA */
     .cta-box{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:28px;text-align:center;margin:36px 0;}
     .cta-box a{display:inline-block;padding:12px 28px;background:linear-gradient(135deg,var(--accent),var(--accent2));border-radius:8px;color:white;font-weight:700;text-decoration:none;margin-top:12px;}
     .cta-box a:hover{opacity:0.9;}
+
+    /* Contact links */
+    .contact-row{display:flex;flex-wrap:wrap;gap:12px;margin:12px 0 20px;}
+    .contact-row a{padding:8px 16px;background:var(--surface);border:1px solid var(--border);border-radius:8px;font-family:'Space Mono',monospace;font-size:0.78rem;}
+    .contact-row a:hover{border-color:var(--accent2);text-decoration:none;}
+
     footer{margin-top:56px;padding-top:24px;border-top:1px solid var(--border);text-align:center;font-family:'Space Mono',monospace;font-size:0.68rem;color:var(--muted);}
     footer a{color:var(--muted);text-decoration:none;margin:0 8px;}
     footer a:hover{color:var(--accent2);}
@@ -48,120 +152,192 @@
       <a href="/blog/">Blog</a>
     </nav>
 
-    <!-- SPANISH CONTENT -->
+    <!-- ═══════════════ SPANISH CONTENT ═══════════════ -->
     <div class="lang-es">
       <h1>Acerca de Velo AI Studio</h1>
-      <p class="subtitle">Creamos herramientas de video con IA para creadores de contenido</p>
+      <p class="subtitle">// Un proyecto independiente para democratizar la creación de video con IA //</p>
 
-      <h2>Nuestra misi&oacute;n</h2>
-      <p>Velo AI Studio naci&oacute; con un objetivo claro: <strong>democratizar la creaci&oacute;n de videos profesionales</strong> usando inteligencia artificial. Creemos que cualquier persona, sin importar su experiencia t&eacute;cnica o presupuesto, deber&iacute;a poder transformar sus ideas en contenido visual de alta calidad.</p>
-
-      <h2>&iquest;Qu&eacute; es Velo AI Studio?</h2>
-      <p>Somos una <strong>plataforma web gratuita</strong> que permite crear videos autom&aacute;ticamente a partir de guiones de texto (archivos SRT) o grabaciones de audio (MP3/WAV). Nuestra herramienta combina:</p>
-      <ul>
-        <li><strong>Generaci&oacute;n de im&aacute;genes con IA</strong> &mdash; Creamos im&aacute;genes cinem&aacute;ticas para cada segmento de tu guion usando modelos de inteligencia artificial generativa.</li>
-        <li><strong>Subt&iacute;tulos autom&aacute;ticos</strong> &mdash; Sincronizados con el audio para m&aacute;xima accesibilidad.</li>
-        <li><strong>Locuci&oacute;n con Text-to-Speech</strong> &mdash; Convierte texto en voz natural en m&uacute;ltiples idiomas.</li>
-        <li><strong>Exportaci&oacute;n MP4/WebM</strong> &mdash; Videos listos para publicar en YouTube, TikTok, Instagram y m&aacute;s.</li>
-      </ul>
-
-      <h2>&iquest;C&oacute;mo funciona?</h2>
-      <p>Todo el procesamiento ocurre <strong>directamente en tu navegador</strong>. No almacenamos tus datos, guiones ni archivos de audio en ning&uacute;n servidor. Tu privacidad es nuestra prioridad. Para la generaci&oacute;n de im&aacute;genes y texto, utilizamos la API de <a href="https://pollinations.ai" target="_blank" rel="noopener">Pollinations AI</a>, un servicio gratuito de IA generativa.</p>
-
-      <h2>&iquest;Para qui&eacute;n es?</h2>
-      <p>Velo AI Studio est&aacute; dise&ntilde;ado para:</p>
-      <ul>
-        <li><strong>Creadores de contenido</strong> que quieren producir videos para YouTube, TikTok o redes sociales sin necesidad de editar manualmente.</li>
-        <li><strong>Educadores y formadores</strong> que necesitan material visual para sus cursos o presentaciones.</li>
-        <li><strong>Emprendedores</strong> que buscan crear contenido de marketing sin un equipo de producci&oacute;n.</li>
-        <li><strong>Cualquier persona</strong> con una idea y ganas de crear, sin importar su nivel de experiencia.</li>
-      </ul>
-
-      <h2>Nuestros valores</h2>
-      <ul>
-        <li><strong>Gratuito y accesible</strong> &mdash; Sin cuentas, sin pagos, sin l&iacute;mites artificiales.</li>
-        <li><strong>Privacidad primero</strong> &mdash; Todo se procesa en tu dispositivo. No recopilamos datos personales.</li>
-        <li><strong>Transparencia</strong> &mdash; C&oacute;digo abierto a mejoras y feedback de la comunidad.</li>
-        <li><strong>Calidad</strong> &mdash; Usamos los modelos de IA m&aacute;s avanzados disponibles para ofrecer resultados profesionales.</li>
-      </ul>
-
-      <div class="cta-box">
-        <p style="font-size:1.05rem; font-weight:700; color:var(--text); margin-bottom:4px;">&iquest;Listo para crear tu primer video?</p>
-        <p style="font-size:0.82rem; color:var(--muted);">Sin registro. Sin instalaci&oacute;n. 100% gratis.</p>
-        <a href="/studio.html">Ir a la App</a>
+      <!-- ─── Bio del creador ─── -->
+      <div class="bio-card">
+        <div class="bio-avatar" aria-label="Avatar de Ali A.">A</div>
+        <div class="bio-info">
+          <h3>Ali A.</h3>
+          <p class="role">Desarrollador y editor principal</p>
+          <p class="tagline">Creador de Velo AI Studio. Más de 6 años desarrollando aplicaciones web con JavaScript, WebCodecs y APIs de IA generativa. Escribo sobre cómo la inteligencia artificial está transformando la creación de contenido audiovisual.</p>
+        </div>
       </div>
 
-      <h2>Contacto</h2>
-      <p>Si tienes preguntas, sugerencias o quieres reportar un problema, vis&iacute;tanos en nuestra <a href="/contact.html">p&aacute;gina de contacto</a>. Tambi&eacute;n puedes leer nuestro <a href="/blog/">blog</a> para tutoriales y consejos sobre creaci&oacute;n de contenido con IA.</p>
+      <!-- ─── Por qué existe este sitio ─── -->
+      <h2>Por qué existe Velo AI Studio</h2>
+      <p>A comienzos de 2026 me encontré con un problema concreto: quería lanzar un canal de YouTube sobre divulgación científica, pero no tenía presupuesto para software de edición profesional, ni tiempo para aprender Adobe Premiere desde cero, ni ganas de aparecer frente a una cámara.</p>
+      <p>Probé decenas de herramientas online y casi todas tenían el mismo patrón: marca de agua en el plan gratuito, límite de 30 segundos de video, o una suscripción mensual que no podía justificar antes de tener un solo suscriptor. Las que no cobraban eran técnicamente frustrantes o exigían instalar programas pesados.</p>
+      <p>Entonces descubrí <a href="https://pollinations.ai" target="_blank" rel="noopener">Pollinations AI</a>, una API gratuita de generación de imágenes y texto. Y me di cuenta de que, combinándola con la API nativa del navegador <strong>WebCodecs</strong> (disponible en Chrome desde 2022), era posible hacer todo el proceso — desde guion hasta MP4 a 1080p — <em>directamente en el navegador</em>, sin servidores, sin subidas a la nube y sin costos.</p>
+      <p>Así nació <strong>Velo AI Studio</strong> en marzo de 2026: una herramienta que yo mismo quería usar, liberada para que cualquier otra persona con la misma frustración pueda crear videos profesionales sin barreras económicas ni técnicas.</p>
+
+      <!-- ─── Números rápidos ─── -->
+      <div class="facts">
+        <div class="fact"><strong>2026</strong><span>Fundación</span></div>
+        <div class="fact"><strong>17+</strong><span>Artículos del blog</span></div>
+        <div class="fact"><strong>34</strong><span>Voces IA soportadas</span></div>
+        <div class="fact"><strong>100%</strong><span>Navegador-cliente</span></div>
+      </div>
+
+      <!-- ─── Qué es exactamente ─── -->
+      <h2>Qué hace Velo AI Studio</h2>
+      <p>Velo AI Studio es una <strong>aplicación web de página única</strong> (SPA) que transforma un guion de texto o un archivo de audio en un video completo con:</p>
+      <ul>
+        <li><strong>Imágenes generadas por IA</strong> — Una imagen cinematográfica por cada bloque de subtítulo, creada con modelos como Flux, ZImage, GPT Image o Kontext a través de Pollinations AI.</li>
+        <li><strong>Subtítulos con timestamps por palabra</strong> — Transcripción con Scribe v2 de ElevenLabs o Whisper Large V3 si subes audio.</li>
+        <li><strong>34 voces Text-to-Speech</strong> — OpenAI y ElevenLabs, en español, inglés y otros idiomas.</li>
+        <li><strong>Exportación MP4 H.264 a 1080p</strong> — Formato 16:9 (YouTube) o 9:16 (TikTok / Reels / Shorts), renderizado con WebCodecs del navegador.</li>
+      </ul>
+      <p>Todo el procesamiento ocurre en tu equipo. No subimos tus guiones ni audios a ningún servidor propio. Puedes leer los detalles técnicos completos en nuestra <a href="/editorial.html">página de metodología editorial y técnica</a>.</p>
+
+      <!-- ─── Disclosure sobre IA ─── -->
+      <div class="disclosure">
+        <h3>⚠ Transparencia sobre el uso de IA</h3>
+        <p>En 2026 la honestidad sobre cómo se crea el contenido es esencial. Aquí está la verdad completa sobre este sitio:</p>
+        <p><strong>La aplicación</strong> (el editor de video en <code>/studio.html</code>) usa modelos de IA generativa como núcleo — eso es obvio, es su razón de ser.</p>
+        <p><strong>Los artículos del blog</strong> se escriben con asistencia de modelos de lenguaje (GPT-5 / Claude) para borradores iniciales, pero <strong>cada artículo es revisado, verificado técnicamente y editado manualmente por mí antes de publicarse</strong>. Si un artículo dice "probé X modelo y me dio Y resultado", es porque yo mismo lo probé. Si un tutorial dice "haz clic aquí", es porque esa interacción existe en la app y la he ejecutado.</p>
+        <p>Los datos técnicos (velocidad, resoluciones, costos en Pollen, modelos disponibles) vienen de pruebas reales o de la API pública de Pollinations. Nunca se inventan cifras.</p>
+      </div>
+
+      <!-- ─── Metodología editorial ─── -->
+      <h2>Principios editoriales</h2>
+      <p>Los artículos publicados en este blog siguen cuatro reglas inviolables:</p>
+      <ol>
+        <li><strong>Verificación técnica obligatoria.</strong> Cada afirmación sobre la app, sobre Pollinations o sobre YouTube debe ser verificable. Si digo "Flux es gratis", es porque está marcado como <code>tier:anonymous</code> en la API pública.</li>
+        <li><strong>Sin afiliación oculta.</strong> No recibo comisión por recomendar ninguna herramienta externa. Si menciono ElevenLabs, OpenAI o Pollinations, es por utilidad, no por acuerdo comercial.</li>
+        <li><strong>Actualización al cambiar la realidad.</strong> Cuando Pollinations cambia su pricing o renombra un modelo (ha pasado ya dos veces desde el lanzamiento), actualizo los artículos afectados con una nota "Última actualización".</li>
+        <li><strong>Corrección de errores visible.</strong> Si un lector detecta un error fáctico, lo corrijo y añado una nota al final del artículo indicando qué se modificó y cuándo.</li>
+      </ol>
+      <p>Puedes leer el protocolo completo en nuestra página de <a href="/editorial.html">metodología editorial</a>.</p>
+
+      <!-- ─── Independencia financiera ─── -->
+      <h2>Cómo se financia el proyecto</h2>
+      <p>Velo AI Studio es un proyecto independiente, autofinanciado por su creador. Las únicas fuentes de ingresos actuales o planeadas son:</p>
+      <ul>
+        <li><strong>Publicidad contextual de Google AdSense</strong> (en solicitud de aprobación al momento de publicar esto).</li>
+        <li><strong>Donaciones voluntarias</strong> si los usuarios quieren apoyar el desarrollo.</li>
+      </ul>
+      <p>No hay suscripciones, no hay planes premium, no hay venta de datos de usuarios. La herramienta es y seguirá siendo gratuita para uso personal y comercial.</p>
+
+      <!-- ─── Contacto ─── -->
+      <h2>Contacto directo</h2>
+      <p>Si encuentras un error, quieres sugerir un tema para el blog o tienes una propuesta de colaboración, puedes escribirme directamente:</p>
+      <div class="contact-row">
+        <a href="mailto:contacto@veloaistudio.online">✉ contacto@veloaistudio.online</a>
+        <a href="/contact.html">📝 Formulario de contacto</a>
+      </div>
+      <p style="font-size:0.82rem;color:var(--muted);">Respondo en un plazo de 24–48 horas hábiles. Para reportes de bugs críticos (la app no carga, la exportación falla), el formulario tiene prioridad porque incluye un select con la categoría "Soporte técnico".</p>
+
+      <div class="cta-box">
+        <p style="font-size:1.05rem;font-weight:700;color:var(--text);margin-bottom:4px;">¿Listo para crear tu primer video?</p>
+        <p style="font-size:0.82rem;color:var(--muted);">Sin registro. Sin instalación. 100% gratis.</p>
+        <a href="/studio.html">Ir a la App →</a>
+      </div>
 
       <footer>
-        <p style="margin-bottom:10px;">&copy; 2026 <strong>Velo AI Studio</strong>. Todos los derechos reservados.</p>
+        <p style="margin-bottom:10px;">© 2026 <strong>Velo AI Studio</strong>. Todos los derechos reservados.</p>
         <div>
           <a href="/">Inicio</a> |
           <a href="/studio.html">Estudio</a> |
           <a href="/blog/">Blog</a> |
+          <a href="/editorial.html">Metodología</a> |
+          <a href="/contact.html">Contacto</a> |
           <a href="/privacy.html">Privacidad</a> |
-          <a href="/tos.html">T&eacute;rminos</a> |
-          <a href="/contact.html">Contacto</a>
+          <a href="/tos.html">Términos</a>
         </div>
       </footer>
     </div>
 
-    <!-- ENGLISH CONTENT -->
+    <!-- ═══════════════ ENGLISH CONTENT ═══════════════ -->
     <div class="lang-en">
       <h1>About Velo AI Studio</h1>
-      <p class="subtitle">We build AI-powered video tools for content creators</p>
+      <p class="subtitle">// An independent project to democratize AI video creation //</p>
 
-      <h2>Our Mission</h2>
-      <p>Velo AI Studio was born with a clear goal: <strong>to democratize professional video creation</strong> using artificial intelligence. We believe that anyone, regardless of their technical experience or budget, should be able to transform their ideas into high-quality visual content.</p>
-
-      <h2>What is Velo AI Studio?</h2>
-      <p>We are a <strong>free web platform</strong> that lets you create videos automatically from text scripts (SRT files) or audio recordings (MP3/WAV). Our tool combines:</p>
-      <ul>
-        <li><strong>AI Image Generation</strong> &mdash; We create cinematic images for each segment of your script using generative AI models.</li>
-        <li><strong>Automatic Subtitles</strong> &mdash; Synchronized with the audio for maximum accessibility.</li>
-        <li><strong>Text-to-Speech Narration</strong> &mdash; Convert text to natural voice in multiple languages.</li>
-        <li><strong>MP4/WebM Export</strong> &mdash; Videos ready to publish on YouTube, TikTok, Instagram, and more.</li>
-      </ul>
-
-      <h2>How Does It Work?</h2>
-      <p>All processing happens <strong>directly in your browser</strong>. We don't store your data, scripts, or audio files on any server. Your privacy is our priority. For image and text generation, we use the <a href="https://pollinations.ai" target="_blank" rel="noopener">Pollinations AI</a> API, a free generative AI service.</p>
-
-      <h2>Who Is It For?</h2>
-      <p>Velo AI Studio is designed for:</p>
-      <ul>
-        <li><strong>Content creators</strong> who want to produce videos for YouTube, TikTok, or social media without manual editing.</li>
-        <li><strong>Educators and trainers</strong> who need visual material for their courses or presentations.</li>
-        <li><strong>Entrepreneurs</strong> looking to create marketing content without a production team.</li>
-        <li><strong>Anyone</strong> with an idea and a desire to create, regardless of experience level.</li>
-      </ul>
-
-      <h2>Our Values</h2>
-      <ul>
-        <li><strong>Free and accessible</strong> &mdash; No accounts, no payments, no artificial limits.</li>
-        <li><strong>Privacy first</strong> &mdash; Everything is processed on your device. We don't collect personal data.</li>
-        <li><strong>Transparency</strong> &mdash; Open to improvements and community feedback.</li>
-        <li><strong>Quality</strong> &mdash; We use the most advanced AI models available to deliver professional results.</li>
-      </ul>
-
-      <div class="cta-box">
-        <p style="font-size:1.05rem; font-weight:700; color:var(--text); margin-bottom:4px;">Ready to create your first video?</p>
-        <p style="font-size:0.82rem; color:var(--muted);">No sign-up. No installation. 100% free.</p>
-        <a href="/studio.html">Go to the App</a>
+      <div class="bio-card">
+        <div class="bio-avatar" aria-label="Ali A. avatar">A</div>
+        <div class="bio-info">
+          <h3>Ali A.</h3>
+          <p class="role">Developer and editor-in-chief</p>
+          <p class="tagline">Creator of Velo AI Studio. Over 6 years building web applications with JavaScript, WebCodecs and generative AI APIs. I write about how artificial intelligence is transforming audiovisual content creation.</p>
+        </div>
       </div>
 
-      <h2>Contact</h2>
-      <p>If you have questions, suggestions, or want to report an issue, visit our <a href="/contact.html">contact page</a>. You can also read our <a href="/blog/">blog</a> for tutorials and tips on AI content creation.</p>
+      <h2>Why Velo AI Studio exists</h2>
+      <p>Early in 2026 I ran into a concrete problem: I wanted to launch a YouTube channel on science outreach, but I had no budget for professional editing software, no time to learn Adobe Premiere from scratch, and no interest in going on camera.</p>
+      <p>I tried dozens of online tools and most followed the same pattern: watermark on the free plan, 30-second video limit, or a monthly subscription I couldn't justify before having a single subscriber. The ones that were free were either technically frustrating or required installing heavy software.</p>
+      <p>Then I discovered <a href="https://pollinations.ai" target="_blank" rel="noopener">Pollinations AI</a>, a free image and text generation API. I realized that by combining it with the browser's native <strong>WebCodecs</strong> API (available in Chrome since 2022), it was possible to do the entire pipeline — from script to 1080p MP4 — <em>directly in the browser</em>, with no servers, no cloud uploads, and no costs.</p>
+      <p>That's how <strong>Velo AI Studio</strong> was born in March 2026: a tool I wanted to use myself, released so that anyone else with the same frustration could make professional videos without financial or technical barriers.</p>
+
+      <div class="facts">
+        <div class="fact"><strong>2026</strong><span>Founded</span></div>
+        <div class="fact"><strong>17+</strong><span>Blog articles</span></div>
+        <div class="fact"><strong>34</strong><span>AI voices supported</span></div>
+        <div class="fact"><strong>100%</strong><span>Client-side</span></div>
+      </div>
+
+      <h2>What Velo AI Studio does</h2>
+      <p>Velo AI Studio is a <strong>single-page web application</strong> (SPA) that turns a text script or an audio file into a complete video with:</p>
+      <ul>
+        <li><strong>AI-generated images</strong> — One cinematic image per subtitle block, created with models like Flux, ZImage, GPT Image or Kontext via Pollinations AI.</li>
+        <li><strong>Word-level timed subtitles</strong> — Transcription via ElevenLabs Scribe v2 or Whisper Large V3 if you upload audio.</li>
+        <li><strong>34 Text-to-Speech voices</strong> — OpenAI and ElevenLabs, in Spanish, English, and other languages.</li>
+        <li><strong>1080p H.264 MP4 export</strong> — 16:9 (YouTube) or 9:16 (TikTok / Reels / Shorts) format, rendered with browser WebCodecs.</li>
+      </ul>
+      <p>All processing happens on your device. We don't upload your scripts or audio to any server of ours. Read full technical details on our <a href="/editorial.html">editorial and technical methodology page</a>.</p>
+
+      <div class="disclosure">
+        <h3>⚠ Transparency about AI use</h3>
+        <p>In 2026, honesty about how content is made is essential. Here's the full truth about this site:</p>
+        <p><strong>The app</strong> (the video editor at <code>/studio.html</code>) uses generative AI models at its core — that's obvious, it's its whole purpose.</p>
+        <p><strong>Blog articles</strong> are drafted with assistance from language models (GPT-5 / Claude), but <strong>every article is reviewed, technically verified, and manually edited by me before publishing</strong>. If an article says "I tested X model and got Y result", it's because I personally tested it. If a tutorial says "click here", that interaction exists in the app and I have executed it.</p>
+        <p>Technical data (speed, resolutions, Pollen costs, available models) comes from real tests or Pollinations' public API. Numbers are never invented.</p>
+      </div>
+
+      <h2>Editorial principles</h2>
+      <p>Articles published here follow four non-negotiable rules:</p>
+      <ol>
+        <li><strong>Mandatory technical verification.</strong> Every claim about the app, Pollinations, or YouTube must be verifiable. If I say "Flux is free", it's because it's marked <code>tier:anonymous</code> in the public API.</li>
+        <li><strong>No hidden affiliation.</strong> I receive no commission for recommending any external tool. If I mention ElevenLabs, OpenAI or Pollinations, it's for utility, not commercial agreement.</li>
+        <li><strong>Updates when reality changes.</strong> When Pollinations changes pricing or renames a model (it has happened twice since launch), I update affected articles with a "Last updated" note.</li>
+        <li><strong>Visible error correction.</strong> If a reader spots a factual error, I fix it and add a note at the end of the article saying what was changed and when.</li>
+      </ol>
+      <p>Read the full protocol on our <a href="/editorial.html">editorial methodology page</a>.</p>
+
+      <h2>How the project is funded</h2>
+      <p>Velo AI Studio is an independent project, self-funded by its creator. Current or planned income sources are only:</p>
+      <ul>
+        <li><strong>Google AdSense contextual ads</strong> (pending approval at the time of writing).</li>
+        <li><strong>Voluntary donations</strong> if users want to support development.</li>
+      </ul>
+      <p>No subscriptions, no premium plans, no selling user data. The tool is and will remain free for personal and commercial use.</p>
+
+      <h2>Direct contact</h2>
+      <p>If you find a bug, want to suggest a blog topic, or have a partnership proposal, you can write me directly:</p>
+      <div class="contact-row">
+        <a href="mailto:contacto@veloaistudio.online">✉ contacto@veloaistudio.online</a>
+        <a href="/contact.html">📝 Contact form</a>
+      </div>
+      <p style="font-size:0.82rem;color:var(--muted);">I reply within 24–48 business hours. For critical bug reports (app won't load, export fails), the form has priority because it includes a "Technical support" category selector.</p>
+
+      <div class="cta-box">
+        <p style="font-size:1.05rem;font-weight:700;color:var(--text);margin-bottom:4px;">Ready to make your first video?</p>
+        <p style="font-size:0.82rem;color:var(--muted);">No signup. No install. 100% free.</p>
+        <a href="/studio.html">Open the App →</a>
+      </div>
 
       <footer>
-        <p style="margin-bottom:10px;">&copy; 2026 <strong>Velo AI Studio</strong>. All rights reserved.</p>
+        <p style="margin-bottom:10px;">© 2026 <strong>Velo AI Studio</strong>. All rights reserved.</p>
         <div>
           <a href="/">Home</a> |
           <a href="/studio.html">Studio</a> |
           <a href="/blog/">Blog</a> |
+          <a href="/editorial.html">Methodology</a> |
+          <a href="/contact.html">Contact</a> |
           <a href="/privacy.html">Privacy</a> |
-          <a href="/tos.html">Terms</a> |
-          <a href="/contact.html">Contact</a>
+          <a href="/tos.html">Terms</a>
         </div>
       </footer>
     </div>
@@ -173,49 +349,14 @@
     var isEN = !navigator.language.toLowerCase().startsWith('es');
     if (isEN) {
       document.documentElement.lang = 'en';
-      document.title = 'About — Velo AI Studio';
+      document.title = 'About Velo AI Studio — Story, team and methodology';
       var md = document.querySelector('meta[name="description"]');
-      if (md) md.setAttribute('content', 'Learn about Velo AI Studio: who we are, our mission, and how our free AI video creation tool works.');
+      if (md) md.setAttribute('content', 'Meet Ali A., the developer behind Velo AI Studio. Project history, editorial methodology, transparency principles, and why we built a free AI video tool.');
       document.querySelectorAll('.lang-es').forEach(function(e){ e.style.display = 'none'; });
       document.querySelectorAll('.lang-en').forEach(function(e){ e.style.display = 'block'; });
     }
   })();
   </script>
 
-  <!-- COOKIE CONSENT BANNER -->
-  <div id="cookieConsent" style="display:none; position:fixed; bottom:0; left:0; right:0; z-index:99999; background:var(--surface); border-top:2px solid var(--accent); padding:18px 24px; font-family:'Space Mono',monospace; font-size:0.75rem; color:var(--text); box-shadow:0 -4px 24px rgba(0,0,0,0.3);">
-    <div style="max-width:960px; margin:0 auto; display:flex; flex-wrap:wrap; align-items:center; gap:14px; justify-content:space-between;">
-      <p class="cc-text-es" style="flex:1; min-width:240px; line-height:1.6; margin:0; color:var(--prose);">
-        Este sitio usa cookies propias y de terceros (Google AdSense, Google Analytics) para mostrar anuncios personalizados y analizar el tráfico.
-        Al hacer clic en <strong>"Aceptar"</strong>, consientes el uso de cookies.
-        <a href="/privacy.html" style="color:var(--accent2);">Política de Privacidad</a>.
-      </p>
-      <p class="cc-text-en" style="flex:1; min-width:240px; line-height:1.6; margin:0; color:var(--prose); display:none;">
-        This site uses first-party and third-party cookies (Google AdSense, Google Analytics) to show personalized ads and analyze traffic.
-        By clicking <strong>"Accept"</strong>, you consent to the use of cookies.
-        <a href="/privacy.html" style="color:var(--accent2);">Privacy Policy</a>.
-      </p>
-      <div style="display:flex; gap:10px; flex-shrink:0;">
-        <button onclick="acceptCookies()" style="padding:10px 22px; background:linear-gradient(135deg,var(--accent),var(--accent2)); border:none; border-radius:8px; color:white; font-family:'Syne',sans-serif; font-weight:700; font-size:0.82rem; cursor:pointer;" class="cc-btn-accept">Aceptar</button>
-        <button onclick="rejectCookies()" style="padding:10px 22px; background:var(--surface2); border:1px solid var(--border); border-radius:8px; color:var(--muted); font-family:'Syne',sans-serif; font-weight:600; font-size:0.82rem; cursor:pointer;" class="cc-btn-reject">Rechazar</button>
-      </div>
-    </div>
-  </div>
-  <script>
-  (function(){
-    var isEN = document.documentElement.lang === 'en';
-    if (isEN) {
-      var es = document.querySelector('.cc-text-es'); if (es) es.style.display='none';
-      var en = document.querySelector('.cc-text-en'); if (en) en.style.display='block';
-      var a = document.querySelector('.cc-btn-accept'); if (a) a.textContent='Accept';
-      var r = document.querySelector('.cc-btn-reject'); if (r) r.textContent='Reject';
-    }
-    if (!localStorage.getItem('cookieConsent')) {
-      var el = document.getElementById('cookieConsent'); if (el) el.style.display='block';
-    }
-  })();
-  function acceptCookies(){localStorage.setItem('cookieConsent','accepted');document.getElementById('cookieConsent').style.display='none';}
-  function rejectCookies(){localStorage.setItem('cookieConsent','rejected');document.getElementById('cookieConsent').style.display='none';}
-  </script>
 </body>
 </html>

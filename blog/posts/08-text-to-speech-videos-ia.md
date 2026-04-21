@@ -2,7 +2,7 @@
 num: "08"
 slug: 08-text-to-speech-videos-ia
 emoji: 🎙️
-date: 2026-03-23
+date: 2026-03-05
 tag_es: Función
 tag_en: Feature
 title_es: "Text-to-Speech en videos de IA: añade locución automática"

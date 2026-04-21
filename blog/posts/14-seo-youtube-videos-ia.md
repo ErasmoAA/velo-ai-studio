@@ -2,7 +2,7 @@
 num: "14"
 slug: 14-seo-youtube-videos-ia
 emoji: 🔍
-date: 2026-03-24
+date: 2026-04-08
 tag_es: Estrategia
 tag_en: Strategy
 title_es: SEO para YouTube con videos de IA — guía completa para principiantes

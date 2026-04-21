@@ -2,7 +2,7 @@
 num: "05"
 slug: 05-subtitulos-automaticos
 emoji: 📝
-date: 2026-03-23
+date: 2026-02-12
 tag_es: Función
 tag_en: Feature
 title_es: "Subtítulos automáticos: cómo usar archivos SRT"

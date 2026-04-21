@@ -2,7 +2,7 @@
 num: "13"
 slug: 13-como-crear-miniaturas-youtube-ia
 emoji: 🖼️
-date: 2026-03-24
+date: 2026-04-05
 tag_es: Tutorial
 tag_en: Tutorial
 title_es: Cómo crear miniaturas de YouTube con IA que generan más clics

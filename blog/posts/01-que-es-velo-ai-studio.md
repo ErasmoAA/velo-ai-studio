@@ -2,7 +2,7 @@
 num: "01"
 slug: 01-que-es-velo-ai-studio
 emoji: 🎬
-date: 2026-03-23
+date: 2026-01-15
 tag_es: Introducción
 tag_en: Introduction
 title_es: ¿Qué es Velo AI Studio y cómo funciona?
