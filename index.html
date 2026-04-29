@@ -1,5 +1,6 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es">
+
 <head>
   <script src="https://quge5.com/88/tag.min.js" data-zone="234545" async data-cfasync="false"></script>
   <meta charset="UTF-8">
@@ -8,7 +9,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>Velo AI Studio — Tutoriales y Herramienta Gratuita para Crear Videos con IA</title>
-  <meta name="description" content="Aprende a crear videos profesionales con inteligencia artificial. Tutoriales, guias y estrategias para YouTube, TikTok e Instagram. Herramienta gratuita de generacion de video con IA.">
+  <meta name="description"
+    content="Aprende a crear videos profesionales con inteligencia artificial. Tutoriales, guias y estrategias para YouTube, TikTok e Instagram. Herramienta gratuita de generacion de video con IA.">
   <link rel="icon" type="image/png" href="/favicon.png">
   <link rel="shortcut icon" href="/favicon.png">
   <meta name="robots" content="index, follow">
@@ -20,14 +22,16 @@
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://veloaistudio.online/">
   <meta property="og:title" content="Velo AI Studio — Videos con Inteligencia Artificial">
-  <meta property="og:description" content="Blog de tutoriales y herramienta gratuita para crear videos profesionales con IA generativa.">
+  <meta property="og:description"
+    content="Blog de tutoriales y herramienta gratuita para crear videos profesionales con IA generativa.">
   <meta property="og:image" content="https://veloaistudio.online/og-image.png">
   <meta property="og:locale" content="es_ES">
   <meta property="og:site_name" content="Velo AI Studio">
 
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Velo AI Studio — Videos con IA">
-  <meta name="twitter:description" content="Tutoriales y herramienta gratuita para crear videos profesionales con inteligencia artificial.">
+  <meta name="twitter:description"
+    content="Tutoriales y herramienta gratuita para crear videos profesionales con inteligencia artificial.">
   <meta name="twitter:image" content="https://veloaistudio.online/og-image.png">
 
   <script type="application/ld+json">
@@ -106,353 +110,812 @@
   <link rel="stylesheet" href="/theme.css">
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;800&display=swap');
-    *{margin:0;padding:0;box-sizing:border-box}
-    body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;min-height:100vh;overflow-x:hidden}
-    body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse 80% 50% at 20% 10%,rgba(124,58,237,.08),transparent),radial-gradient(ellipse 60% 40% at 80% 80%,rgba(6,182,212,.06),transparent);pointer-events:none;z-index:0}
-    .wrap{position:relative;z-index:1}
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Syne', sans-serif;
+      min-height: 100vh;
+      overflow-x: hidden
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(ellipse 80% 50% at 20% 10%, rgba(124, 58, 237, .08), transparent), radial-gradient(ellipse 60% 40% at 80% 80%, rgba(6, 182, 212, .06), transparent);
+      pointer-events: none;
+      z-index: 0
+    }
+
+    .wrap {
+      position: relative;
+      z-index: 1
+    }
 
     /* Nav */
-    .nav{display:flex;justify-content:space-between;align-items:center;padding:18px 24px;max-width:1100px;margin:0 auto;font-family:'Space Mono',monospace;font-size:.78rem}
-    .nav-logo{color:var(--text);text-decoration:none;font-weight:700;font-size:.95rem;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-    .nav-links a{color:var(--muted);text-decoration:none;margin-left:22px;transition:color .2s}
-    .nav-links a:hover{color:var(--accent2)}
-    .nav-links .cta-link{color:var(--accent2);font-weight:700;border:1px solid var(--accent2);padding:6px 14px;border-radius:8px}
-    .nav-links .cta-link:hover{background:var(--accent2);color:#fff}
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 24px;
+      max-width: 1100px;
+      margin: 0 auto;
+      font-family: 'Space Mono', monospace;
+      font-size: .78rem
+    }
+
+    .nav-logo {
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 700;
+      font-size: .95rem;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      margin-left: 22px;
+      transition: color .2s
+    }
+
+    .nav-links a:hover {
+      color: var(--accent2)
+    }
+
+    .nav-links .cta-link {
+      color: var(--accent2);
+      font-weight: 700;
+      border: 1px solid var(--accent2);
+      padding: 6px 14px;
+      border-radius: 8px
+    }
+
+    .nav-links .cta-link:hover {
+      background: var(--accent2);
+      color: #fff
+    }
 
     /* Hero */
-    .hero{text-align:center;padding:60px 24px 40px;max-width:800px;margin:0 auto}
-    .hero .eyebrow{display:inline-block;font-family:'Space Mono',monospace;font-size:.7rem;text-transform:uppercase;letter-spacing:2px;color:var(--accent2);margin-bottom:16px}
-    .hero .eyebrow::before{content:'';display:inline-block;width:20px;height:1px;background:var(--accent2);vertical-align:middle;margin-right:8px}
-    .hero h1{font-size:clamp(1.8rem,4.5vw,2.8rem);font-weight:800;line-height:1.2;margin-bottom:18px;background:linear-gradient(135deg,var(--text) 0%,var(--accent) 50%,var(--accent2) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-    .hero p{font-size:1.05rem;color:var(--muted);line-height:1.7;margin-bottom:28px;max-width:600px;margin-left:auto;margin-right:auto}
-    .hero-stats{display:flex;justify-content:center;gap:32px;margin-bottom:30px;font-family:'Space Mono',monospace;font-size:.75rem;color:var(--muted)}
-    .hero-stats strong{display:block;font-size:1.4rem;color:var(--text);margin-bottom:2px;font-family:'Syne',sans-serif}
-    .hero-cta{display:inline-block;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;padding:14px 32px;border-radius:12px;text-decoration:none;font-weight:700;font-size:1rem;transition:transform .2s,box-shadow .2s}
-    .hero-cta:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(124,58,237,.35)}
+    .hero {
+      text-align: center;
+      padding: 60px 24px 40px;
+      max-width: 800px;
+      margin: 0 auto
+    }
+
+    .hero .eyebrow {
+      display: inline-block;
+      font-family: 'Space Mono', monospace;
+      font-size: .7rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--accent2);
+      margin-bottom: 16px
+    }
+
+    .hero .eyebrow::before {
+      content: '';
+      display: inline-block;
+      width: 20px;
+      height: 1px;
+      background: var(--accent2);
+      vertical-align: middle;
+      margin-right: 8px
+    }
+
+    .hero h1 {
+      font-size: clamp(1.8rem, 4.5vw, 2.8rem);
+      font-weight: 800;
+      line-height: 1.2;
+      margin-bottom: 18px;
+      background: linear-gradient(135deg, var(--text) 0%, var(--accent) 50%, var(--accent2) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text
+    }
+
+    .hero p {
+      font-size: 1.05rem;
+      color: var(--muted);
+      line-height: 1.7;
+      margin-bottom: 28px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto
+    }
+
+    .hero-stats {
+      display: flex;
+      justify-content: center;
+      gap: 32px;
+      margin-bottom: 30px;
+      font-family: 'Space Mono', monospace;
+      font-size: .75rem;
+      color: var(--muted)
+    }
+
+    .hero-stats strong {
+      display: block;
+      font-size: 1.4rem;
+      color: var(--text);
+      margin-bottom: 2px;
+      font-family: 'Syne', sans-serif
+    }
+
+    .hero-cta {
+      display: inline-block;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      color: #fff;
+      padding: 14px 32px;
+      border-radius: 12px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 1rem;
+      transition: transform .2s, box-shadow .2s
+    }
+
+    .hero-cta:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(124, 58, 237, .35)
+    }
 
     /* Section headings */
-    .section{max-width:1000px;margin:50px auto;padding:0 24px}
-    .section h2{font-size:1.5rem;font-weight:800;margin-bottom:8px;color:var(--text)}
-    .section .sub{font-size:.88rem;color:var(--muted);margin-bottom:28px;font-family:'Space Mono',monospace}
+    .section {
+      max-width: 1000px;
+      margin: 50px auto;
+      padding: 0 24px
+    }
+
+    .section h2 {
+      font-size: 1.5rem;
+      font-weight: 800;
+      margin-bottom: 8px;
+      color: var(--text)
+    }
+
+    .section .sub {
+      font-size: .88rem;
+      color: var(--muted);
+      margin-bottom: 28px;
+      font-family: 'Space Mono', monospace
+    }
 
     /* Article cards grid */
-    .cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:20px}
-    .card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:24px;transition:border-color .25s,transform .2s,box-shadow .2s;display:flex;flex-direction:column;text-decoration:none;color:inherit}
-    .card:hover{border-color:var(--accent);transform:translateY(-3px);box-shadow:0 8px 24px rgba(124,58,237,.12)}
-    .card-tag{display:inline-block;font-family:'Space Mono',monospace;font-size:.65rem;text-transform:uppercase;padding:3px 10px;border-radius:12px;margin-bottom:10px;width:fit-content}
-    .card h3{font-size:1rem;font-weight:700;line-height:1.35;margin-bottom:8px;color:var(--text)}
-    .card p{font-size:.82rem;color:var(--muted);line-height:1.6;flex-grow:1}
-    .card-foot{font-family:'Space Mono',monospace;font-size:.65rem;color:var(--muted);margin-top:12px;display:flex;justify-content:space-between;align-items:center}
-    .card-foot .arrow{color:var(--accent);font-size:1.1rem}
-    .card.featured{grid-column:1/-1;display:flex;flex-direction:row;gap:24px;background:linear-gradient(135deg,var(--surface),var(--surface2,var(--surface)));border-color:rgba(124,58,237,.3)}
-    .card.featured .card-body{display:flex;flex-direction:column;justify-content:center}
-    .card.featured h3{font-size:1.2rem}
-    @media(max-width:640px){.card.featured{flex-direction:column}}
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 20px
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 24px;
+      transition: border-color .25s, transform .2s, box-shadow .2s;
+      display: flex;
+      flex-direction: column;
+      text-decoration: none;
+      color: inherit
+    }
+
+    .card:hover {
+      border-color: var(--accent);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 24px rgba(124, 58, 237, .12)
+    }
+
+    .card-tag {
+      display: inline-block;
+      font-family: 'Space Mono', monospace;
+      font-size: .65rem;
+      text-transform: uppercase;
+      padding: 3px 10px;
+      border-radius: 12px;
+      margin-bottom: 10px;
+      width: fit-content
+    }
+
+    .card h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      line-height: 1.35;
+      margin-bottom: 8px;
+      color: var(--text)
+    }
+
+    .card p {
+      font-size: .82rem;
+      color: var(--muted);
+      line-height: 1.6;
+      flex-grow: 1
+    }
+
+    .card-foot {
+      font-family: 'Space Mono', monospace;
+      font-size: .65rem;
+      color: var(--muted);
+      margin-top: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center
+    }
+
+    .card-foot .arrow {
+      color: var(--accent);
+      font-size: 1.1rem
+    }
+
+    .card.featured {
+      grid-column: 1/-1;
+      display: flex;
+      flex-direction: row;
+      gap: 24px;
+      background: linear-gradient(135deg, var(--surface), var(--surface2, var(--surface)));
+      border-color: rgba(124, 58, 237, .3)
+    }
+
+    .card.featured .card-body {
+      display: flex;
+      flex-direction: column;
+      justify-content: center
+    }
+
+    .card.featured h3 {
+      font-size: 1.2rem
+    }
+
+    @media(max-width:640px) {
+      .card.featured {
+        flex-direction: column
+      }
+    }
 
     /* Guide article */
-    .guide{max-width:820px;margin:60px auto;padding:0 24px;line-height:1.85;font-size:.95rem;color:var(--prose,var(--muted))}
-    .guide h2{font-size:1.5rem;font-weight:800;color:var(--text);margin-bottom:20px}
-    .guide h3{font-size:1.1rem;font-weight:700;color:var(--text);margin:28px 0 12px;border-left:3px solid var(--accent);padding-left:12px}
-    .guide p{margin-bottom:14px}
-    .guide ol,.guide ul{padding-left:20px;margin-bottom:18px}
-    .guide li{margin-bottom:8px}
-    .guide strong{color:var(--text)}
-    .guide a{color:var(--accent);text-decoration:none}
-    .guide a:hover{text-decoration:underline}
+    .guide {
+      max-width: 820px;
+      margin: 60px auto;
+      padding: 0 24px;
+      line-height: 1.85;
+      font-size: .95rem;
+      color: var(--prose, var(--muted))
+    }
+
+    .guide h2 {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--text);
+      margin-bottom: 20px
+    }
+
+    .guide h3 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--text);
+      margin: 28px 0 12px;
+      border-left: 3px solid var(--accent);
+      padding-left: 12px
+    }
+
+    .guide p {
+      margin-bottom: 14px
+    }
+
+    .guide ol,
+    .guide ul {
+      padding-left: 20px;
+      margin-bottom: 18px
+    }
+
+    .guide li {
+      margin-bottom: 8px
+    }
+
+    .guide strong {
+      color: var(--text)
+    }
+
+    .guide a {
+      color: var(--accent);
+      text-decoration: none
+    }
+
+    .guide a:hover {
+      text-decoration: underline
+    }
 
     /* FAQ */
-    .faq-item{margin-bottom:18px;border-bottom:1px solid var(--border);padding-bottom:16px}
-    .faq-item:last-child{border-bottom:none}
-    .faq-q{font-weight:700;color:var(--text);margin-bottom:6px;font-size:.95rem}
-    .faq-a{color:var(--muted);font-size:.9rem;line-height:1.7}
+    .faq-item {
+      margin-bottom: 18px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 16px
+    }
+
+    .faq-item:last-child {
+      border-bottom: none
+    }
+
+    .faq-q {
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 6px;
+      font-size: .95rem
+    }
+
+    .faq-a {
+      color: var(--muted);
+      font-size: .9rem;
+      line-height: 1.7
+    }
 
     /* CTA banner */
-    .cta-banner{text-align:center;padding:50px 24px;margin:40px 0;background:linear-gradient(135deg,rgba(124,58,237,.08),rgba(6,182,212,.08));border-radius:20px;max-width:800px;margin-left:auto;margin-right:auto}
-    .cta-banner h2{margin-bottom:12px;font-size:1.4rem}
-    .cta-banner p{color:var(--muted);margin-bottom:24px;font-size:.9rem}
+    .cta-banner {
+      text-align: center;
+      padding: 50px 24px;
+      margin: 40px 0;
+      background: linear-gradient(135deg, rgba(124, 58, 237, .08), rgba(6, 182, 212, .08));
+      border-radius: 20px;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto
+    }
+
+    .cta-banner h2 {
+      margin-bottom: 12px;
+      font-size: 1.4rem
+    }
+
+    .cta-banner p {
+      color: var(--muted);
+      margin-bottom: 24px;
+      font-size: .9rem
+    }
 
     /* Blog links */
-    .blog-links{list-style:none;padding:0}
-    .blog-links li{margin-bottom:14px}
-    .blog-links a{color:var(--accent);text-decoration:none;font-weight:600;font-size:.95rem}
-    .blog-links a:hover{text-decoration:underline}
-    .blog-links .desc{display:block;font-size:.82rem;color:var(--muted);margin-top:2px}
+    .blog-links {
+      list-style: none;
+      padding: 0
+    }
+
+    .blog-links li {
+      margin-bottom: 14px
+    }
+
+    .blog-links a {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: .95rem
+    }
+
+    .blog-links a:hover {
+      text-decoration: underline
+    }
+
+    .blog-links .desc {
+      display: block;
+      font-size: .82rem;
+      color: var(--muted);
+      margin-top: 2px
+    }
 
     /* Footer */
-    footer{text-align:center;padding:40px 24px 32px;font-size:.7rem;color:var(--muted);font-family:'Space Mono',monospace;border-top:1px solid var(--border);margin-top:40px}
-    footer p{margin-bottom:8px}
-    footer a{color:var(--muted);text-decoration:none;margin:0 8px}
-    footer a:hover{color:var(--accent2)}
+    footer {
+      text-align: center;
+      padding: 40px 24px 32px;
+      font-size: .7rem;
+      color: var(--muted);
+      font-family: 'Space Mono', monospace;
+      border-top: 1px solid var(--border);
+      margin-top: 40px
+    }
+
+    footer p {
+      margin-bottom: 8px
+    }
+
+    footer a {
+      color: var(--muted);
+      text-decoration: none;
+      margin: 0 8px
+    }
+
+    footer a:hover {
+      color: var(--accent2)
+    }
 
     /* Ad containers */
-    .ad-container{margin:30px auto;max-width:728px;min-height:90px;text-align:center;border:1px dashed var(--border);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:.65rem;color:var(--muted);font-family:'Space Mono',monospace;opacity:.5}
+    .ad-container {
+      margin: 30px auto;
+      max-width: 728px;
+      min-height: 90px;
+      text-align: center;
+      border: 1px dashed var(--border);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: .65rem;
+      color: var(--muted);
+      font-family: 'Space Mono', monospace;
+      opacity: .5
+    }
   </style>
   <meta name="monetag" content="7ca439aa8317b6517fa50ba436d45a8f">
 </head>
+
 <body>
-<div class="wrap">
+  <div class="wrap">
 
-  <!-- ── NAVEGACION ──────────────────────────────────────────────────── -->
-  <nav class="nav">
-    <a href="/" class="nav-logo">Velo AI Studio</a>
-    <div class="nav-links">
-      <a href="/blog/">Blog</a>
-      <a href="/about.html">Acerca de</a>
-      <a href="/contact.html">Contacto</a>
-      <a href="/studio.html" class="cta-link">Crear Video</a>
-    </div>
-  </nav>
+    <!-- ── NAVEGACION ──────────────────────────────────────────────────── -->
+    <nav class="nav">
+      <a href="/" class="nav-logo">Velo AI Studio</a>
+      <div class="nav-links">
+        <a href="/blog/">Blog</a>
+        <a href="/about.html">Acerca de</a>
+        <a href="/contact.html">Contacto</a>
+        <a href="/studio.html" class="cta-link">Crear Video</a>
+      </div>
+    </nav>
 
-  <!-- ── HERO ────────────────────────────────────────────────────────── -->
-  <section class="hero">
-    <span class="eyebrow">Plataforma de Creacion de Video con IA</span>
-    <h1>Aprende a Crear Videos Profesionales con Inteligencia Artificial</h1>
-    <p>Tutoriales paso a paso, guias de estrategia y una herramienta gratuita para transformar tus ideas en videos cinematograficos. Sin camaras, sin experiencia previa.</p>
-    <div class="hero-stats">
-      <div><strong>17</strong>articulos</div>
-      <div><strong>100%</strong>gratis</div>
-      <div><strong>ES + EN</strong>bilingue</div>
-      <div><strong>34</strong>voces IA</div>
-    </div>
-    <a href="/studio.html" class="hero-cta">Abrir Estudio de Video →</a>
-  </section>
+    <!-- ── HERO ────────────────────────────────────────────────────────── -->
+    <section class="hero">
+      <span class="eyebrow">Plataforma de Creacion de Video con IA</span>
+      <h1>Aprende a Crear Videos Profesionales con Inteligencia Artificial</h1>
+      <p>Tutoriales paso a paso, guias de estrategia y una herramienta gratuita para transformar tus ideas en videos
+        cinematograficos. Sin camaras, sin experiencia previa.</p>
+      <div class="hero-stats">
+        <div><strong>17</strong>articulos</div>
+        <div><strong>100%</strong>gratis</div>
+        <div><strong>ES + EN</strong>bilingue</div>
+        <div><strong>34</strong>voces IA</div>
+      </div>
+      <a href="/studio.html" class="hero-cta">Abrir Estudio de Video →</a>
+    </section>
 
-  <!-- ── AD UNIT 1 ───────────────────────────────────────────────────── -->
-  <div class="ad-container">Anuncio</div>
+    <!-- ── AD UNIT 1 ───────────────────────────────────────────────────── -->
+    <div class="ad-container">Anuncio</div>
 
-  <!-- ── ARTICULOS DESTACADOS ────────────────────────────────────────── -->
-  <section class="section">
-    <h2>Articulos Destacados</h2>
-    <p class="sub">Guias y tutoriales para dominar la creacion de video con IA</p>
+    <!-- ── ARTICULOS DESTACADOS ────────────────────────────────────────── -->
+    <section class="section">
+      <h2>Articulos Destacados</h2>
+      <p class="sub">Guias y tutoriales para dominar la creacion de video con IA</p>
 
-    <div class="cards">
-      <!-- Featured -->
-      <a href="/blog/02-como-crear-videos-con-ia.html" class="card featured">
-        <div style="font-size:3rem;min-width:80px;text-align:center">🎬</div>
-        <div class="card-body">
-          <span class="card-tag" style="color:#7c3aed;border:1px solid #7c3aed22;background:#7c3aed12">Tutorial</span>
-          <h3>Como crear videos con inteligencia artificial paso a paso</h3>
-          <p>Tutorial completo desde la escritura del guion hasta la exportacion final del video en MP4. Aprende el flujo de trabajo profesional.</p>
+      <div class="cards">
+        <!-- Featured -->
+        <a href="/blog/02-como-crear-videos-con-ia.html" class="card featured">
+          <div style="font-size:3rem;min-width:80px;text-align:center">🎬</div>
+          <div class="card-body">
+            <span class="card-tag" style="color:#7c3aed;border:1px solid #7c3aed22;background:#7c3aed12">Tutorial</span>
+            <h3>Como crear videos con inteligencia artificial paso a paso</h3>
+            <p>Tutorial completo desde la escritura del guion hasta la exportacion final del video en MP4. Aprende el
+              flujo de trabajo profesional.</p>
+            <div class="card-foot"><span>7 min lectura</span><span class="arrow">→</span></div>
+          </div>
+        </a>
+
+        <a href="/blog/06-monetizar-canal-youtube.html" class="card">
+          <span class="card-tag" style="color:#f59e0b;border:1px solid #f59e0b22;background:#f59e0b12">Estrategia</span>
+          <h3>Como monetizar tu canal de YouTube con videos de IA</h3>
+          <p>Estrategias reales para generar ingresos con contenido creado con inteligencia artificial. Publicidad,
+            membresías y mas.</p>
+          <div class="card-foot"><span>6 min lectura</span><span class="arrow">→</span></div>
+        </a>
+
+        <a href="/blog/14-seo-youtube-videos-ia.html" class="card">
+          <span class="card-tag" style="color:#f59e0b;border:1px solid #f59e0b22;background:#f59e0b12">Estrategia</span>
+          <h3>SEO para YouTube: optimiza tus videos con IA</h3>
+          <p>Tecnicas avanzadas de posicionamiento para que tus videos aparezcan en busquedas y obtengan mas
+            visualizaciones organicas.</p>
           <div class="card-foot"><span>7 min lectura</span><span class="arrow">→</span></div>
+        </a>
+
+        <a href="/blog/17-primeros-1000-suscriptores-youtube.html" class="card">
+          <span class="card-tag" style="color:#f59e0b;border:1px solid #f59e0b22;background:#f59e0b12">Estrategia</span>
+          <h3>Primeros 1000 suscriptores en YouTube: plan de accion</h3>
+          <p>Plan paso a paso para crecer tu canal desde cero usando contenido generado con inteligencia artificial.</p>
+          <div class="card-foot"><span>8 min lectura</span><span class="arrow">→</span></div>
+        </a>
+
+        <a href="/blog/10-canal-youtube-sin-mostrar-cara.html" class="card">
+          <span class="card-tag" style="color:#f97316;border:1px solid #f97316;background:#f9731612">Consejos</span>
+          <h3>Canal de YouTube sin mostrar la cara: guia completa</h3>
+          <p>Nichos rentables, estrategias de contenido y herramientas para crear un canal exitoso sin aparecer en
+            camara.</p>
+          <div class="card-foot"><span>6 min lectura</span><span class="arrow">→</span></div>
+        </a>
+
+        <a href="/blog/08-text-to-speech-videos-ia.html" class="card">
+          <span class="card-tag" style="color:#10b981;border:1px solid #10b98122;background:#10b98112">Funcion</span>
+          <h3>Text-to-Speech: 34 voces de IA para tus videos</h3>
+          <p>Guia de las voces disponibles de OpenAI y ElevenLabs. Aprende a elegir la voz perfecta para cada tipo de
+            contenido.</p>
+          <div class="card-foot"><span>5 min lectura</span><span class="arrow">→</span></div>
+        </a>
+
+        <a href="/blog/16-guia-prompts-imagenes-ia.html" class="card">
+          <span class="card-tag" style="color:#ec4899;border:1px solid #ec489922;background:#ec489912">Guia
+            Visual</span>
+          <h3>Guia de prompts para imagenes con IA</h3>
+          <p>Domina el arte de escribir prompts que generan imagenes profesionales y visualmente impactantes para tus
+            videos.</p>
+          <div class="card-foot"><span>7 min lectura</span><span class="arrow">→</span></div>
+        </a>
+
+        <a href="/blog/13-como-crear-miniaturas-youtube-ia.html" class="card">
+          <span class="card-tag" style="color:#7c3aed;border:1px solid #7c3aed22;background:#7c3aed12">Tutorial</span>
+          <h3>Miniaturas de YouTube con IA que generan mas clics</h3>
+          <p>Disena miniaturas llamativas usando herramientas de inteligencia artificial. Colores, textos y estrategias
+            de CTR.</p>
+          <div class="card-foot"><span>6 min lectura</span><span class="arrow">→</span></div>
+        </a>
+      </div>
+
+      <p style="text-align:center;margin-top:24px;">
+        <a href="/blog/"
+          style="color:var(--accent2);text-decoration:none;font-weight:700;font-family:'Space Mono',monospace;font-size:.85rem">Ver
+          los 17 articulos del blog →</a>
+      </p>
+    </section>
+
+    <!-- ── AD UNIT 2 ───────────────────────────────────────────────────── -->
+    <div class="ad-container">Anuncio</div>
+
+    <!-- ── GUIA COMPLETA ───────────────────────────────────────────────── -->
+    <article class="guide">
+      <h2>Guia Completa: Como Crear Videos Profesionales con Inteligencia Artificial</h2>
+
+      <p>La inteligencia artificial ha revolucionado la creacion de contenido audiovisual. Lo que antes requeria semanas
+        de trabajo con software profesional de edicion como Adobe Premiere, Final Cut Pro o DaVinci Resolve, ahora puede
+        lograrse en minutos gracias a los avances en modelos generativos de imagenes, sintesis de voz y procesamiento de
+        lenguaje natural.</p>
+
+      <p>Velo AI Studio es una plataforma web gratuita que automatiza el proceso completo de produccion de video: desde
+        la escritura del guion hasta la exportacion final en MP4. Utilizando la API de Pollinations AI, genera imagenes
+        cinematograficas para cada escena, sincroniza subtitulos con precision de milisegundos y ofrece 34 voces de
+        inteligencia artificial para la narracion, incluyendo voces de OpenAI y ElevenLabs.</p>
+
+      <h3>Como funciona el proceso de creacion</h3>
+
+      <p>El flujo de trabajo de Velo AI Studio esta disenado para ser completamente automatico. No necesitas experiencia
+        previa en edicion de video ni conocimientos de programacion. Asi funciona el proceso:</p>
+
+      <ol>
+        <li><strong>Escribe tu guion o sube un audio.</strong> Puedes escribir directamente tu historia en la
+          plataforma, o subir un archivo MP3 o WAV con tu narracion grabada. Si no tienes audio, la IA puede generar una
+          voz profesional a partir de tu texto escrito.</li>
+        <li><strong>La IA genera los subtitulos automaticamente.</strong> Si subes un archivo de audio, Velo utiliza
+          modelos avanzados de transcripcion como Scribe v2 de ElevenLabs o Whisper Large V3 de OpenAI para generar
+          subtitulos con timestamps precisos por palabra. El audio se comprime automaticamente a 16kHz mono y se divide
+          en partes si es necesario, sin importar su duracion.</li>
+        <li><strong>Se crean las imagenes de cada escena.</strong> Un modelo de lenguaje analiza cada bloque de
+          subtitulos y genera descripciones visuales detalladas (prompts). Luego, modelos de generacion de imagenes como
+          Flux, ZImage o GPT Image crean imagenes de alta calidad para cada segmento del video. Si un modelo falla, el
+          sistema prueba automaticamente con modelos de respaldo.</li>
+        <li><strong>Renderizado y exportacion directa.</strong> Todo se monta en un video final MP4 a 1080p usando las
+          APIs nativas de WebCodecs del navegador. El video se guarda directamente en tu disco duro. Sin servidores
+          intermedios, sin subidas a la nube: tu contenido permanece completamente privado.</li>
+      </ol>
+
+      <h3>Para quien es esta herramienta</h3>
+
+      <p>Velo AI Studio esta disenada para cualquier persona que quiera crear contenido audiovisual de calidad sin
+        necesidad de equipos costosos ni software complejo:</p>
+
+      <ul>
+        <li><strong>Creadores de YouTube</strong> que quieren producir videos de calidad visual sin camaras, iluminacion
+          ni equipo de grabacion profesional. Ideal para canales de divulgacion, educacion, top lists y contenido
+          evergreen.</li>
+        <li><strong>Educadores y profesores</strong> que necesitan material didactico visual para sus clases
+          presenciales, cursos online o plataformas de e-learning como Udemy o Coursera.</li>
+        <li><strong>Emprendedores y marketers</strong> que requieren videos promocionales rapidos para redes sociales,
+          campanas de marketing digital o presentaciones comerciales.</li>
+        <li><strong>Narradores de historias</strong> que desean transformar sus relatos escritos, cuentos, guiones o
+          poemas en experiencias audiovisuales envolventes.</li>
+        <li><strong>Periodistas y divulgadores</strong> que buscan ilustrar noticias, reportajes, articulos de
+          investigacion o hilos informativos con video de calidad profesional.</li>
+        <li><strong>Podcasters</strong> que quieren convertir sus episodios de audio en videos para YouTube y
+          multiplicar su alcance en multiples plataformas.</li>
+      </ul>
+
+      <h3>Tecnologias que hacen esto posible</h3>
+
+      <p>Detras de Velo AI Studio hay un ecosistema de tecnologias de inteligencia artificial de ultima generacion:</p>
+
+      <ul>
+        <li><strong>Pollinations AI</strong> — Plataforma de IA generativa que proporciona acceso gratuito a modelos de
+          generacion de imagenes, texto y audio a traves de su API.</li>
+        <li><strong>Modelos de imagen</strong> — Flux, ZImage, GPT Image y otros modelos de difusion que generan
+          imagenes fotorrealistas y artisticas a partir de descripciones textuales.</li>
+        <li><strong>ElevenLabs</strong> — Motor de voz con 34 voces expresivas en multiples idiomas, capaz de generar
+          narraciones que suenan naturales y profesionales.</li>
+        <li><strong>Scribe v2 y Whisper</strong> — Modelos de transcripcion de audio a texto que soportan mas de 90
+          idiomas con precision de milisegundos.</li>
+        <li><strong>WebCodecs API</strong> — Tecnologia nativa del navegador que permite codificar video H.264
+          directamente en el cliente, sin necesidad de servidores externos.</li>
+      </ul>
+
+      <h3>Ventajas frente a herramientas tradicionales</h3>
+
+      <p>A diferencia de software como Adobe Premiere, Final Cut Pro o incluso editores online de pago, Velo AI Studio
+        ofrece un enfoque radicalmente diferente:</p>
+
+      <ul>
+        <li><strong>Sin instalacion:</strong> Funciona directamente en tu navegador (Chrome, Edge o Firefox).</li>
+        <li><strong>Sin costos:</strong> Completamente gratis, sin planes premium ni limitaciones artificiales.</li>
+        <li><strong>Privacidad total:</strong> Todo el procesamiento ocurre en tu navegador. Tus guiones, audios y
+          videos nunca se suben a servidores externos.</li>
+        <li><strong>Automatizacion completa:</strong> Desde el guion hasta el video final exportado, todo el flujo puede
+          ejecutarse sin intervencion manual.</li>
+        <li><strong>Bilingue:</strong> Interfaz completa en espanol e ingles con deteccion automatica del idioma del
+          navegador.</li>
+      </ul>
+    </article>
+
+    <!-- ── AD UNIT 3 ───────────────────────────────────────────────────── -->
+    <div class="ad-container">Anuncio</div>
+
+    <!-- ── PREGUNTAS FRECUENTES ────────────────────────────────────────── -->
+    <section class="section">
+      <h2>Preguntas Frecuentes</h2>
+      <p class="sub">Todo lo que necesitas saber antes de empezar</p>
+
+      <div style="max-width:760px;">
+        <div class="faq-item">
+          <p class="faq-q">Es realmente gratuito?</p>
+          <p class="faq-a">Si. Velo AI Studio utiliza la API gratuita de Pollinations AI para la generacion de imagenes,
+            texto y voz. La unica inversion es una clave API gratuita que se obtiene en segundos desde el sitio de
+            Pollinations. No requiere tarjeta de credito, suscripcion ni registro obligatorio.</p>
         </div>
-      </a>
+        <div class="faq-item">
+          <p class="faq-q">Puedo crear videos largos de mas de una hora?</p>
+          <p class="faq-a">Si. La plataforma comprime automaticamente los archivos de audio grandes a formato optimizado
+            (16kHz mono WAV) y los divide en partes si es necesario para la transcripcion. El renderizado se realiza
+            directamente en tu navegador sin limites de duracion impuestos por un servidor. La unica limitacion practica
+            es la memoria RAM de tu computadora.</p>
+        </div>
+        <div class="faq-item">
+          <p class="faq-q">En que formatos puedo exportar mis videos?</p>
+          <p class="faq-a">Los videos se exportan en MP4 (H.264) con calidad Full HD 1080p. Puedes elegir entre formato
+            horizontal 16:9 (ideal para YouTube, presentaciones web y pantallas de escritorio) o vertical 9:16 (perfecto
+            para TikTok, Instagram Reels y YouTube Shorts).</p>
+        </div>
+        <div class="faq-item">
+          <p class="faq-q">Puedo monetizar los videos en YouTube?</p>
+          <p class="faq-a">Si. Los videos que creas con Velo AI Studio son completamente tuyos y puedes publicarlos en
+            cualquier plataforma para generar ingresos mediante publicidad de YouTube AdSense, membresías, Super Chats,
+            patrocinios o colaboraciones. Te recomendamos agregar tu toque personal — locucion propia, edicion
+            adicional, investigacion original — para maximizar el valor y la originalidad de tu contenido.</p>
+        </div>
+        <div class="faq-item">
+          <p class="faq-q">Necesito saber programar o disenar?</p>
+          <p class="faq-a">No. La interfaz de Velo AI Studio esta diseñada para que cualquier persona,
+            independientemente de su nivel tecnico, pueda crear videos profesionales. Solo necesitas escribir un guion o
+            subir un archivo de audio, y la plataforma se encarga de todo el proceso automaticamente: transcripcion,
+            generacion de imagenes, sincronizacion y montaje final.</p>
+        </div>
+        <div class="faq-item">
+          <p class="faq-q">Que voces de inteligencia artificial hay disponibles?</p>
+          <p class="faq-a">Velo AI Studio ofrece 34 voces de IA organizadas en cuatro categorias: OpenAI Estandar (6
+            voces incluyendo Alloy, Echo, Nova y Shimmer), OpenAI HD (5 voces como Ash, Coral y Sage), ElevenLabs
+            Femeninas (10 voces como Rachel, Bella y Charlotte) y ElevenLabs Masculinas (13 voces como Adam, Daniel y
+            James). Cada voz tiene un tono y caracter unico, adecuado para diferentes tipos de contenido.</p>
+        </div>
+      </div>
+    </section>
 
-      <a href="/blog/06-monetizar-canal-youtube.html" class="card">
-        <span class="card-tag" style="color:#f59e0b;border:1px solid #f59e0b22;background:#f59e0b12">Estrategia</span>
-        <h3>Como monetizar tu canal de YouTube con videos de IA</h3>
-        <p>Estrategias reales para generar ingresos con contenido creado con inteligencia artificial. Publicidad, membresías y mas.</p>
-        <div class="card-foot"><span>6 min lectura</span><span class="arrow">→</span></div>
-      </a>
+    <!-- ── MAS ARTICULOS ───────────────────────────────────────────────── -->
+    <section class="section">
+      <h2>Todos los Articulos</h2>
+      <p class="sub">Explora nuestra biblioteca completa de tutoriales y guias</p>
 
-      <a href="/blog/14-seo-youtube-videos-ia.html" class="card">
-        <span class="card-tag" style="color:#f59e0b;border:1px solid #f59e0b22;background:#f59e0b12">Estrategia</span>
-        <h3>SEO para YouTube: optimiza tus videos con IA</h3>
-        <p>Tecnicas avanzadas de posicionamiento para que tus videos aparezcan en busquedas y obtengan mas visualizaciones organicas.</p>
-        <div class="card-foot"><span>7 min lectura</span><span class="arrow">→</span></div>
-      </a>
+      <ul class="blog-links">
+        <li><a href="/blog/01-que-es-velo-ai-studio.html">Que es Velo AI Studio y como funciona</a><span
+            class="desc">Introduccion completa a la plataforma, sus funciones principales y como empezar desde
+            cero.</span></li>
+        <li><a href="/blog/02-como-crear-videos-con-ia.html">Como crear videos con IA paso a paso</a><span
+            class="desc">Tutorial detallado desde la escritura del guion hasta la exportacion del video final.</span>
+        </li>
+        <li><a href="/blog/03-guia-formatos-video.html">Guia de formatos: 16:9 vs 9:16</a><span class="desc">Elige el
+            formato correcto segun la plataforma: YouTube, TikTok, Instagram o Shorts.</span></li>
+        <li><a href="/blog/04-pollinations-ai-gratis.html">Pollinations AI: la tecnologia detras del estudio</a><span
+            class="desc">Como funciona la API gratuita de IA generativa que impulsa la creacion de imagenes y
+            texto.</span></li>
+        <li><a href="/blog/05-subtitulos-automaticos.html">Subtitulos automaticos: guia completa del formato
+            SRT</a><span class="desc">Todo sobre archivos SRT, como crearlos y como usarlos para sincronizar tu
+            video.</span></li>
+        <li><a href="/blog/06-monetizar-canal-youtube.html">Como monetizar tu canal de YouTube con videos de IA</a><span
+            class="desc">Estrategias reales de monetizacion: AdSense, patrocinios, membresías y diversificacion.</span>
+        </li>
+        <li><a href="/blog/07-estilos-visuales-ia.html">Estilos visuales con IA: del fotorrealismo al anime</a><span
+            class="desc">Guia de los estilos disponibles para personalizar la estetica visual de tus videos.</span></li>
+        <li><a href="/blog/08-text-to-speech-videos-ia.html">Text-to-Speech: la voz de tu video con IA</a><span
+            class="desc">Como usar las 34 voces de IA para crear narraciones profesionales sin grabar audio.</span></li>
+        <li><a href="/blog/09-errores-comunes-videos-ia.html">Errores comunes al crear videos con IA y como
+            evitarlos</a><span class="desc">Los 10 errores mas frecuentes y las mejores practicas para
+            solucionarlos.</span></li>
+        <li><a href="/blog/10-canal-youtube-sin-mostrar-cara.html">Canal de YouTube sin mostrar la cara: guia
+            completa</a><span class="desc">Nichos rentables y estrategias para canales faceless con contenido generado
+            por IA.</span></li>
+        <li><a href="/blog/como-elegir-voz-perfecta-videos-ia.html">Como elegir la voz perfecta para tus videos de
+            IA</a><span class="desc">Analisis de cada voz disponible y recomendaciones segun el tipo de
+            contenido.</span></li>
+        <li><a href="/blog/riesgos-canal-automatizado.html">Riesgos de un canal automatizado con IA</a><span
+            class="desc">Lo que debes saber sobre politicas de YouTube, copyright y limitaciones de la
+            automatizacion.</span></li>
+        <li><a href="/blog/13-como-crear-miniaturas-youtube-ia.html">Miniaturas de YouTube con IA que generan mas
+            clics</a><span class="desc">Disena miniaturas llamativas con herramientas de IA. Colores, textos y
+            CTR.</span></li>
+        <li><a href="/blog/14-seo-youtube-videos-ia.html">SEO para YouTube: optimiza tus videos con IA</a><span
+            class="desc">Tecnicas de posicionamiento para que tus videos aparezcan en busquedas.</span></li>
+        <li><a href="/blog/15-modo-express-vs-revision.html">Modo Express vs Modo Revision: cual elegir</a><span
+            class="desc">Comparacion detallada de los dos flujos de trabajo disponibles en Velo AI Studio.</span></li>
+        <li><a href="/blog/16-guia-prompts-imagenes-ia.html">Guia de prompts para imagenes con IA</a><span
+            class="desc">El arte de escribir prompts que generan imagenes profesionales y visualmente
+            impactantes.</span></li>
+        <li><a href="/blog/17-primeros-1000-suscriptores-youtube.html">Los primeros 1000 suscriptores en
+            YouTube</a><span class="desc">Plan de accion paso a paso para crecer tu canal desde cero con contenido de
+            IA.</span></li>
+      </ul>
+    </section>
 
-      <a href="/blog/17-primeros-1000-suscriptores-youtube.html" class="card">
-        <span class="card-tag" style="color:#f59e0b;border:1px solid #f59e0b22;background:#f59e0b12">Estrategia</span>
-        <h3>Primeros 1000 suscriptores en YouTube: plan de accion</h3>
-        <p>Plan paso a paso para crecer tu canal desde cero usando contenido generado con inteligencia artificial.</p>
-        <div class="card-foot"><span>8 min lectura</span><span class="arrow">→</span></div>
-      </a>
-
-      <a href="/blog/10-canal-youtube-sin-mostrar-cara.html" class="card">
-        <span class="card-tag" style="color:#f97316;border:1px solid #f97316;background:#f9731612">Consejos</span>
-        <h3>Canal de YouTube sin mostrar la cara: guia completa</h3>
-        <p>Nichos rentables, estrategias de contenido y herramientas para crear un canal exitoso sin aparecer en camara.</p>
-        <div class="card-foot"><span>6 min lectura</span><span class="arrow">→</span></div>
-      </a>
-
-      <a href="/blog/08-text-to-speech-videos-ia.html" class="card">
-        <span class="card-tag" style="color:#10b981;border:1px solid #10b98122;background:#10b98112">Funcion</span>
-        <h3>Text-to-Speech: 34 voces de IA para tus videos</h3>
-        <p>Guia de las voces disponibles de OpenAI y ElevenLabs. Aprende a elegir la voz perfecta para cada tipo de contenido.</p>
-        <div class="card-foot"><span>5 min lectura</span><span class="arrow">→</span></div>
-      </a>
-
-      <a href="/blog/16-guia-prompts-imagenes-ia.html" class="card">
-        <span class="card-tag" style="color:#ec4899;border:1px solid #ec489922;background:#ec489912">Guia Visual</span>
-        <h3>Guia de prompts para imagenes con IA</h3>
-        <p>Domina el arte de escribir prompts que generan imagenes profesionales y visualmente impactantes para tus videos.</p>
-        <div class="card-foot"><span>7 min lectura</span><span class="arrow">→</span></div>
-      </a>
-
-      <a href="/blog/13-como-crear-miniaturas-youtube-ia.html" class="card">
-        <span class="card-tag" style="color:#7c3aed;border:1px solid #7c3aed22;background:#7c3aed12">Tutorial</span>
-        <h3>Miniaturas de YouTube con IA que generan mas clics</h3>
-        <p>Disena miniaturas llamativas usando herramientas de inteligencia artificial. Colores, textos y estrategias de CTR.</p>
-        <div class="card-foot"><span>6 min lectura</span><span class="arrow">→</span></div>
-      </a>
+    <!-- ── CTA FINAL ───────────────────────────────────────────────────── -->
+    <div class="cta-banner">
+      <h2>Listo para crear tu primer video?</h2>
+      <p>Abre el estudio de video, escribe tu guion y deja que la IA haga el resto. Es gratis.</p>
+      <a href="/studio.html" class="hero-cta">Abrir Estudio de Video →</a>
     </div>
 
-    <p style="text-align:center;margin-top:24px;">
-      <a href="/blog/" style="color:var(--accent2);text-decoration:none;font-weight:700;font-family:'Space Mono',monospace;font-size:.85rem">Ver los 17 articulos del blog →</a>
-    </p>
-  </section>
-
-  <!-- ── AD UNIT 2 ───────────────────────────────────────────────────── -->
-  <div class="ad-container">Anuncio</div>
-
-  <!-- ── GUIA COMPLETA ───────────────────────────────────────────────── -->
-  <article class="guide">
-    <h2>Guia Completa: Como Crear Videos Profesionales con Inteligencia Artificial</h2>
-
-    <p>La inteligencia artificial ha revolucionado la creacion de contenido audiovisual. Lo que antes requeria semanas de trabajo con software profesional de edicion como Adobe Premiere, Final Cut Pro o DaVinci Resolve, ahora puede lograrse en minutos gracias a los avances en modelos generativos de imagenes, sintesis de voz y procesamiento de lenguaje natural.</p>
-
-    <p>Velo AI Studio es una plataforma web gratuita que automatiza el proceso completo de produccion de video: desde la escritura del guion hasta la exportacion final en MP4. Utilizando la API de Pollinations AI, genera imagenes cinematograficas para cada escena, sincroniza subtitulos con precision de milisegundos y ofrece 34 voces de inteligencia artificial para la narracion, incluyendo voces de OpenAI y ElevenLabs.</p>
-
-    <h3>Como funciona el proceso de creacion</h3>
-
-    <p>El flujo de trabajo de Velo AI Studio esta disenado para ser completamente automatico. No necesitas experiencia previa en edicion de video ni conocimientos de programacion. Asi funciona el proceso:</p>
-
-    <ol>
-      <li><strong>Escribe tu guion o sube un audio.</strong> Puedes escribir directamente tu historia en la plataforma, o subir un archivo MP3 o WAV con tu narracion grabada. Si no tienes audio, la IA puede generar una voz profesional a partir de tu texto escrito.</li>
-      <li><strong>La IA genera los subtitulos automaticamente.</strong> Si subes un archivo de audio, Velo utiliza modelos avanzados de transcripcion como Scribe v2 de ElevenLabs o Whisper Large V3 de OpenAI para generar subtitulos con timestamps precisos por palabra. El audio se comprime automaticamente a 16kHz mono y se divide en partes si es necesario, sin importar su duracion.</li>
-      <li><strong>Se crean las imagenes de cada escena.</strong> Un modelo de lenguaje analiza cada bloque de subtitulos y genera descripciones visuales detalladas (prompts). Luego, modelos de generacion de imagenes como Flux, ZImage o GPT Image crean imagenes de alta calidad para cada segmento del video. Si un modelo falla, el sistema prueba automaticamente con modelos de respaldo.</li>
-      <li><strong>Renderizado y exportacion directa.</strong> Todo se monta en un video final MP4 a 1080p usando las APIs nativas de WebCodecs del navegador. El video se guarda directamente en tu disco duro. Sin servidores intermedios, sin subidas a la nube: tu contenido permanece completamente privado.</li>
-    </ol>
-
-    <h3>Para quien es esta herramienta</h3>
-
-    <p>Velo AI Studio esta disenada para cualquier persona que quiera crear contenido audiovisual de calidad sin necesidad de equipos costosos ni software complejo:</p>
-
-    <ul>
-      <li><strong>Creadores de YouTube</strong> que quieren producir videos de calidad visual sin camaras, iluminacion ni equipo de grabacion profesional. Ideal para canales de divulgacion, educacion, top lists y contenido evergreen.</li>
-      <li><strong>Educadores y profesores</strong> que necesitan material didactico visual para sus clases presenciales, cursos online o plataformas de e-learning como Udemy o Coursera.</li>
-      <li><strong>Emprendedores y marketers</strong> que requieren videos promocionales rapidos para redes sociales, campanas de marketing digital o presentaciones comerciales.</li>
-      <li><strong>Narradores de historias</strong> que desean transformar sus relatos escritos, cuentos, guiones o poemas en experiencias audiovisuales envolventes.</li>
-      <li><strong>Periodistas y divulgadores</strong> que buscan ilustrar noticias, reportajes, articulos de investigacion o hilos informativos con video de calidad profesional.</li>
-      <li><strong>Podcasters</strong> que quieren convertir sus episodios de audio en videos para YouTube y multiplicar su alcance en multiples plataformas.</li>
-    </ul>
-
-    <h3>Tecnologias que hacen esto posible</h3>
-
-    <p>Detras de Velo AI Studio hay un ecosistema de tecnologias de inteligencia artificial de ultima generacion:</p>
-
-    <ul>
-      <li><strong>Pollinations AI</strong> — Plataforma de IA generativa que proporciona acceso gratuito a modelos de generacion de imagenes, texto y audio a traves de su API.</li>
-      <li><strong>Modelos de imagen</strong> — Flux, ZImage, GPT Image y otros modelos de difusion que generan imagenes fotorrealistas y artisticas a partir de descripciones textuales.</li>
-      <li><strong>ElevenLabs</strong> — Motor de voz con 34 voces expresivas en multiples idiomas, capaz de generar narraciones que suenan naturales y profesionales.</li>
-      <li><strong>Scribe v2 y Whisper</strong> — Modelos de transcripcion de audio a texto que soportan mas de 90 idiomas con precision de milisegundos.</li>
-      <li><strong>WebCodecs API</strong> — Tecnologia nativa del navegador que permite codificar video H.264 directamente en el cliente, sin necesidad de servidores externos.</li>
-    </ul>
-
-    <h3>Ventajas frente a herramientas tradicionales</h3>
-
-    <p>A diferencia de software como Adobe Premiere, Final Cut Pro o incluso editores online de pago, Velo AI Studio ofrece un enfoque radicalmente diferente:</p>
-
-    <ul>
-      <li><strong>Sin instalacion:</strong> Funciona directamente en tu navegador (Chrome, Edge o Firefox).</li>
-      <li><strong>Sin costos:</strong> Completamente gratis, sin planes premium ni limitaciones artificiales.</li>
-      <li><strong>Privacidad total:</strong> Todo el procesamiento ocurre en tu navegador. Tus guiones, audios y videos nunca se suben a servidores externos.</li>
-      <li><strong>Automatizacion completa:</strong> Desde el guion hasta el video final exportado, todo el flujo puede ejecutarse sin intervencion manual.</li>
-      <li><strong>Bilingue:</strong> Interfaz completa en espanol e ingles con deteccion automatica del idioma del navegador.</li>
-    </ul>
-  </article>
-
-  <!-- ── AD UNIT 3 ───────────────────────────────────────────────────── -->
-  <div class="ad-container">Anuncio</div>
-
-  <!-- ── PREGUNTAS FRECUENTES ────────────────────────────────────────── -->
-  <section class="section">
-    <h2>Preguntas Frecuentes</h2>
-    <p class="sub">Todo lo que necesitas saber antes de empezar</p>
-
-    <div style="max-width:760px;">
-      <div class="faq-item">
-        <p class="faq-q">Es realmente gratuito?</p>
-        <p class="faq-a">Si. Velo AI Studio utiliza la API gratuita de Pollinations AI para la generacion de imagenes, texto y voz. La unica inversion es una clave API gratuita que se obtiene en segundos desde el sitio de Pollinations. No requiere tarjeta de credito, suscripcion ni registro obligatorio.</p>
+    <!-- ── FOOTER ──────────────────────────────────────────────────────── -->
+    <footer>
+      <p>&copy; 2026 <strong>Velo AI Studio</strong>. Todos los derechos reservados.</p>
+      <p style="font-size:.65rem;opacity:.7;margin-bottom:14px;">Powered by <a href="https://pollinations.ai"
+          target="_blank" rel="noopener" style="color:var(--accent2)">Pollinations AI</a></p>
+      <div>
+        <a href="/">Inicio</a><span style="opacity:.4">|</span>
+        <a href="/blog/">Blog</a><span style="opacity:.4">|</span>
+        <a href="/studio.html">Estudio</a><span style="opacity:.4">|</span>
+        <a href="/about.html">Acerca de</a><span style="opacity:.4">|</span>
+        <a href="/contact.html">Contacto</a><span style="opacity:.4">|</span>
+        <a href="/privacy.html">Privacidad</a><span style="opacity:.4">|</span>
+        <a href="/tos.html">Terminos</a>
       </div>
-      <div class="faq-item">
-        <p class="faq-q">Puedo crear videos largos de mas de una hora?</p>
-        <p class="faq-a">Si. La plataforma comprime automaticamente los archivos de audio grandes a formato optimizado (16kHz mono WAV) y los divide en partes si es necesario para la transcripcion. El renderizado se realiza directamente en tu navegador sin limites de duracion impuestos por un servidor. La unica limitacion practica es la memoria RAM de tu computadora.</p>
-      </div>
-      <div class="faq-item">
-        <p class="faq-q">En que formatos puedo exportar mis videos?</p>
-        <p class="faq-a">Los videos se exportan en MP4 (H.264) con calidad Full HD 1080p. Puedes elegir entre formato horizontal 16:9 (ideal para YouTube, presentaciones web y pantallas de escritorio) o vertical 9:16 (perfecto para TikTok, Instagram Reels y YouTube Shorts).</p>
-      </div>
-      <div class="faq-item">
-        <p class="faq-q">Puedo monetizar los videos en YouTube?</p>
-        <p class="faq-a">Si. Los videos que creas con Velo AI Studio son completamente tuyos y puedes publicarlos en cualquier plataforma para generar ingresos mediante publicidad de YouTube AdSense, membresías, Super Chats, patrocinios o colaboraciones. Te recomendamos agregar tu toque personal — locucion propia, edicion adicional, investigacion original — para maximizar el valor y la originalidad de tu contenido.</p>
-      </div>
-      <div class="faq-item">
-        <p class="faq-q">Necesito saber programar o disenar?</p>
-        <p class="faq-a">No. La interfaz de Velo AI Studio esta diseñada para que cualquier persona, independientemente de su nivel tecnico, pueda crear videos profesionales. Solo necesitas escribir un guion o subir un archivo de audio, y la plataforma se encarga de todo el proceso automaticamente: transcripcion, generacion de imagenes, sincronizacion y montaje final.</p>
-      </div>
-      <div class="faq-item">
-        <p class="faq-q">Que voces de inteligencia artificial hay disponibles?</p>
-        <p class="faq-a">Velo AI Studio ofrece 34 voces de IA organizadas en cuatro categorias: OpenAI Estandar (6 voces incluyendo Alloy, Echo, Nova y Shimmer), OpenAI HD (5 voces como Ash, Coral y Sage), ElevenLabs Femeninas (10 voces como Rachel, Bella y Charlotte) y ElevenLabs Masculinas (13 voces como Adam, Daniel y James). Cada voz tiene un tono y caracter unico, adecuado para diferentes tipos de contenido.</p>
-      </div>
-    </div>
-  </section>
+    </footer>
 
-  <!-- ── MAS ARTICULOS ───────────────────────────────────────────────── -->
-  <section class="section">
-    <h2>Todos los Articulos</h2>
-    <p class="sub">Explora nuestra biblioteca completa de tutoriales y guias</p>
-
-    <ul class="blog-links">
-      <li><a href="/blog/01-que-es-velo-ai-studio.html">Que es Velo AI Studio y como funciona</a><span class="desc">Introduccion completa a la plataforma, sus funciones principales y como empezar desde cero.</span></li>
-      <li><a href="/blog/02-como-crear-videos-con-ia.html">Como crear videos con IA paso a paso</a><span class="desc">Tutorial detallado desde la escritura del guion hasta la exportacion del video final.</span></li>
-      <li><a href="/blog/03-guia-formatos-video.html">Guia de formatos: 16:9 vs 9:16</a><span class="desc">Elige el formato correcto segun la plataforma: YouTube, TikTok, Instagram o Shorts.</span></li>
-      <li><a href="/blog/04-pollinations-ai-gratis.html">Pollinations AI: la tecnologia detras del estudio</a><span class="desc">Como funciona la API gratuita de IA generativa que impulsa la creacion de imagenes y texto.</span></li>
-      <li><a href="/blog/05-subtitulos-automaticos.html">Subtitulos automaticos: guia completa del formato SRT</a><span class="desc">Todo sobre archivos SRT, como crearlos y como usarlos para sincronizar tu video.</span></li>
-      <li><a href="/blog/06-monetizar-canal-youtube.html">Como monetizar tu canal de YouTube con videos de IA</a><span class="desc">Estrategias reales de monetizacion: AdSense, patrocinios, membresías y diversificacion.</span></li>
-      <li><a href="/blog/07-estilos-visuales-ia.html">Estilos visuales con IA: del fotorrealismo al anime</a><span class="desc">Guia de los estilos disponibles para personalizar la estetica visual de tus videos.</span></li>
-      <li><a href="/blog/08-text-to-speech-videos-ia.html">Text-to-Speech: la voz de tu video con IA</a><span class="desc">Como usar las 34 voces de IA para crear narraciones profesionales sin grabar audio.</span></li>
-      <li><a href="/blog/09-errores-comunes-videos-ia.html">Errores comunes al crear videos con IA y como evitarlos</a><span class="desc">Los 10 errores mas frecuentes y las mejores practicas para solucionarlos.</span></li>
-      <li><a href="/blog/10-canal-youtube-sin-mostrar-cara.html">Canal de YouTube sin mostrar la cara: guia completa</a><span class="desc">Nichos rentables y estrategias para canales faceless con contenido generado por IA.</span></li>
-      <li><a href="/blog/como-elegir-voz-perfecta-videos-ia.html">Como elegir la voz perfecta para tus videos de IA</a><span class="desc">Analisis de cada voz disponible y recomendaciones segun el tipo de contenido.</span></li>
-      <li><a href="/blog/riesgos-canal-automatizado.html">Riesgos de un canal automatizado con IA</a><span class="desc">Lo que debes saber sobre politicas de YouTube, copyright y limitaciones de la automatizacion.</span></li>
-      <li><a href="/blog/13-como-crear-miniaturas-youtube-ia.html">Miniaturas de YouTube con IA que generan mas clics</a><span class="desc">Disena miniaturas llamativas con herramientas de IA. Colores, textos y CTR.</span></li>
-      <li><a href="/blog/14-seo-youtube-videos-ia.html">SEO para YouTube: optimiza tus videos con IA</a><span class="desc">Tecnicas de posicionamiento para que tus videos aparezcan en busquedas.</span></li>
-      <li><a href="/blog/15-modo-express-vs-revision.html">Modo Express vs Modo Revision: cual elegir</a><span class="desc">Comparacion detallada de los dos flujos de trabajo disponibles en Velo AI Studio.</span></li>
-      <li><a href="/blog/16-guia-prompts-imagenes-ia.html">Guia de prompts para imagenes con IA</a><span class="desc">El arte de escribir prompts que generan imagenes profesionales y visualmente impactantes.</span></li>
-      <li><a href="/blog/17-primeros-1000-suscriptores-youtube.html">Los primeros 1000 suscriptores en YouTube</a><span class="desc">Plan de accion paso a paso para crecer tu canal desde cero con contenido de IA.</span></li>
-    </ul>
-  </section>
-
-  <!-- ── CTA FINAL ───────────────────────────────────────────────────── -->
-  <div class="cta-banner">
-    <h2>Listo para crear tu primer video?</h2>
-    <p>Abre el estudio de video, escribe tu guion y deja que la IA haga el resto. Es gratis.</p>
-    <a href="/studio.html" class="hero-cta">Abrir Estudio de Video →</a>
   </div>
 
-  <!-- ── FOOTER ──────────────────────────────────────────────────────── -->
-  <footer>
-    <p>&copy; 2026 <strong>Velo AI Studio</strong>. Todos los derechos reservados.</p>
-    <p style="font-size:.65rem;opacity:.7;margin-bottom:14px;">Powered by <a href="https://pollinations.ai" target="_blank" rel="noopener" style="color:var(--accent2)">Pollinations AI</a></p>
-    <div>
-      <a href="/">Inicio</a><span style="opacity:.4">|</span>
-      <a href="/blog/">Blog</a><span style="opacity:.4">|</span>
-      <a href="/studio.html">Estudio</a><span style="opacity:.4">|</span>
-      <a href="/about.html">Acerca de</a><span style="opacity:.4">|</span>
-      <a href="/contact.html">Contacto</a><span style="opacity:.4">|</span>
-      <a href="/privacy.html">Privacidad</a><span style="opacity:.4">|</span>
-      <a href="/tos.html">Terminos</a>
-    </div>
-  </footer>
-
-</div>
-
-<!-- ── COOKIE CONSENT ──────────────────────────────────────────────── -->
-<div id="cookieConsent" style="display:none;position:fixed;bottom:0;left:0;right:0;background:var(--surface);border-top:1px solid var(--border);padding:16px 24px;z-index:9999;font-size:.78rem;font-family:'Space Mono',monospace;">
-  <div style="max-width:900px;margin:0 auto;display:flex;align-items:center;gap:16px;flex-wrap:wrap;">
-    <p style="flex:1;min-width:200px;color:var(--muted);line-height:1.5;">Este sitio usa cookies de Google AdSense y Analytics para mejorar tu experiencia. <a href="/privacy.html" style="color:var(--accent2);text-decoration:none;">Politica de Privacidad</a></p>
-    <div style="display:flex;gap:8px;">
-      <button onclick="acceptCookies()" style="background:var(--accent2);color:#fff;border:none;padding:8px 18px;border-radius:6px;cursor:pointer;font-family:inherit;font-size:.75rem;">Aceptar</button>
-      <button onclick="rejectCookies()" style="background:transparent;color:var(--muted);border:1px solid var(--border);padding:8px 18px;border-radius:6px;cursor:pointer;font-family:inherit;font-size:.75rem;">Rechazar</button>
+  <!-- ── COOKIE CONSENT ──────────────────────────────────────────────── -->
+  <div id="cookieConsent"
+    style="display:none;position:fixed;bottom:0;left:0;right:0;background:var(--surface);border-top:1px solid var(--border);padding:16px 24px;z-index:9999;font-size:.78rem;font-family:'Space Mono',monospace;">
+    <div style="max-width:900px;margin:0 auto;display:flex;align-items:center;gap:16px;flex-wrap:wrap;">
+      <p style="flex:1;min-width:200px;color:var(--muted);line-height:1.5;">Este sitio usa cookies de Google AdSense y
+        Analytics para mejorar tu experiencia. <a href="/privacy.html"
+          style="color:var(--accent2);text-decoration:none;">Politica de Privacidad</a></p>
+      <div style="display:flex;gap:8px;">
+        <button onclick="acceptCookies()"
+          style="background:var(--accent2);color:#fff;border:none;padding:8px 18px;border-radius:6px;cursor:pointer;font-family:inherit;font-size:.75rem;">Aceptar</button>
+        <button onclick="rejectCookies()"
+          style="background:transparent;color:var(--muted);border:1px solid var(--border);padding:8px 18px;border-radius:6px;cursor:pointer;font-family:inherit;font-size:.75rem;">Rechazar</button>
+      </div>
     </div>
   </div>
-</div>
-<script>
-  function acceptCookies(){document.getElementById('cookieConsent').style.display='none';localStorage.setItem('cookieConsent','accepted')}
-  function rejectCookies(){document.getElementById('cookieConsent').style.display='none';localStorage.setItem('cookieConsent','rejected')}
-  if(!localStorage.getItem('cookieConsent'))document.getElementById('cookieConsent').style.display='block';
-</script>
+  <script>
+    function acceptCookies() { document.getElementById('cookieConsent').style.display = 'none'; localStorage.setItem('cookieConsent', 'accepted') }
+    function rejectCookies() { document.getElementById('cookieConsent').style.display = 'none'; localStorage.setItem('cookieConsent', 'rejected') }
+    if (!localStorage.getItem('cookieConsent')) document.getElementById('cookieConsent').style.display = 'block';
+  </script>
 
 </body>
+
 </html>
