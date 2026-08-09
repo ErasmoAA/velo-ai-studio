@@ -110,12 +110,16 @@ Contributions, bug reports, feature ideas, and documentation improvements are we
 
 Please read [CONTRIBUTING.md](CONTRIBUTING.md) before opening a pull request. Bug reports and feature requests can also be submitted through the repository's issue templates.
 
+Community participation is governed by [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md).
+
 ## Security
 
 If you discover a security issue, please follow [SECURITY.md](SECURITY.md) rather than publishing sensitive details in a public issue.
 
+## Citation
+
+If Velo is useful in research, development, or published work, see [CITATION.cff](CITATION.cff) for citation metadata.
+
 ## License
 
 Velo AI Studio is released under the **MIT License**. See [LICENSE](LICENSE) for the full text.
-
-<!-- CI validation touch: duplicate rescueReasonText fix is on main. -->
