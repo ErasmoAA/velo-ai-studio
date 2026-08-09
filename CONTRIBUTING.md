@@ -1,36 +1,59 @@
 # Contributing to Velo AI Studio
 
-Thank you for your interest in Velo AI Studio.
+Thank you for your interest in Velo AI Studio. Contributions of code, documentation, bug reports, testing, and ideas are welcome.
 
-The project is currently in an early public-development stage, and contributions are welcome as the codebase and documentation mature.
+## Before you start
 
-## Before contributing
+For bugs and feature requests, search existing issues first. For security vulnerabilities, follow `SECURITY.md` and do not disclose sensitive details in a public issue.
 
-1. Read the README and understand the current project structure.
-2. Search existing issues before opening a new one.
-3. For substantial changes, open an issue first so the proposed approach can be discussed.
-4. Never commit API keys, tokens, passwords, private credentials, or other secrets.
+## Local development
+
+### Requirements
+
+- Node.js 18 or newer
+- npm
+- A modern browser
+
+### Setup
+
+```bash
+npm install
+npm run dev
+```
+
+### Validation
+
+Before opening a pull request, run:
+
+```bash
+npm run check
+```
+
+This runs the production build and the studio validation script. Pull requests targeting `main` are also checked by GitHub Actions.
 
 ## Pull requests
 
-A good pull request should:
+Keep pull requests focused and explain:
 
-- Explain what changed and why.
-- Keep the scope focused.
-- Avoid unrelated formatting or refactoring.
-- Include documentation when behavior or public workflows change.
-- Test the affected workflow in a current browser where practical.
+1. What changed.
+2. Why the change is needed.
+3. How you tested it.
+4. Any browser, media, or compatibility considerations.
 
-## Bug reports
+Prefer small, reviewable commits and avoid unrelated formatting or dependency changes.
 
-Please include:
+## Code and content guidelines
 
-- Browser and operating system
-- Steps to reproduce
-- Expected behavior
-- Actual behavior
-- Relevant console errors, without exposing secrets
+- Preserve existing behavior unless the change intentionally modifies it.
+- Keep browser-side processing privacy-conscious and avoid unnecessary server-side dependencies.
+- Never commit API keys, access tokens, credentials, personal data, or generated secrets.
+- Keep user-facing copy clear and accessible.
+- When changing multimedia behavior, test with representative audio, subtitle, and visual assets where practical.
 
-## AI-assisted development
+## Reporting bugs
 
-Velo AI Studio uses AI-assisted development as part of its engineering workflow. Contributors may use AI tools, but contributors remain responsible for reviewing generated code, respecting licenses, protecting secrets, and ensuring that submitted changes are understandable and maintainable.
+Include the browser and operating system, steps to reproduce, expected behavior, actual behavior, and relevant console or build errors. Do not include secrets or private user data.
+
+## License
+
+By contributing to Velo AI Studio, you agree that your contributions are provided under the repository's MIT License.
