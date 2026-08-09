@@ -1,10 +1,12 @@
 {
   "name": "velo-ai-studio",
   "version": "1.0.0",
-  "description": "Velo AI Studio — static site with Eleventy",
+  "description": "Velo AI Studio — open-source browser-based AI video creation studio",
+  "private": false,
   "scripts": {
     "build": "eleventy",
-    "dev": "eleventy --serve"
+    "dev": "eleventy --serve",
+    "check": "npm run build"
   },
   "dependencies": {
     "@11ty/eleventy": "^2.0.1",
