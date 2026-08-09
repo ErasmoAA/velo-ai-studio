@@ -1,0 +1,19 @@
+cff-version: 1.2.0
+message: "If Velo AI Studio is useful in your work, please cite the project."
+title: "Velo AI Studio"
+type: software
+abstract: "Open-source, browser-based AI video creation studio for scripts, narration, subtitles, AI visuals, and video rendering."
+repository-code: "https://github.com/ErasmoAA/velo-ai-studio"
+url: "https://veloaistudio.online/"
+license: MIT
+authors:
+  - family-names: Aliaga
+    given-names: Erasmo
+    affiliation: "Velo AI Studio"
+keywords:
+  - AI
+  - video
+  - video editing
+  - subtitles
+  - SRT
+  - open source
