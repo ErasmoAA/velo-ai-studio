@@ -6,7 +6,8 @@
   "scripts": {
     "build": "eleventy",
     "dev": "eleventy --serve",
-    "check": "npm run build"
+    "check": "npm run build && npm run check:studio",
+    "check:studio": "node _scripts/validate-studio.js"
   },
   "dependencies": {
     "@11ty/eleventy": "^2.0.1",
