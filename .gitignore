@@ -1,5 +1,9 @@
 node_modules/
 _site/
-package-lock.json
 .DS_Store
 Thumbs.db
+.env
+.env.*
+!.env.example
+*.local
+.DS_Store
