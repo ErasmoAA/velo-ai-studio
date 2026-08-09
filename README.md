@@ -117,3 +117,5 @@ If you discover a security issue, please follow [SECURITY.md](SECURITY.md) rathe
 ## License
 
 Velo AI Studio is released under the **MIT License**. See [LICENSE](LICENSE) for the full text.
+
+<!-- CI validation touch: duplicate rescueReasonText fix is on main. -->
