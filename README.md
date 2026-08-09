@@ -2,6 +2,8 @@
 
 **Open-source, browser-based AI video creation studio.**
 
+[![Build](https://github.com/ErasmoAA/velo-ai-studio/actions/workflows/ci.yml/badge.svg)](https://github.com/ErasmoAA/velo-ai-studio/actions/workflows/ci.yml) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+
 Velo AI Studio is a public open-source project for assembling narrated videos from scripts, subtitles, audio, and AI-assisted visual assets in a browser-first workflow.
 
 🌐 **Live application:** https://veloaistudio.online/
@@ -24,13 +26,15 @@ The project is aimed at creators producing narrated, documentary, educational, a
 
 AI video production is fragmented across scripting, narration, asset generation, editing, subtitle synchronization, and rendering tools. Velo explores a browser-first alternative: bringing these steps into a single workflow while keeping the project inspectable and extensible as open source.
 
-Velo is currently an early-stage public project maintained by its creator. The repository is public so developers can inspect the implementation, report issues, suggest improvements, and eventually contribute code and documentation.
+Velo is currently an early-stage public project maintained by its creator. The repository is public so developers can inspect the implementation, report issues, suggest improvements, and contribute code and documentation.
 
 ## Project status
 
-Velo is actively evolving. The current focus is reliability, browser compatibility, multimedia processing, clearer developer documentation, and making AI integrations easier to extend.
+Velo is actively evolving. The current engineering focus is reliability, browser compatibility, multimedia processing, clearer developer documentation, and making AI integrations easier to extend.
 
 The production build is validated automatically with GitHub Actions on pushes and pull requests to `main`.
+
+This is an active development project rather than a finished production framework. Interfaces and implementation details may change as the architecture matures.
 
 ## Technology
 
@@ -78,7 +82,7 @@ npm run build
 ├── _includes/         # Eleventy/Nunjucks templates
 ├── _data/             # Site and content data
 ├── _scripts/          # Build/content utilities
-├── .claude/           # Local Claude development configuration
+├── .github/           # CI and contribution templates
 ├── .eleventy.js       # Eleventy configuration
 ├── package.json       # Build configuration and dependencies
 └── theme.css          # Shared styling
@@ -104,7 +108,7 @@ Priorities may change based on real-world usage and community feedback.
 
 Contributions, bug reports, feature ideas, and documentation improvements are welcome.
 
-Please read [CONTRIBUTING.md](CONTRIBUTING.md) before opening a pull request.
+Please read [CONTRIBUTING.md](CONTRIBUTING.md) before opening a pull request. Bug reports and feature requests can also be submitted through the repository's issue templates.
 
 ## Security
 
