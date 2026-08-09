@@ -1942,7 +1942,7 @@
             ⚠️ Generación Pausada para proteger tu video
           </h4>
           <p style="font-size:0.85rem; color:var(--text); line-height:1.5; margin-bottom:12px;">
-            El proceso se detuvo por este motivo: <strong id="rescueReasonText"
+            El proceso se detuvo por este motivo: <strong class="rescueReasonText"
               style="color:var(--accent3);"></strong><br>
             Tus imágenes anteriores están a salvo. Para terminar tu video:
           </p>
@@ -2649,7 +2649,7 @@
         const h4 = rescueBox.querySelector('h4');
         if (h4) h4.innerHTML = '⚠️ Generation Paused to protect your video';
         const p = rescueBox.querySelector('p');
-        if (p) p.innerHTML = 'The process stopped for this reason: <strong id="rescueReasonText" style="color:var(--accent3);"></strong><br>Your previous images are safe. To finish your video:';
+        if (p) p.innerHTML = 'The process stopped for this reason: <strong class="rescueReasonText" style="color:var(--accent3);"></strong><br>Your previous images are safe. To finish your video:';
         const lis = rescueBox.querySelectorAll('li');
         if (lis[0]) lis[0].innerHTML = 'Change the model selector for the failed images (try a <b>Free</b> one like <i>Flux Schnell</i> or one that is online).';
         if (lis[1]) lis[1].innerHTML = 'Click the <b>"Retry all failed images"</b> button below.';
@@ -4732,7 +4732,8 @@
         if (pipelineErrorDetected) {
           log('⚠️ Se detectaron fallos críticos. Cancelando montaje automático para evitar un video corrupto.', 'warn');
           isAutoMode = false; // Abortar Express
-          document.getElementById('rescueReasonText').innerText = lastFriendlyError;
+          const rescueReason = document.querySelector('.rescueReasonText');
+          if (rescueReason) rescueReason.innerText = lastFriendlyError;
           document.getElementById('rescueWarningBox').style.display = 'block';
           setProgress(100, '⚠️ Esperando tu intervención para continuar.');
           document.getElementById('composeBtn').style.display = 'block';
