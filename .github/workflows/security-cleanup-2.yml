@@ -1,0 +1,29 @@
+name: Security cleanup 2
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+
+jobs:
+  cleanup:
+    if: ${{ github.event.before == '37b4c697eb1490d1ba793514d9c0a6310ec6d765' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Remove third-party ad worker and studio ad script
+        run: |
+          set -e
+          sed -i '/quge5\.com\/88\/tag\.min\.js/d' studio.html
+          git rm sw.js
+          git rm .github/workflows/security-cleanup.yml
+          git rm .github/workflows/security-cleanup-2.yml
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add studio.html
+          git commit -m "security: remove remote ad worker and studio ad script"
+          git push origin HEAD:main
