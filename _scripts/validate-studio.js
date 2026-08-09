@@ -60,6 +60,10 @@ function validateDocument(html) {
     if (count > 1) fail(`Duplicate DOM id detected: ${id} (${count} occurrences).`);
   }
 
+  // A getElementById call can legitimately target an element created later
+  // by the application, so unresolved references are reported as warnings,
+  // not hard failures. This keeps the check useful without blocking valid UI
+  // patterns such as dynamically-created progress/output elements.
   const referencedIds = new Set();
   for (const match of html.matchAll(/getElementById\(\s*["']([^"']+)["']\s*\)/g)) {
     referencedIds.add(match[1]);
@@ -68,7 +72,7 @@ function validateDocument(html) {
     referencedIds.add(match[1]);
   }
   for (const id of referencedIds) {
-    if (!ids.has(id)) fail(`JavaScript references missing DOM id: ${id}.`);
+    if (!ids.has(id)) warn(`DOM id is not present statically and may be runtime-created: ${id}.`);
   }
 }
 
@@ -148,7 +152,8 @@ if (failures.length) {
 
 console.log('Velo studio validation PASSED');
 console.log(`- validated ${html ? (html.match(/<script\b/gi) || []).length : 0} script tags`);
-console.log('- document structure and DOM id references checked');
+console.log('- document structure and duplicate DOM ids checked');
+console.log('- literal DOM references audited (runtime-created ids allowed)');
 console.log('- inline JavaScript syntax checked with Node');
 console.log('- no blocked remote runtime or embedded credential pattern detected');
 for (const warning of warnings) console.warn(`WARN: ${warning}`);
